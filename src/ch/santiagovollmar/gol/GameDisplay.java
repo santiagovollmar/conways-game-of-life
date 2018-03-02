@@ -9,6 +9,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.time.Year;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -149,6 +151,23 @@ public class GameDisplay extends JPanel {
       }
     });
     
+    GameDisplay parentDisplay = this;
+    addMouseWheelListener(e -> {
+      if (ctrlIsPressed) {
+        if (e.getWheelRotation() > 0) {
+          if (parentDisplay.scaling > 4) {
+            parentDisplay.scaling--;
+            parentDisplay.repaint();
+          }
+        } else if (e.getWheelRotation() < 0) {
+          if (scaling < 100) {
+            parentDisplay.scaling++;
+            parentDisplay.repaint();
+          }
+        }
+      }
+    });
+    
     // add global key listeners
     GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
       LogicManager.setPaused(!LogicManager.isPaused());
@@ -165,19 +184,19 @@ public class GameDisplay extends JPanel {
     GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
       switch (e.getKeyCode()) {
         case KeyEvent.VK_UP:
-          viewport.y++;
-          break;
-          
-        case KeyEvent.VK_DOWN:
           viewport.y--;
           break;
           
+        case KeyEvent.VK_DOWN:
+          viewport.y++;
+          break;
+          
         case KeyEvent.VK_LEFT:
-          viewport.x++;
+          viewport.x--;
           break;
           
         case KeyEvent.VK_RIGHT:
-          viewport.x--;
+          viewport.x++;
           break;
       }
     }, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT);
