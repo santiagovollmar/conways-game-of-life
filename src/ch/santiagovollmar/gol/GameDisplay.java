@@ -91,11 +91,11 @@ public class GameDisplay extends JPanel {
             int x = dragStart.x;
             int y = dragStart.y;
             
-            dragStart.x = e.getX() + viewport.x;
-            dragStart.y = e.getY() + viewport.y;
+            dragStart.x = e.getX();
+            dragStart.y = e.getY();
             
-            viewport.x += x - e.getX();
-            viewport.y += y - e.getY();
+            viewport.x += x - dragStart.x;
+            viewport.y += y - dragStart.y;
             
             System.out.println("dragPos: " + dragStart);
           }
@@ -124,8 +124,8 @@ public class GameDisplay extends JPanel {
         if (ctrlIsPressed) {
           System.out.println("[set drag]");
           
-          dragStart.x = e.getX() + viewport.x;
-          dragStart.y = e.getY() + viewport.y;
+          dragStart.x = e.getX();
+          dragStart.y = e.getY();
         }
       }
       
