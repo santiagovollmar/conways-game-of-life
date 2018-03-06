@@ -16,7 +16,7 @@ public class GridManager {
   private static Set<Point> map = Collections.synchronizedSet(new HashSet<Point>(450, 1f));
   private static LinkedList<Point> fillStash = new LinkedList<Point>();
   private static LinkedList<Point> clearStash = new LinkedList<Point>();
-  private static ExecutorService executor = Executors.newFixedThreadPool(8);
+  private static ExecutorService executor = Executors.newFixedThreadPool(16);
   
   /*
    * Set the fetch operation of GameDisplay
@@ -52,6 +52,7 @@ public class GridManager {
     
     try {
       executor.invokeAll(tasks);
+      LogicManager.clearCheckedCache();
     } catch (InterruptedException e) {
       e.printStackTrace();
     }

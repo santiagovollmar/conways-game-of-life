@@ -78,11 +78,14 @@ public class GameDisplay extends JPanel {
     grabFocus();
     requestFocus();
     
+    GameDisplay parentDisplay = this;
+    
     // add mouse listeners
     addMouseMotionListener(new MouseMotionListener() {
       
       @Override
-      public void mouseMoved(MouseEvent e) {}
+      public void mouseMoved(MouseEvent e) {
+      }
       
       @Override
       public void mouseDragged(MouseEvent e) {
@@ -94,18 +97,19 @@ public class GameDisplay extends JPanel {
             dragStart.x = e.getX();
             dragStart.y = e.getY();
             
-            viewport.x += x - dragStart.x;
-            viewport.y += y - dragStart.y;
+            int difference_x = (x - dragStart.x);
+            int difference_y = (y - dragStart.y);
+            
+            viewport.x += (difference_x) ;// parentDisplay.scaling;
+            viewport.y += (difference_y) ;// parentDisplay.scaling;
             
             System.out.println("dragPos: " + dragStart);
           }
-        } else { // draw
-          if (LogicManager.isPaused()) {
-            if (SwingUtilities.isLeftMouseButton(e)) {
-              fillCell(e);
-            } else if (SwingUtilities.isRightMouseButton(e)) {
-              clearCell(e);
-            }
+        } else if (LogicManager.isPaused()) { // draw
+          if (SwingUtilities.isLeftMouseButton(e)) {
+            fillCell(e);
+          } else if (SwingUtilities.isRightMouseButton(e)) {
+            clearCell(e);
           }
         }
       }
@@ -130,7 +134,8 @@ public class GameDisplay extends JPanel {
       }
       
       @Override
-      public void mouseExited(MouseEvent e) {}
+      public void mouseExited(MouseEvent e) {
+      }
       
       @Override
       public void mouseEntered(MouseEvent e) {
@@ -151,7 +156,6 @@ public class GameDisplay extends JPanel {
       }
     });
     
-    GameDisplay parentDisplay = this;
     addMouseWheelListener(e -> {
       if (ctrlIsPressed) {
         if (e.getWheelRotation() > 0) {
@@ -165,6 +169,10 @@ public class GameDisplay extends JPanel {
             parentDisplay.repaint();
           }
         }
+        
+        SwingUtilities.invokeLater(() -> {
+          parentDisplay.repaint();
+        });
       }
     });
     
@@ -186,15 +194,15 @@ public class GameDisplay extends JPanel {
         case KeyEvent.VK_UP:
           viewport.y--;
           break;
-          
+        
         case KeyEvent.VK_DOWN:
           viewport.y++;
           break;
-          
+        
         case KeyEvent.VK_LEFT:
           viewport.x--;
           break;
-          
+        
         case KeyEvent.VK_RIGHT:
           viewport.x++;
           break;

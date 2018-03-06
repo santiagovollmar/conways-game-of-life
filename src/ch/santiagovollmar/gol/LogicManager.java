@@ -1,6 +1,9 @@
 package ch.santiagovollmar.gol;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.sun.glass.ui.TouchInputSupport;
 
@@ -13,6 +16,12 @@ public class LogicManager {
       GridManager.update();
     }
   }
+  
+  private static Set<Point> checkedNeighbors = Collections.synchronizedSet(new HashSet<Point>());
+  public static void clearCheckedCache() {
+    checkedNeighbors.clear();
+  }
+  
   
   public static void compute(Point point) {
     // get amount of neighbors
@@ -29,6 +38,11 @@ public class LogicManager {
     
     // check if any near, dead cells get born
     for (Point neighbor : neighbors) {
+      if (checkedNeighbors.contains(neighbor)) {
+        continue;
+      }
+      checkedNeighbors.add(neighbor);
+      
       // get amount of neighbors
       int subNeighborAmount = 0;
       ArrayList<Point> subNeighbors = GridManager.getNeighborCoordinates(neighbor);
