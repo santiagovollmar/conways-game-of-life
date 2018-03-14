@@ -24,10 +24,13 @@ public class Window {
   }
   
   private JFrame frame;
-  private GameDisplay gd;
-  
   public JFrame getFrame() {
     return frame;
+  }
+  
+  private GameDisplay gd;
+  public GameDisplay getGameDisplay() {
+    return gd;
   }
   
   /**
@@ -75,47 +78,11 @@ public class Window {
     frame = new JFrame();
     frame.setBounds(100, 100, 500, 500);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    
-    gd = new GameDisplay(this.frame, 200, 100, 5, Color.BLUE);
-    
+    gd = new GameDisplay(this.frame, 200, 100, 5, new Color(0, 102, 255));
     frame.add(new MenuBar(), BorderLayout.NORTH);
     frame.add(gd, BorderLayout.CENTER);
+    frame.add(new ToolBar(), BorderLayout.SOUTH);
     frame.pack();
-    
-    ArrayList<Point> points = new ArrayList<Point>();
-    points.add(new Point(0 + 5 + 45000, 2 + 5 + 45000));
-    points.add(new Point(1 + 5 + 45000, 3 + 5 + 45000));
-    points.add(new Point(2 + 5 + 45000, 3 + 5 + 45000));
-    points.add(new Point(2 + 5 + 45000, 2 + 5 + 45000));
-    points.add(new Point(2 + 5 + 45000, 1 + 5 + 45000));
-    points.add(new Point(0 + 15 + 45000, 2 + 5 + 45000));
-    points.add(new Point(1 + 15 + 45000, 3 + 5 + 45000));
-    points.add(new Point(2 + 15 + 45000, 3 + 5 + 45000));
-    points.add(new Point(2 + 15 + 45000, 2 + 5 + 45000));
-    points.add(new Point(2 + 15 + 45000, 1 + 5 + 45000));
-    points.add(new Point(0 + 2 + 45000, 2 + 10 + 45000));
-    points.add(new Point(1 + 2 + 45000, 3 + 10 + 45000));
-    points.add(new Point(2 + 2 + 45000, 3 + 10 + 45000));
-    points.add(new Point(2 + 2 + 45000, 2 + 10 + 45000));
-    points.add(new Point(2 + 2 + 45000, 1 + 10 + 45000));
-    points.add(new Point(0 + 30 + 45000, 1 + 10 + 45000));
-    points.add(new Point(0 + 30 + 45000, 4 + 10 + 45000));
-    points.add(new Point(1 + 30 + 45000, 0 + 10 + 45000));
-    points.add(new Point(1 + 30 + 45000, 2 + 10 + 45000));
-    points.add(new Point(1 + 30 + 45000, 3 + 10 + 45000));
-    points.add(new Point(1 + 30 + 45000, 5 + 10 + 45000));
-    points.add(new Point(2 + 30 + 45000, 1 + 10 + 45000));
-    points.add(new Point(2 + 30 + 45000, 4 + 10 + 45000));
-    points.add(new Point(3 + 30 + 45000, 1 + 10 + 45000));
-    points.add(new Point(3 + 30 + 45000, 4 + 10 + 45000));
-    points.add(new Point(4 + 30 + 45000, 0 + 10 + 45000));
-    points.add(new Point(4 + 30 + 45000, 2 + 10 + 45000));
-    points.add(new Point(4 + 30 + 45000, 3 + 10 + 45000));
-    points.add(new Point(4 + 30 + 45000, 5 + 10 + 45000));
-    points.add(new Point(5 + 30 + 45000, 1 + 10 + 45000));
-    points.add(new Point(5 + 30 + 45000, 4 + 10 + 45000));
-    
-    // GridManager.fill(points, false);
     
     for (int x = 0; x < 100; x++) {
       for (int y = 0; y < 100; y++) {
@@ -128,6 +95,8 @@ public class Window {
     GlobalKeyListener.apply(frame.getContentPane());
     
     new Thread(this::run_normal).start();
+    
+    SwingUtilities.invokeLater(gd::grabFocus);
   }
   
   private void run_normal() {

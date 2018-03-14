@@ -8,10 +8,17 @@ import java.util.Set;
 public class LogicManager {
   private static boolean isPaused = false;
   
+  private static volatile boolean updating;
+  public static boolean isUpdating() {
+    return updating;
+  }
+  
   public static synchronized void renderNext() {
     if (!isPaused) {
+      updating = true;
       GridManager.consume();
       GridManager.update();
+      updating = false;
     }
   }
   
@@ -56,7 +63,7 @@ public class LogicManager {
   
   public static synchronized void setPaused(boolean paused) {
     isPaused = paused;
-    MenuBar.getCurrentInstance().setPaused(paused);
+    ToolBar.getCurrentInstance().setPaused(paused);
   }
   
   public static synchronized boolean isPaused() {

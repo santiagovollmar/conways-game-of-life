@@ -1,7 +1,10 @@
 package ch.santiagovollmar.gol;
 
+import java.awt.Dimension;
+import java.io.File;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -18,6 +21,45 @@ public class GridManager {
   private static ArrayDeque<Point> fillStash = new ArrayDeque<Point>();
   private static ArrayDeque<Point> clearStash = new ArrayDeque<Point>();
   private static ExecutorService executor = Executors.newFixedThreadPool(16);
+  
+  public static void clearMap() {
+    map.clear();
+  }
+  
+  /**
+   * 
+   * @return
+   */
+  public Point[] dumpMap() {
+    // ensure game is paused
+    while (LogicManager.isUpdating()) {} // wait for current update cycle to complete
+    
+    LogicManager.setPaused(true);
+    
+    // return data contained in map
+    return map.toArray(new Point[0]);
+  }
+  
+  /**
+   * 
+   * @param data
+   */
+  public void loadMap(Point[] data) {
+    // ensure game is paused
+    while (LogicManager.isUpdating()) {} // wait for current update cycle to complete
+    
+    LogicManager.setPaused(true);
+    
+    // clear buffers
+    update();
+    LogicManager.clearCheckedCache();
+    
+    // clear map
+    map.clear();
+    
+    // insert new data
+    map.addAll(Arrays.asList(data));
+  }
   
   /*
    * Set the fetch operation of GameDisplay
@@ -39,6 +81,9 @@ public class GridManager {
     GameDisplay.setFetchOperation(GridManager::fetchOperation);
   }
   
+  /**
+   * Invokes calculation of each point
+   */
   public static void consume() {
     ArrayList<Callable<Object>> tasks = new ArrayList<Callable<Object>>(map.size());
     

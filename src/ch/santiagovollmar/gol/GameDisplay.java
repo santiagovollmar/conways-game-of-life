@@ -7,11 +7,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
 import java.util.Collection;
 import java.util.LinkedList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
+import org.apache.batik.swing.JSVGCanvas;
 
 import ch.santiagovollmar.gol.GlobalKeyListener.KeyListenerType;
 
@@ -37,6 +40,25 @@ public class GameDisplay extends JPanel {
    * fields
    */
   private Color fillColor = Color.BLUE;
+  private Color lineColor = Color.WHITE;
+  private Color paneColor = Color.GRAY;
+  public Color getFillColor() {
+    synchronized (fillColor) {
+      return fillColor;
+    }
+  }
+  public void setFillColor(Color fillColor) {
+    synchronized (fillColor) {
+      this.fillColor = fillColor;
+    }
+    
+    int lineColorAvg = ((fillColor.getGreen() + fillColor.getRed() + fillColor.getBlue()) / 3) + 30;
+    lineColorAvg = lineColorAvg > 255 ? 255: lineColorAvg; 
+    int paneColorAvg = 255 - (lineColorAvg/2);
+    
+    lineColor = new Color(lineColorAvg, lineColorAvg, lineColorAvg);
+    paneColor = new Color(paneColorAvg, paneColorAvg, paneColorAvg);
+  }
   
   private final Point viewport;
   
@@ -57,7 +79,7 @@ public class GameDisplay extends JPanel {
     this.vsize = vsize;
     this.hsize = hsize;
     this.scaling = scaling;
-    this.fillColor = fillColor;
+    setFillColor(fillColor);
     this.parent = parent;
     this.viewport = new Point(45000, 45000);
     
@@ -243,11 +265,15 @@ public class GameDisplay extends JPanel {
    * User editing
    */
   public void fillCell(MouseEvent e) {
-    GridManager.fill(new Point((e.getX() / scaling) + viewport.x, (e.getY() / scaling) + viewport.y), false);
+    synchronized (viewport) {
+      GridManager.fill(new Point((e.getX() / scaling) + viewport.x, (e.getY() / scaling) + viewport.y), false);
+    }
   }
   
   public void clearCell(MouseEvent e) {
-    GridManager.clear(new Point((e.getX() / scaling) + viewport.x, (e.getY() / scaling) + viewport.y), false);
+    synchronized (viewport) {
+      GridManager.clear(new Point((e.getX() / scaling) + viewport.x, (e.getY() / scaling) + viewport.y), false);
+    }
   }
   
   /*
@@ -284,11 +310,13 @@ public class GameDisplay extends JPanel {
   
   protected final void drawSquares(Graphics graphics) {
     Color prevColor = graphics.getColor();
-    graphics.setColor(fillColor);
+    synchronized (fillColor) {
+      graphics.setColor(fillColor);
+    }
     
     Collection<Point> points = fetchOperation.fetch(viewport.x, viewport.y, viewport.x + hsize - 1,
         viewport.y + vsize - 1);
-    synchronized (this) {
+    synchronized (viewport) {
       points.forEach((e) -> {
         graphics.fillRect((e.x - viewport.x) * scaling, (e.y - viewport.y) * scaling, scaling, scaling);
       });
@@ -299,9 +327,9 @@ public class GameDisplay extends JPanel {
   
   @Override
   protected void paintComponent(Graphics graphics) {
-    graphics.setColor(Color.LIGHT_GRAY);
+    graphics.setColor(paneColor);
     graphics.fillRect(0, 0, hsize * scaling, vsize * scaling);
     drawSquares(graphics);
-    drawLines(graphics, Color.WHITE, 1);
+    drawLines(graphics, lineColor, 1);
   }
 }
