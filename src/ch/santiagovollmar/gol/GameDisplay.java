@@ -1,27 +1,19 @@
 package ch.santiagovollmar.gol;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
-import java.time.Year;
 import java.util.Collection;
 import java.util.LinkedList;
-
-import javax.net.ssl.ExtendedSSLSession;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import ch.santiagovollmar.gol.GlobalKeyListener.KeyListenerType;
-import jdk.nashorn.internal.objects.Global;
 
 @SuppressWarnings("serial")
 public class GameDisplay extends JPanel {
@@ -46,16 +38,16 @@ public class GameDisplay extends JPanel {
    */
   private Color fillColor = Color.BLUE;
   
-  private Point viewport;
+  private final Point viewport;
   
-  private int vsize;
-  private int hsize;
-  private int scaling;
+  private volatile int vsize;
+  private volatile int hsize;
+  private volatile int scaling;
   
-  private boolean ctrlIsPressed;
-  private JFrame parent;
+  private volatile boolean ctrlIsPressed;
+  private final JFrame parent;
   
-  private Point dragStart = new Point(-1, -1);
+  private final Point dragStart = new Point(-1, -1);
   
   /*
    * Constructors
@@ -84,8 +76,7 @@ public class GameDisplay extends JPanel {
     addMouseMotionListener(new MouseMotionListener() {
       
       @Override
-      public void mouseMoved(MouseEvent e) {
-      }
+      public void mouseMoved(MouseEvent e) {}
       
       @Override
       public void mouseDragged(MouseEvent e) {
@@ -94,16 +85,32 @@ public class GameDisplay extends JPanel {
             int x = dragStart.x;
             int y = dragStart.y;
             
-            dragStart.x = e.getX();
-            dragStart.y = e.getY();
+            int mouse_x = e.getX();
+            int mouse_y = e.getY();
             
-            int difference_x = (x - dragStart.x);
-            int difference_y = (y - dragStart.y);
+            if ((((double) Math.abs(x - mouse_x)) / ((double) scaling)) > 0) {
+              int difference_x;
+              synchronized (dragStart) {
+                dragStart.x = mouse_x;
+                difference_x = (x - dragStart.x);
+              }
+              
+              synchronized (viewport) {
+                viewport.x += (int) Math.round(((double) (difference_x)) / ((double) parentDisplay.scaling));// parentDisplay.scaling;
+              }
+            }
             
-            viewport.x += (difference_x) ;// parentDisplay.scaling;
-            viewport.y += (difference_y) ;// parentDisplay.scaling;
-            
-            System.out.println("dragPos: " + dragStart);
+            if ((((double) Math.abs(y - mouse_y)) / ((double) scaling)) > 0) {
+              int difference_y;
+              synchronized (dragStart) {
+                dragStart.y = mouse_y;
+                difference_y = (y - dragStart.y);
+              }
+              
+              synchronized (viewport) {
+                viewport.y += (int) Math.round(((double) (difference_y)) / ((double) parentDisplay.scaling));// parentDisplay.scaling;
+              }
+            }
           }
         } else if (LogicManager.isPaused()) { // draw
           if (SwingUtilities.isLeftMouseButton(e)) {
@@ -118,7 +125,6 @@ public class GameDisplay extends JPanel {
     addMouseListener(new MouseListener() {
       @Override
       public void mouseReleased(MouseEvent e) {
-        System.out.println("[reset drag]");
         dragStart.x = -1;
         dragStart.y = -1;
       }
@@ -126,16 +132,13 @@ public class GameDisplay extends JPanel {
       @Override
       public void mousePressed(MouseEvent e) {
         if (ctrlIsPressed) {
-          System.out.println("[set drag]");
-          
           dragStart.x = e.getX();
           dragStart.y = e.getY();
         }
       }
       
       @Override
-      public void mouseExited(MouseEvent e) {
-      }
+      public void mouseExited(MouseEvent e) {}
       
       @Override
       public void mouseEntered(MouseEvent e) {
@@ -161,12 +164,18 @@ public class GameDisplay extends JPanel {
         if (e.getWheelRotation() > 0) {
           if (parentDisplay.scaling > 4) {
             parentDisplay.scaling--;
-            parentDisplay.repaint();
+            SwingUtilities.invokeLater(() -> {
+              parentDisplay.revalidate();
+              parentDisplay.repaint();
+            });
           }
         } else if (e.getWheelRotation() < 0) {
           if (scaling < 100) {
             parentDisplay.scaling++;
-            parentDisplay.repaint();
+            SwingUtilities.invokeLater(() -> {
+              parentDisplay.revalidate();
+              parentDisplay.repaint();
+            });
           }
         }
         
@@ -244,9 +253,6 @@ public class GameDisplay extends JPanel {
   /*
    * Drawing methods
    */
-  int a;
-  int b;
-  
   @Override
   public void setBounds(int x, int y, int width, int height) {
     super.setBounds(x, y, width, height);
@@ -282,10 +288,7 @@ public class GameDisplay extends JPanel {
     
     Collection<Point> points = fetchOperation.fetch(viewport.x, viewport.y, viewport.x + hsize - 1,
         viewport.y + vsize - 1);
-    // System.out.printf("fetched: %d, %d to %d, %d\n", viewportOrigin.x,
-    // viewportOrigin.y, viewportOrigin.x + hsize - 1, viewportOrigin.y + vsize -
-    // 1);
-    synchronized (points) {
+    synchronized (this) {
       points.forEach((e) -> {
         graphics.fillRect((e.x - viewport.x) * scaling, (e.y - viewport.y) * scaling, scaling, scaling);
       });

@@ -1,5 +1,6 @@
 package ch.santiagovollmar.gol;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -13,15 +14,15 @@ import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
 public class GridManager {
-  private static Set<Point> map = Collections.synchronizedSet(new HashSet<Point>(450, 1f));
-  private static LinkedList<Point> fillStash = new LinkedList<Point>();
-  private static LinkedList<Point> clearStash = new LinkedList<Point>();
+  private static Set<Point> map = Collections.synchronizedSet(new HashSet<Point>(10000, 1f));
+  private static ArrayDeque<Point> fillStash = new ArrayDeque<Point>();
+  private static ArrayDeque<Point> clearStash = new ArrayDeque<Point>();
   private static ExecutorService executor = Executors.newFixedThreadPool(16);
   
   /*
    * Set the fetch operation of GameDisplay
    */
-  private static Collection<Point> fetchOperation(int x1, int y1, int x2, int y2) {
+  private static synchronized Collection<Point> fetchOperation(int x1, int y1, int x2, int y2) {
     // fill all points into a list which are within given bounds
     LinkedList<Point> list = new LinkedList<Point>();
     for (Point e : map) {
@@ -44,10 +45,7 @@ public class GridManager {
     Iterator<Point> iterator = map.iterator();
     while (iterator.hasNext()) {
       Point point = iterator.next();
-      tasks.add(() -> {
-        LogicManager.compute(point);
-        return null;
-      });
+      tasks.add(point);
     }
     
     try {
@@ -169,43 +167,16 @@ public class GridManager {
    * @param p
    * @return
    */
-  public static ArrayList<Point> getNeighborCoordinates(Point p) {
-    ArrayList<Point> neighbors = new ArrayList<Point>(8);
-    int[][] coordinates =
-    {
-        {
-            p.x + 1, p.y + 1
-        },
-        {
-            p.x + 1, p.y - 1
-        },
-        {
-            p.x + 1, p.y
-        },
-        {
-            p.x - 1, p.y + 1
-        },
-        {
-            p.x - 1, p.y - 1
-        },
-        {
-            p.x - 1, p.y
-        },
-        {
-            p.x, p.y + 1
-        },
-        {
-            p.x, p.y - 1
-        }
+  public static Point[] getNeighborCoordinates(Point p) {
+    return new Point[] {
+        new Point(p.x+1, p.y+1),
+        new Point(p.x+1, p.y-1),
+        new Point(p.x+1, p.y),
+        new Point(p.x-1, p.y+1),
+        new Point(p.x-1, p.y-1),
+        new Point(p.x-1, p.y),
+        new Point(p.x, p.y+1),
+        new Point(p.x, p.y-1)
     };
-    
-    for (int[] coordinate : coordinates) {
-      try {
-        Point n = new Point(coordinate[0], coordinate[1]);
-        neighbors.add(n);
-      } catch (IllegalArgumentException e) {}
-    }
-    
-    return neighbors;
   }
 }

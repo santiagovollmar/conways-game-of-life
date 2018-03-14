@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.sun.glass.ui.TouchInputSupport;
-
 public class LogicManager {
   private static boolean isPaused = false;
   
@@ -26,7 +24,7 @@ public class LogicManager {
   public static void compute(Point point) {
     // get amount of neighbors
     int neighborAmount = 0;
-    ArrayList<Point> neighbors = GridManager.getNeighborCoordinates(point);
+    Point[] neighbors = GridManager.getNeighborCoordinates(point);
     for (Point neighbor : neighbors) {
       neighborAmount += GridManager.isAlive(neighbor) ? 1 : 0;
     }
@@ -45,7 +43,7 @@ public class LogicManager {
       
       // get amount of neighbors
       int subNeighborAmount = 0;
-      ArrayList<Point> subNeighbors = GridManager.getNeighborCoordinates(neighbor);
+      Point[] subNeighbors = GridManager.getNeighborCoordinates(neighbor);
       for (Point subNeighbor : subNeighbors) {
         subNeighborAmount += GridManager.isAlive(subNeighbor) ? 1 : 0;
       }

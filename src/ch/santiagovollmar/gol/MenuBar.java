@@ -1,6 +1,10 @@
 package ch.santiagovollmar.gol;
 
+import java.awt.Color;
+
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -20,6 +24,8 @@ public class MenuBar extends JMenuBar {
   }
   
   private JButton pauseButton;
+  private JDialog colorChooserDialog;
+  private JColorChooser colorChooser;
   
   public MenuBar() {
     currentInstance = this;
@@ -39,5 +45,18 @@ public class MenuBar extends JMenuBar {
       
       LogicManager.setPaused(!paused);
     });
+    
+    // color chooser
+    this.colorChooserDialog = new JDialog(Window.getCurrentInstance().getFrame(), "Choose new color", true);
+    colorChooserDialog.setBounds(300, 300, 700, 400);
+    this.colorChooser = new JColorChooser(Color.BLUE);
+    this.colorChooserDialog.add(this.colorChooser);
+    
+    JButton colorChooserOpener = new JButton("Change color");
+    colorChooserOpener.addActionListener(e -> {
+      LogicManager.setPaused(true);
+      colorChooserDialog.setVisible(true);
+    });
+    add(colorChooserOpener);
   }
 }

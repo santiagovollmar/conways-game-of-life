@@ -1,6 +1,8 @@
 package ch.santiagovollmar.gol;
 
-public class Point {
+import java.util.concurrent.Callable;
+
+public class Point implements Callable<Object> {
   int x;
   int y;
   
@@ -30,6 +32,12 @@ public class Point {
   @Override
   public String toString() {
     return "Point[x=" + x + ", y=" + y + "];";
+  }
+
+  @Override
+  public Object call() throws Exception {
+    LogicManager.compute(this);
+    return null;
   }
   
   

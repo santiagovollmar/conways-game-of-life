@@ -3,13 +3,10 @@ package ch.santiagovollmar.gol;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.function.Consumer;
 
 import javax.swing.JComponent;
-
-import sun.awt.image.ImageWatched.Link;
 
 public class GlobalKeyListener implements KeyListener {
   public static final KeyListener KEY_LISTENER = new GlobalKeyListener(); 
