@@ -7,14 +7,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.io.File;
 import java.util.Collection;
 import java.util.LinkedList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-
-import org.apache.batik.swing.JSVGCanvas;
 
 import ch.santiagovollmar.gol.logic.GridManager;
 import ch.santiagovollmar.gol.logic.LogicManager;
@@ -71,6 +68,7 @@ public class GameDisplay extends JPanel {
   private volatile int scaling;
   
   private volatile boolean ctrlIsPressed;
+  @SuppressWarnings("unused")
   private final JFrame parent;
   
   private final Point dragStart = new Point(-1, -1);

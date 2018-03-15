@@ -1,26 +1,16 @@
 package ch.santiagovollmar.gol.gui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
-
-import javax.swing.Action;
-import javax.swing.JButton;
-import javax.swing.JColorChooser;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.SpringLayout;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+@SuppressWarnings("serial")
 public class MenuBar extends JMenuBar {
   private static MenuBar currentInstance;
   
@@ -46,6 +36,7 @@ public class MenuBar extends JMenuBar {
     add(menu);
     JMenuItem save = new JMenuItem("Export");
     save.addActionListener(e -> {
+      @SuppressWarnings("unused")
       File file = getFile();
     });
     menu.add(save);

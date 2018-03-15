@@ -2,7 +2,6 @@ package ch.santiagovollmar.gol.util;
 
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.image.VolatileImage;
 import java.io.File;
 
 import javax.swing.JComponent;

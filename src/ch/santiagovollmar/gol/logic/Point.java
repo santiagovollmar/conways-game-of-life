@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.concurrent.Callable;
 
 public class Point implements Callable<Object>, Serializable {
+  private static final long serialVersionUID = 741323992140637769L;
+  
   public int x;
   public int y;
   
@@ -14,10 +16,6 @@ public class Point implements Callable<Object>, Serializable {
     
     this.x = x;
     this.y = y;
-  }
-  
-  public Point(byte[] bytes) throws IllegalArgumentException {
-    // TODO Auto-generated constructor stub
   }
   
   @Override

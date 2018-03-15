@@ -6,8 +6,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JDialog;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 import javax.swing.SpringLayout;
@@ -16,6 +14,7 @@ import javax.swing.SwingUtilities;
 import ch.santiagovollmar.gol.logic.GridManager;
 import ch.santiagovollmar.gol.logic.LogicManager;
 
+@SuppressWarnings("serial")
 public class ToolBar extends JToolBar {
   private static ToolBar currentInstance;
   
