@@ -7,8 +7,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import ch.santiagovollmar.gol.logic.LogicManager;
+import ch.santiagovollmar.gol.util.FileManager;
 
 @SuppressWarnings("serial")
 public class MenuBar extends JMenuBar {
@@ -36,15 +39,57 @@ public class MenuBar extends JMenuBar {
     add(menu);
     JMenuItem save = new JMenuItem("Export");
     save.addActionListener(e -> {
-      @SuppressWarnings("unused")
-      File file = getFile();
+      boolean pausedState = LogicManager.isPaused();
+      LogicManager.setPaused(true);
+      File file = getFile(true);
+      
+      if (file != null) {
+        new Thread(() -> {
+          try {
+            FileManager.put(file);
+            SwingUtilities.invokeLater(() -> {
+              JOptionPane.showMessageDialog(Window.getCurrentInstance().getFrame(),
+                  "Current scene has been saved successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+              LogicManager.setPaused(pausedState);
+            });
+          } catch (IOException e1) {
+            SwingUtilities.invokeLater(() -> {
+              JOptionPane.showMessageDialog(Window.getCurrentInstance().getFrame(),
+                  "Could not save current Scene: " + e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            });
+            e1.printStackTrace();
+          }
+        }).start();
+      }
     });
     menu.add(save);
     JMenuItem load = new JMenuItem("Import");
+    load.addActionListener(e -> {
+      LogicManager.setPaused(true);
+      File file = getFile(false);
+      
+      if (file != null) {
+        new Thread(() -> {
+          try {
+            FileManager.load(file);
+            SwingUtilities.invokeLater(() -> {
+              JOptionPane.showMessageDialog(Window.getCurrentInstance().getFrame(),
+                  "New scene has been loaded successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+            });
+          } catch (IOException e1) {
+            SwingUtilities.invokeLater(() -> {
+              JOptionPane.showMessageDialog(Window.getCurrentInstance().getFrame(),
+                  "Could not load new Scene: " + e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            });
+            e1.printStackTrace();
+          }
+        }).start();
+      }
+    });
     menu.add(load);
   }
   
-  private File getFile() {
+  private File getFile(boolean ensureExtension) {
     JFileChooser fileChooser = new JFileChooser("/");
     fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
     fileChooser.setMultiSelectionEnabled(false);
@@ -70,6 +115,14 @@ public class MenuBar extends JMenuBar {
       
       try {
         file = file.getCanonicalFile();
+        
+        if (ensureExtension) {
+          String[] fileNameParts = file.getName().split("\\.");
+          if (!"cgls|||cgols".contains(fileNameParts[fileNameParts.length - 1])) {
+            file = new File(file.getAbsolutePath() + ".cgls");
+          }
+        }
+        
         return file;
       } catch (IOException e) {
         JOptionPane.showMessageDialog(Window.getCurrentInstance().getGameDisplay(),

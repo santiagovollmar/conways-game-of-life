@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.Collection;
+import java.util.ConcurrentModificationException;
 import java.util.LinkedList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -43,11 +44,28 @@ public class GameDisplay extends JPanel {
   private Color fillColor = Color.BLUE;
   private Color lineColor = Color.WHITE;
   private Color paneColor = Color.GRAY;
+  
+  private final Point viewport;
+  
+  private volatile int vsize;
+  private volatile int hsize;
+  private volatile int scaling;
+  
+  private volatile boolean ctrlIsPressed;
+  @SuppressWarnings("unused")
+  private final JFrame parent;
+  
+  private final Point dragStart = new Point(-1, -1);
+  
+  /*
+   * getters and setters
+   */
   public Color getFillColor() {
     synchronized (fillColor) {
       return fillColor;
     }
   }
+  
   public void setFillColor(Color fillColor) {
     synchronized (fillColor) {
       this.fillColor = fillColor;
@@ -61,17 +79,22 @@ public class GameDisplay extends JPanel {
     paneColor = new Color(paneColorAvg, paneColorAvg, paneColorAvg);
   }
   
-  private final Point viewport;
+  public Point getViewport() {
+    return new Point(viewport.x, viewport.y);
+  }
   
-  private volatile int vsize;
-  private volatile int hsize;
-  private volatile int scaling;
+  public void setViewport(Point edge) {
+    viewport.x = edge.x;
+    viewport.y = edge.y;
+  }
   
-  private volatile boolean ctrlIsPressed;
-  @SuppressWarnings("unused")
-  private final JFrame parent;
+  public int getScaling() {
+    return scaling;
+  }
   
-  private final Point dragStart = new Point(-1, -1);
+  public void setScaling(int scaling) {
+    this.scaling = scaling;
+  }
   
   /*
    * Constructors
@@ -316,15 +339,19 @@ public class GameDisplay extends JPanel {
       graphics.setColor(fillColor);
     }
     
-    Collection<Point> points = fetchOperation.fetch(viewport.x, viewport.y, viewport.x + hsize - 1,
-        viewport.y + vsize - 1);
-    synchronized (viewport) {
-      points.forEach((e) -> {
-        graphics.fillRect((e.x - viewport.x) * scaling, (e.y - viewport.y) * scaling, scaling, scaling);
-      });
+    try {
+      Collection<Point> points = fetchOperation.fetch(viewport.x, viewport.y, viewport.x + hsize - 1,
+          viewport.y + vsize - 1);
+      synchronized (viewport) {
+        points.forEach((e) -> {
+          graphics.fillRect((e.x - viewport.x) * scaling, (e.y - viewport.y) * scaling, scaling, scaling);
+        });
+      }
+      
+      graphics.setColor(prevColor);
+    } catch (ConcurrentModificationException e) {
+      e.printStackTrace(System.err);
     }
-    
-    graphics.setColor(prevColor);
   }
   
   @Override
