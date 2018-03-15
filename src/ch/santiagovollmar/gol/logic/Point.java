@@ -1,10 +1,11 @@
-package ch.santiagovollmar.gol;
+package ch.santiagovollmar.gol.logic;
 
+import java.io.Serializable;
 import java.util.concurrent.Callable;
 
-public class Point implements Callable<Object> {
-  int x;
-  int y;
+public class Point implements Callable<Object>, Serializable {
+  public int x;
+  public int y;
   
   public Point(int x, int y) throws IllegalArgumentException {
     if (x > 90000 || y > 90000) {
@@ -13,6 +14,10 @@ public class Point implements Callable<Object> {
     
     this.x = x;
     this.y = y;
+  }
+  
+  public Point(byte[] bytes) throws IllegalArgumentException {
+    // TODO Auto-generated constructor stub
   }
   
   @Override
@@ -34,6 +39,20 @@ public class Point implements Callable<Object> {
     return "Point[x=" + x + ", y=" + y + "];";
   }
 
+  public byte[] getBytes() {
+    byte[] bytes = new byte[8];
+    
+    for (int i = 0; i < 4; i++) {
+      bytes[i] = (byte) ((x >>> (i * 8)) & 0xFF);
+    }
+    
+    for (int i = 0; i < 4; i++) {
+      bytes[i + 4] = (byte) ((y >>> (i * 8)) & 0xFF);
+    }
+    
+    return bytes;
+  }
+  
   @Override
   public Object call() throws Exception {
     LogicManager.compute(this);

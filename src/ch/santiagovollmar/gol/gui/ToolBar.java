@@ -1,4 +1,4 @@
-package ch.santiagovollmar.gol;
+package ch.santiagovollmar.gol.gui;
 
 import java.awt.Color;
 
@@ -12,6 +12,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 import javax.swing.SpringLayout;
 import javax.swing.SwingUtilities;
+
+import ch.santiagovollmar.gol.logic.GridManager;
+import ch.santiagovollmar.gol.logic.LogicManager;
 
 public class ToolBar extends JToolBar {
   private static ToolBar currentInstance;
@@ -59,7 +62,7 @@ public class ToolBar extends JToolBar {
           "Confirm Action", JOptionPane.YES_NO_OPTION);
       if (choice == 0) {
         GridManager.update();
-        GridManager.clearMap();
+        GridManager.clearScene();
       }
       LogicManager.setPaused(pausedState);
     });

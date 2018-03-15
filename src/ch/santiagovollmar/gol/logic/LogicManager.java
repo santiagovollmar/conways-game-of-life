@@ -1,9 +1,11 @@
-package ch.santiagovollmar.gol;
+package ch.santiagovollmar.gol.logic;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
+import ch.santiagovollmar.gol.gui.ToolBar;
 
 public class LogicManager {
   private static boolean isPaused = false;

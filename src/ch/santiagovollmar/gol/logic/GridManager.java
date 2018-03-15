@@ -1,7 +1,5 @@
-package ch.santiagovollmar.gol;
+package ch.santiagovollmar.gol.logic;
 
-import java.awt.Dimension;
-import java.io.File;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +12,8 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.function.Consumer;
+
+import ch.santiagovollmar.gol.gui.GameDisplay;
 
 public class GridManager {
   private static Set<Point> map = Collections.synchronizedSet(new HashSet<Point>(10000, 1f));
@@ -22,7 +21,8 @@ public class GridManager {
   private static ArrayDeque<Point> clearStash = new ArrayDeque<Point>();
   private static ExecutorService executor = Executors.newFixedThreadPool(16);
   
-  public static void clearMap() {
+  public static void clearScene() {
+    update(); // clear buffers
     map.clear();
   }
   
@@ -30,7 +30,7 @@ public class GridManager {
    * 
    * @return
    */
-  public Point[] dumpMap() {
+  public static Point[] dumpScene() {
     // ensure game is paused
     while (LogicManager.isUpdating()) {} // wait for current update cycle to complete
     
@@ -44,7 +44,7 @@ public class GridManager {
    * 
    * @param data
    */
-  public void loadMap(Point[] data) {
+  public static void loadScene(Point[] data) {
     // ensure game is paused
     while (LogicManager.isUpdating()) {} // wait for current update cycle to complete
     

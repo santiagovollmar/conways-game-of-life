@@ -1,4 +1,4 @@
-package ch.santiagovollmar.gol;
+package ch.santiagovollmar.gol.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,7 +16,11 @@ import javax.swing.SwingUtilities;
 
 import org.apache.batik.swing.JSVGCanvas;
 
-import ch.santiagovollmar.gol.GlobalKeyListener.KeyListenerType;
+import ch.santiagovollmar.gol.logic.GridManager;
+import ch.santiagovollmar.gol.logic.LogicManager;
+import ch.santiagovollmar.gol.logic.Point;
+import ch.santiagovollmar.gol.util.GlobalKeyListener;
+import ch.santiagovollmar.gol.util.GlobalKeyListener.KeyListenerType;
 
 @SuppressWarnings("serial")
 public class GameDisplay extends JPanel {

@@ -1,4 +1,4 @@
-package ch.santiagovollmar.gol;
+package ch.santiagovollmar.gol.util;
 
 import java.awt.Component;
 import java.awt.event.KeyEvent;

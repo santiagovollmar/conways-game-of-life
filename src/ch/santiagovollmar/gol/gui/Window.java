@@ -1,4 +1,4 @@
-package ch.santiagovollmar.gol;
+package ch.santiagovollmar.gol.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,6 +14,11 @@ import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import ch.santiagovollmar.gol.logic.GridManager;
+import ch.santiagovollmar.gol.logic.LogicManager;
+import ch.santiagovollmar.gol.logic.Point;
+import ch.santiagovollmar.gol.util.GlobalKeyListener;
 
 public class Window {
   
