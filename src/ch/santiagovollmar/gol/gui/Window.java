@@ -84,15 +84,14 @@ public class Window {
     frame.setBounds(100, 100, 500, 500);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
-    String[] rgbValues = PropertyManager.properties.getProperty("display.color").split("\\s*\\,\\s*");
+    String[] rgbValues = PropertyManager.get("display.color").split("\\s*\\,\\s*");
     gd = new GameDisplay(this.frame, 
-        Integer.valueOf(PropertyManager.properties.getProperty("display.width")),
-        Integer.valueOf(PropertyManager.properties.getProperty("display.height")),
-        Integer.valueOf(PropertyManager.properties.getProperty("display.scaling")), 
+        Integer.valueOf(PropertyManager.get("display.width")),
+        Integer.valueOf(PropertyManager.get("display.height")),
+        Integer.valueOf(PropertyManager.get("display.scaling")), 
         new Color(Integer.valueOf(rgbValues[0]), 
             Integer.valueOf(rgbValues[1]), 
             Integer.valueOf(rgbValues[2])));
-    PropertyManager.properties.list(System.out);
     
     frame.add(new MenuBar(), BorderLayout.NORTH);
     frame.add(gd, BorderLayout.CENTER);
@@ -101,9 +100,9 @@ public class Window {
     
     for (int x = 0; x < 100; x++) {
       for (int y = 0; y < 100; y++) {
-        // if (Math.random() > 0.5) {
-        GridManager.fill(new Point(x + 45020, y + 45020), false);
-        // }
+        if (Math.random() > 0.5) {
+          GridManager.fill(new Point(x + 45020, y + 45020), false);
+        }
       }
     }
   }

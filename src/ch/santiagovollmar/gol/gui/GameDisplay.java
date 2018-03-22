@@ -1,18 +1,24 @@
 package ch.santiagovollmar.gol.gui;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.nio.channels.SeekableByteChannel;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ConcurrentModificationException;
 import java.util.LinkedList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
+import org.apache.bcel.generic.IF_ACMPEQ;
 
 import ch.santiagovollmar.gol.logic.GridManager;
 import ch.santiagovollmar.gol.logic.LogicManager;
@@ -44,6 +50,7 @@ public class GameDisplay extends JPanel {
   private Color fillColor = Color.BLUE;
   private Color lineColor = Color.WHITE;
   private Color paneColor = Color.GRAY;
+  private Color selectionColor = Color.WHITE;
   
   private final Point viewport;
   
@@ -52,10 +59,15 @@ public class GameDisplay extends JPanel {
   private volatile int scaling;
   
   private volatile boolean ctrlIsPressed;
+  private volatile boolean shiftIsPressed;
+  
   @SuppressWarnings("unused")
   private final JFrame parent;
   
   private final Point dragStart = new Point(-1, -1);
+  
+  private final Point selectionStart = new Point(-1, -1);
+  private final Point selectionEnd = new Point(-1, -1);
   
   /*
    * getters and setters
@@ -72,11 +84,14 @@ public class GameDisplay extends JPanel {
     }
     
     int lineColorAvg = ((fillColor.getGreen() + fillColor.getRed() + fillColor.getBlue()) / 3) + 30;
-    lineColorAvg = lineColorAvg > 255 ? 255: lineColorAvg; 
-    int paneColorAvg = 255 - (lineColorAvg/2);
+    lineColorAvg = lineColorAvg > 255 ? 255 : lineColorAvg;
+    int paneColorAvg = 255 - (lineColorAvg / 2);
     
     lineColor = new Color(lineColorAvg, lineColorAvg, lineColorAvg);
     paneColor = new Color(paneColorAvg, paneColorAvg, paneColorAvg);
+    selectionColor = new Color(paneColorAvg + 20, paneColorAvg + 20, 255);
+    selectionColor = Color.WHITE;
+    System.out.printf("%d %d %d\n", selectionColor.getRed(), selectionColor.getGreen(), selectionColor.getBlue());
   }
   
   public Point getViewport() {
@@ -117,13 +132,246 @@ public class GameDisplay extends JPanel {
     grabFocus();
     requestFocus();
     
-    GameDisplay parentDisplay = this;
+    // functionality
+    setupDraw();
+    setupDrag();
+    setupZoom();
+    setupSelection();
+    setupDeleteAction();
     
-    // add mouse listeners
+    // add global key listeners
+    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
+      LogicManager.setPaused(!LogicManager.isPaused());
+    }, KeyEvent.VK_SPACE);
+    
+    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
+      ctrlIsPressed = true;
+    }, KeyEvent.VK_CONTROL);
+    
+    GlobalKeyListener.attach(KeyListenerType.RELEASED, e -> {
+      ctrlIsPressed = false;
+    }, KeyEvent.VK_CONTROL);
+    
+    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
+      shiftIsPressed = true;
+    }, KeyEvent.VK_SHIFT);
+    
+    GlobalKeyListener.attach(KeyListenerType.RELEASED, e -> {
+      shiftIsPressed = false;
+    }, KeyEvent.VK_SHIFT);
+    
+    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
+      switch (e.getKeyCode()) {
+        case KeyEvent.VK_UP:
+          viewport.y--;
+          break;
+        
+        case KeyEvent.VK_DOWN:
+          viewport.y++;
+          break;
+        
+        case KeyEvent.VK_LEFT:
+          viewport.x--;
+          break;
+        
+        case KeyEvent.VK_RIGHT:
+          viewport.x++;
+          break;
+      }
+    }, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT);
+  }
+    
+  public GameDisplay(JFrame parent, int hsize, int vsize, Color fillColor) {
+    this(parent, hsize, vsize, 10, fillColor);
+  }
+  
+  public GameDisplay(JFrame parent, int hsize, int vsize, int scaling) {
+    this(parent, hsize, vsize, scaling, Color.MAGENTA);
+  }
+  
+  public GameDisplay(JFrame parent, int scaling) {
+    this(parent, 100, 100, scaling);
+  }
+  
+  public GameDisplay(JFrame parent, Color fillColor) {
+    this(parent, 100, 100, fillColor);
+  }
+  
+  public GameDisplay(JFrame parent) {
+    this(parent, 10);
+  }
+  
+  /*
+   * Functionality
+   */
+  private void setupDeleteAction() {
+    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
+      if (LogicManager.isPaused()) { // check if game is paused
+        if (selectionStart.x != -1 && selectionEnd.x != -1) { // user has an active selection
+          Point min = getSelectionMin();
+          Point max = getSelectionMax();
+          
+          // put points to be cleared into a list
+          ArrayList<Point> points = new ArrayList<>((max.x - min.x) * (max.y - min.y));
+          for (int x = min.x; x < max.x; x++) {
+            for (int y = min.y; y < max.y; y++) {
+              points.add(new Point(x, y));
+            }
+          }
+          
+          // clear all points
+          GridManager.clear(points, false);
+        }
+      }
+    }, KeyEvent.VK_DELETE);
+  }
+  
+  private void setupCopyPasteAction() {
+    // TODO do this
+  }
+  
+  private void setupSelection() {
     addMouseMotionListener(new MouseMotionListener() {
       
       @Override
-      public void mouseMoved(MouseEvent e) {}
+      public void mouseMoved(MouseEvent arg0) {
+      }
+      
+      @Override
+      public void mouseDragged(MouseEvent e) {
+        if (shiftIsPressed) {
+          selectionEnd.x = (e.getX() / scaling) + viewport.x;
+          selectionEnd.y = (e.getY() / scaling) + viewport.y;
+        }
+      }
+    });
+    
+    addMouseListener(new MouseListener() {
+      
+      @Override
+      public void mouseReleased(MouseEvent e) {
+        if (shiftIsPressed) {
+          selectionEnd.x = (e.getX() / scaling) + viewport.x;
+          selectionEnd.y = (e.getY() / scaling) + viewport.y;
+        } else {
+          clearSelection();
+        }
+      }
+      
+      @Override
+      public void mousePressed(MouseEvent e) {
+        if (shiftIsPressed) {
+          selectionStart.x = (e.getX() / scaling) + viewport.x;
+          selectionStart.y = (e.getY() / scaling) + viewport.y;
+        } else {
+          clearSelection();
+        }
+      }
+      
+      @Override
+      public void mouseExited(MouseEvent arg0) {
+      }
+      
+      @Override
+      public void mouseEntered(MouseEvent arg0) {
+      }
+      
+      @Override
+      public void mouseClicked(MouseEvent arg0) {
+      }
+    });
+  }
+  
+  private void setupDraw() {
+    addMouseListener(new MouseListener() {
+      
+      @Override
+      public void mouseReleased(MouseEvent arg0) {
+      }
+      
+      @Override
+      public void mousePressed(MouseEvent arg0) {
+      }
+      
+      @Override
+      public void mouseExited(MouseEvent arg0) {
+      }
+      
+      @Override
+      public void mouseEntered(MouseEvent arg0) {
+      }
+      
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        System.out.println(e.getButton());
+        grabFocus();
+        if (LogicManager.isPaused() && !ctrlIsPressed) {
+          if (e.getButton() == 1) {
+            fillCell(e);
+          } else if (e.getButton() == 3) {
+            clearCell(e);
+          }
+        }
+      }
+    });
+    
+    addMouseMotionListener(new MouseMotionListener() {
+      
+      @Override
+      public void mouseMoved(MouseEvent e) {
+      }
+      
+      @Override
+      public void mouseDragged(MouseEvent e) {
+        if (!ctrlIsPressed && LogicManager.isPaused()) { // draw
+          if (SwingUtilities.isLeftMouseButton(e)) {
+            fillCell(e);
+          } else if (SwingUtilities.isRightMouseButton(e)) {
+            clearCell(e);
+          }
+        }
+      }
+    });
+  }
+  
+  private void setupDrag() {
+    GameDisplay parentDisplay = this;
+    
+    addMouseListener(new MouseListener() {
+      
+      @Override
+      public void mouseReleased(MouseEvent e) {
+        dragStart.x = -1;
+        dragStart.y = -1;
+      }
+      
+      @Override
+      public void mousePressed(MouseEvent e) {
+        if (ctrlIsPressed) {
+          dragStart.x = e.getX();
+          dragStart.y = e.getY();
+        }
+      }
+      
+      @Override
+      public void mouseExited(MouseEvent arg0) {
+      }
+      
+      @Override
+      public void mouseEntered(MouseEvent arg0) {
+        grabFocus();
+      }
+      
+      @Override
+      public void mouseClicked(MouseEvent arg0) {
+      }
+    });
+    
+    addMouseMotionListener(new MouseMotionListener() {
+      
+      @Override
+      public void mouseMoved(MouseEvent e) {
+      }
       
       @Override
       public void mouseDragged(MouseEvent e) {
@@ -159,133 +407,32 @@ public class GameDisplay extends JPanel {
               }
             }
           }
-        } else if (LogicManager.isPaused()) { // draw
-          if (SwingUtilities.isLeftMouseButton(e)) {
-            fillCell(e);
-          } else if (SwingUtilities.isRightMouseButton(e)) {
-            clearCell(e);
-          }
         }
       }
     });
-    
-    addMouseListener(new MouseListener() {
-      @Override
-      public void mouseReleased(MouseEvent e) {
-        dragStart.x = -1;
-        dragStart.y = -1;
-      }
-      
-      @Override
-      public void mousePressed(MouseEvent e) {
-        if (ctrlIsPressed) {
-          dragStart.x = e.getX();
-          dragStart.y = e.getY();
-        }
-      }
-      
-      @Override
-      public void mouseExited(MouseEvent e) {}
-      
-      @Override
-      public void mouseEntered(MouseEvent e) {
-        grabFocus();
-      }
-      
-      @Override
-      public void mouseClicked(MouseEvent e) {
-        System.out.println(e.getButton());
-        grabFocus();
-        if (LogicManager.isPaused() && !ctrlIsPressed) {
-          if (e.getButton() == 1) {
-            fillCell(e);
-          } else if (e.getButton() == 3) {
-            clearCell(e);
-          }
-        }
-      }
-    });
+  }
+  
+  private void setupZoom() {
+    GameDisplay parentDisplay = this;
     
     addMouseWheelListener(e -> {
       if (ctrlIsPressed) {
         if (e.getWheelRotation() > 0) {
           if (parentDisplay.scaling > 4) {
             parentDisplay.scaling--;
-            SwingUtilities.invokeLater(() -> {
-              parentDisplay.revalidate();
-              parentDisplay.repaint();
-            });
           }
         } else if (e.getWheelRotation() < 0) {
           if (scaling < 100) {
             parentDisplay.scaling++;
-            SwingUtilities.invokeLater(() -> {
-              parentDisplay.revalidate();
-              parentDisplay.repaint();
-            });
           }
         }
         
-        SwingUtilities.invokeLater(() -> {
-          parentDisplay.repaint();
-        });
+        SwingUtilities.invokeLater(parentDisplay::revalidate);
+        SwingUtilities.invokeLater(parentDisplay::repaint);
       }
     });
-    
-    // add global key listeners
-    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
-      LogicManager.setPaused(!LogicManager.isPaused());
-    }, KeyEvent.VK_SPACE);
-    
-    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
-      ctrlIsPressed = true;
-    }, KeyEvent.VK_CONTROL);
-    
-    GlobalKeyListener.attach(KeyListenerType.RELEASED, e -> {
-      ctrlIsPressed = false;
-    }, KeyEvent.VK_CONTROL);
-    
-    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
-      switch (e.getKeyCode()) {
-        case KeyEvent.VK_UP:
-          viewport.y--;
-          break;
-        
-        case KeyEvent.VK_DOWN:
-          viewport.y++;
-          break;
-        
-        case KeyEvent.VK_LEFT:
-          viewport.x--;
-          break;
-        
-        case KeyEvent.VK_RIGHT:
-          viewport.x++;
-          break;
-      }
-    }, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT);
   }
-  
-  public GameDisplay(JFrame parent, int hsize, int vsize, Color fillColor) {
-    this(parent, hsize, vsize, 10, fillColor);
-  }
-  
-  public GameDisplay(JFrame parent, int hsize, int vsize, int scaling) {
-    this(parent, hsize, vsize, scaling, Color.MAGENTA);
-  }
-  
-  public GameDisplay(JFrame parent, int scaling) {
-    this(parent, 100, 100, scaling);
-  }
-  
-  public GameDisplay(JFrame parent, Color fillColor) {
-    this(parent, 100, 100, fillColor);
-  }
-  
-  public GameDisplay(JFrame parent) {
-    this(parent, 10);
-  }
-  
+
   /*
    * User editing
    */
@@ -299,6 +446,28 @@ public class GameDisplay extends JPanel {
     synchronized (viewport) {
       GridManager.clear(new Point((e.getX() / scaling) + viewport.x, (e.getY() / scaling) + viewport.y), false);
     }
+  }
+  
+  public void clearSelection() {
+    selectionStart.x = -1;
+    selectionStart.y = -1;
+    
+    selectionEnd.x = -1;
+    selectionEnd.y = -1;
+  }
+  
+  public Point getSelectionMin() {
+    int x = selectionStart.x < selectionEnd.x ? selectionStart.x : selectionEnd.x;
+    int y = selectionStart.y < selectionEnd.y ? selectionStart.y : selectionEnd.y;
+    
+    return new Point(x, y);
+  }
+  
+  public Point getSelectionMax() {
+    int x = selectionStart.x > selectionEnd.x ? selectionStart.x : selectionEnd.x;
+    int y = selectionStart.y > selectionEnd.y ? selectionStart.y : selectionEnd.y;
+    
+    return new Point(x, y);
   }
   
   /*
@@ -342,6 +511,7 @@ public class GameDisplay extends JPanel {
     try {
       Collection<Point> points = fetchOperation.fetch(viewport.x, viewport.y, viewport.x + hsize - 1,
           viewport.y + vsize - 1);
+      
       synchronized (viewport) {
         points.forEach((e) -> {
           graphics.fillRect((e.x - viewport.x) * scaling, (e.y - viewport.y) * scaling, scaling, scaling);
@@ -354,11 +524,28 @@ public class GameDisplay extends JPanel {
     }
   }
   
+  protected final void drawSelection(Graphics graphics) {
+    if (selectionEnd.x == -1 || selectionStart.x == -1) {
+      return;
+    }
+    
+    graphics.setColor(new Color(255, 255, 255, 100));
+    Point selectionMin = getSelectionMin();
+    selectionMin.x -= viewport.x;
+    selectionMin.y -= viewport.y;
+    
+    int selectionHeight = Math.abs(selectionStart.y - selectionEnd.y);
+    int selectionWidth = Math.abs(selectionStart.x - selectionEnd.x);
+    graphics.fillRect(selectionMin.x * scaling, selectionMin.y * scaling, selectionWidth * scaling,
+        selectionHeight * scaling);
+  }
+  
   @Override
   protected void paintComponent(Graphics graphics) {
     graphics.setColor(paneColor);
     graphics.fillRect(0, 0, hsize * scaling, vsize * scaling);
     drawSquares(graphics);
     drawLines(graphics, lineColor, 1);
+    drawSelection(graphics);
   }
 }

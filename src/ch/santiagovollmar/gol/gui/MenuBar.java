@@ -12,6 +12,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import ch.santiagovollmar.gol.logic.LogicManager;
 import ch.santiagovollmar.gol.util.FileManager;
+import ch.santiagovollmar.gol.util.PropertyManager;
 
 @SuppressWarnings("serial")
 public class MenuBar extends JMenuBar {
@@ -20,13 +21,6 @@ public class MenuBar extends JMenuBar {
   public static MenuBar getCurrentInstance() {
     return currentInstance;
   }
-  
-  // pauseImage = SVGReader.readImage(new
-  // File("C:\\Users\\vollmar\\Downloads\\ionicons-2.0.1\\ionicons-2.0.1\\src\\pause"),
-  // new Dimension(23, 23));
-  // playImage = SVGReader.readImage(new
-  // File("C:\\Users\\vollmar\\Downloads\\ionicons-2.0.1\\ionicons-2.0.1\\src\\play"),
-  // new Dimension(23, 23));
   
   public MenuBar() {
     currentInstance = this;
@@ -90,10 +84,10 @@ public class MenuBar extends JMenuBar {
   }
   
   private File getFile(boolean ensureExtension) {
-    JFileChooser fileChooser = new JFileChooser("/");
+    JFileChooser fileChooser = new JFileChooser(PropertyManager.get("path"));
     fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
     fileChooser.setMultiSelectionEnabled(false);
-    FileFilter filter = new FileNameExtensionFilter("Conways game of life scene", "cgls", "cgols");
+    FileFilter filter = new FileNameExtensionFilter("Conways game of life scene [.cgls, .cgols]", "cgls", "cgols");
     fileChooser.setFileFilter(filter);
     fileChooser.addChoosableFileFilter(filter);
     fileChooser.showDialog(Window.getCurrentInstance().getFrame(), "Select");
@@ -123,6 +117,10 @@ public class MenuBar extends JMenuBar {
           }
         }
         
+        try {
+          PropertyManager.set("path", fileChooser.getCurrentDirectory().getAbsolutePath());
+          PropertyManager.store();
+        } catch (IOException e) {}
         return file;
       } catch (IOException e) {
         JOptionPane.showMessageDialog(Window.getCurrentInstance().getGameDisplay(),
