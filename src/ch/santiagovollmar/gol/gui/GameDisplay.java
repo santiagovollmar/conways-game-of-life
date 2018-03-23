@@ -171,26 +171,43 @@ public class GameDisplay extends JPanel {
     }, KeyEvent.VK_SHIFT);
     
     GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
+      Point direction = new Point(0, 0);
       switch (e.getKeyCode()) {
         case KeyEvent.VK_UP:
-          viewport.y--;
+          direction.y--;
           break;
         
         case KeyEvent.VK_DOWN:
-          viewport.y++;
+          direction.y++;
           break;
         
         case KeyEvent.VK_LEFT:
-          viewport.x--;
+          direction.x--;
           break;
         
         case KeyEvent.VK_RIGHT:
-          viewport.x++;
+          direction.x++;
           break;
+      }
+      
+      if (ctrlIsPressed) {
+        viewport.x += direction.x;
+        viewport.y += direction.y;
+      } else if (shiftIsPressed) {
+        ensureSelection();
+        selectionEnd.x += direction.x;
+        selectionEnd.y += direction.y;
+      } else {
+        ensureSelection();
+        selectionStart.x += direction.x;
+        selectionStart.y += direction.y;
+        
+        selectionEnd.x += direction.x;
+        selectionEnd.y += direction.y;
       }
     }, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT);
   }
-    
+  
   public GameDisplay(JFrame parent, int hsize, int vsize, Color fillColor) {
     this(parent, hsize, vsize, 10, fillColor);
   }
@@ -264,7 +281,9 @@ public class GameDisplay extends JPanel {
     // paste
     GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
       if (LogicManager.isPaused() && ctrlIsPressed) { // check if game is paused and ctrl is pressed
-        if (copyBufferStart != null && selectionStart.x != -1 && selectionEnd.x != -1) { // check if clipboard contains data and there is a selection
+        if (copyBufferStart != null && selectionStart.x != -1 && selectionEnd.x != -1) { // check if clipboard contains
+                                                                                         // data and there is a
+                                                                                         // selection
           // get selection
           Point min = getSelectionMin();
           Point max = getSelectionMax();
@@ -329,6 +348,7 @@ public class GameDisplay extends JPanel {
       @Override
       public void mousePressed(MouseEvent e) {
         if (shiftIsPressed) {
+          clearSelection();
           selectionStart.x = (e.getX() / scaling) + viewport.x;
           selectionStart.y = (e.getY() / scaling) + viewport.y;
           selectionCreation = true;
@@ -509,7 +529,7 @@ public class GameDisplay extends JPanel {
       }
     });
   }
-
+  
   /*
    * User editing
    */
@@ -545,6 +565,16 @@ public class GameDisplay extends JPanel {
     int y = selectionStart.y > selectionEnd.y ? selectionStart.y : selectionEnd.y;
     
     return new Point(x, y);
+  }
+  
+  private void ensureSelection() {
+    if (selectionStart.x == -1 || selectionEnd.x == -1) { // no active selection
+      // spawn new selection in center
+      selectionStart.x = viewport.x + hsize / 2;
+      selectionStart.y = viewport.y + vsize / 2;
+      selectionEnd.x = selectionStart.x + 1;
+      selectionEnd.y = selectionStart.y + 1;
+    }
   }
   
   /*
@@ -606,7 +636,12 @@ public class GameDisplay extends JPanel {
       return;
     }
     
-    graphics.setColor(new Color(255, 255, 255, 100));
+    int r, g, b;
+    r = 205 - 60;
+    g = 232 - 60;
+    b = 255 - 60 + 40;
+    
+    graphics.setColor(new Color(r, g, b, 100));
     Point selectionMin = getSelectionMin();
     selectionMin.x -= viewport.x;
     selectionMin.y -= viewport.y;
@@ -614,6 +649,11 @@ public class GameDisplay extends JPanel {
     int selectionHeight = Math.abs(selectionStart.y - selectionEnd.y);
     int selectionWidth = Math.abs(selectionStart.x - selectionEnd.x);
     graphics.fillRect(selectionMin.x * scaling, selectionMin.y * scaling, selectionWidth * scaling,
+        selectionHeight * scaling);
+    
+    ((Graphics2D) graphics).setStroke(new BasicStroke(2f));
+    graphics.setColor(new Color(r, g, b, 255));
+    graphics.drawRect(selectionMin.x * scaling, selectionMin.y * scaling, selectionWidth * scaling,
         selectionHeight * scaling);
   }
   
