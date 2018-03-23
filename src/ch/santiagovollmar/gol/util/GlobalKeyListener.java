@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.function.Consumer;
 
 import javax.swing.JComponent;
+import javax.swing.SwingUtilities;
 
 public class GlobalKeyListener implements KeyListener {
   public static final KeyListener KEY_LISTENER = new GlobalKeyListener(); 
@@ -18,9 +19,7 @@ public class GlobalKeyListener implements KeyListener {
       }
     }
     
-    System.out.println("attached  global keylistener to: " + parent);
-    
-    parent.addKeyListener(KEY_LISTENER);
+    SwingUtilities.invokeLater(() -> parent.addKeyListener(KEY_LISTENER));
   }
   
   public enum KeyListenerType {
@@ -44,31 +43,20 @@ public class GlobalKeyListener implements KeyListener {
   
   @Override
   public void keyPressed(KeyEvent e) {
-    KeyListenerType type = KeyListenerType.PRESSED;
-    for (int i = 0; i < type.listeners.size(); i++) {
-      for (int code : type.codes.get(i)) {
-        if (code == e.getKeyCode()) {
-          type.listeners.get(i).accept(e);
-        }
-      }
-    }
+    evaluateType(KeyListenerType.PRESSED, e);
   }
 
   @Override
   public void keyReleased(KeyEvent e) {
-    KeyListenerType type = KeyListenerType.RELEASED;
-    for (int i = 0; i < type.listeners.size(); i++) {
-      for (int code : type.codes.get(i)) {
-        if (code == e.getKeyCode()) {
-          type.listeners.get(i).accept(e);
-        }
-      }
-    }
+    evaluateType(KeyListenerType.RELEASED, e);
   }
 
   @Override
   public void keyTyped(KeyEvent e) {
-    KeyListenerType type = KeyListenerType.TYPED;
+    evaluateType(KeyListenerType.TYPED, e);
+  }
+  
+  private void evaluateType(KeyListenerType type, KeyEvent e) {
     for (int i = 0; i < type.listeners.size(); i++) {
       for (int code : type.codes.get(i)) {
         if (code == e.getKeyCode()) {

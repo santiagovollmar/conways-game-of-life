@@ -11,9 +11,9 @@ public class Main {
   public static void main(String[] arguments) {
     PropertyManager.readProperties();
     Window.open();
-    GlobalKeyListener.apply(Window.getCurrentInstance().getFrame().getContentPane());
-    
     new Thread(Main::run_normal).start();
+    
+    GlobalKeyListener.apply(Window.getCurrentInstance().getFrame().getContentPane());
     
     SwingUtilities.invokeLater(Window.getCurrentInstance().getGameDisplay()::grabFocus);
   }
