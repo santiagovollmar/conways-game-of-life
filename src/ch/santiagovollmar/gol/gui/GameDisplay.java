@@ -276,7 +276,7 @@ public class GameDisplay extends JPanel {
           
           // overwrite selected area
           for (int x = min.x; x < max.x; x++) {
-            for (int y = min.y; y < min.y; y++) {
+            for (int y = min.y; y < max.y; y++) {
               Point point = new Point(x + offset.x, y + offset.y);
               
               if (copyBuffer.contains(point)) {
@@ -309,7 +309,6 @@ public class GameDisplay extends JPanel {
           selectionEnd.y = (e.getY() / scaling) + viewport.y;
           selectionCreation = true;
         } else {
-          clearSelection();
           selectionCreation = false;
         }
       }
@@ -322,8 +321,6 @@ public class GameDisplay extends JPanel {
         if (shiftIsPressed) {
           selectionEnd.x = (e.getX() / scaling) + viewport.x;
           selectionEnd.y = (e.getY() / scaling) + viewport.y;
-        } else {
-          clearSelection();
         }
         
         selectionCreation = false;
@@ -336,7 +333,6 @@ public class GameDisplay extends JPanel {
           selectionStart.y = (e.getY() / scaling) + viewport.y;
           selectionCreation = true;
         } else {
-          clearSelection();
           selectionCreation = false;
         }
       }
@@ -376,6 +372,9 @@ public class GameDisplay extends JPanel {
       
       @Override
       public void mouseClicked(MouseEvent e) {
+        System.out.println("e { x: " + e.getX() + ", y: " + e.getY() + " }");
+        System.out.println("selection_start: " + selectionStart);
+        System.out.println("selection_end: " + selectionEnd);
         grabFocus();
         if (selectionStart.x == -1 && selectionEnd.x == -1) {
           if (LogicManager.isPaused() && !ctrlIsPressed && !selectionCreation) {
@@ -400,6 +399,8 @@ public class GameDisplay extends JPanel {
       @Override
       public void mouseDragged(MouseEvent e) {
         if (!ctrlIsPressed && LogicManager.isPaused() && !selectionCreation) { // draw
+          clearSelection();
+          
           if (SwingUtilities.isLeftMouseButton(e)) {
             fillCell(e);
           } else if (SwingUtilities.isRightMouseButton(e)) {
