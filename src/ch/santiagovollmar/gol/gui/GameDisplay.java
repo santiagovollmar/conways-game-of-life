@@ -13,7 +13,10 @@ import java.nio.channels.SeekableByteChannel;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ConcurrentModificationException;
+import java.util.HashSet;
 import java.util.LinkedList;
+
+import javax.security.auth.x500.X500Principal;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -60,6 +63,7 @@ public class GameDisplay extends JPanel {
   
   private volatile boolean ctrlIsPressed;
   private volatile boolean shiftIsPressed;
+  private volatile boolean selectionCreation;
   
   @SuppressWarnings("unused")
   private final JFrame parent;
@@ -68,6 +72,11 @@ public class GameDisplay extends JPanel {
   
   private final Point selectionStart = new Point(-1, -1);
   private final Point selectionEnd = new Point(-1, -1);
+  
+  private Point copyBufferStart;
+  private HashSet<Point> copyBuffer;
+  
+  int i;
   
   /*
    * getters and setters
@@ -138,6 +147,7 @@ public class GameDisplay extends JPanel {
     setupZoom();
     setupSelection();
     setupDeleteAction();
+    setupCopyPasteAction();
     
     // add global key listeners
     GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
@@ -227,7 +237,62 @@ public class GameDisplay extends JPanel {
   }
   
   private void setupCopyPasteAction() {
-    // TODO do this
+    // copy
+    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
+      if (LogicManager.isPaused() && ctrlIsPressed) { // check if ctrl is pressed and game is paused
+        if (selectionStart.x != -1 && selectionEnd.x != -1) { // check if there is an active selection
+          Point min = getSelectionMin();
+          Point max = getSelectionMax();
+          
+          copyBufferStart = min; // save start of copy selection
+          
+          // save data in copied area
+          copyBuffer = new HashSet<>();
+          for (int x = min.x; x < max.x; x++) {
+            for (int y = min.y; y < max.y; y++) {
+              Point point = new Point(x, y);
+              
+              if (GridManager.isAlive(point)) {
+                copyBuffer.add(point);
+              }
+            }
+          }
+        }
+      }
+    }, KeyEvent.VK_C);
+    
+    // paste
+    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
+      if (LogicManager.isPaused() && ctrlIsPressed) { // check if game is paused and ctrl is pressed
+        if (copyBufferStart != null && selectionStart.x != -1 && selectionEnd.x != -1) { // check if clipboard contains data and there is a selection
+          // get selection
+          Point min = getSelectionMin();
+          Point max = getSelectionMax();
+          
+          // calculate offset
+          Point offset = new Point(-1, -1);
+          offset.x = copyBufferStart.x - min.x;
+          offset.y = copyBufferStart.y - min.y;
+          
+          // overwrite selected area
+          for (int x = min.x; x < max.x; x++) {
+            for (int y = min.y; y < min.y; y++) {
+              Point point = new Point(x + offset.x, y + offset.y);
+              
+              if (copyBuffer.contains(point)) {
+                point.x = x;
+                point.y = y;
+                GridManager.fill(point, false);
+              } else {
+                point.x = x;
+                point.y = y;
+                GridManager.clear(point, false);
+              }
+            }
+          }
+        }
+      }
+    }, KeyEvent.VK_V);
   }
   
   private void setupSelection() {
@@ -242,6 +307,10 @@ public class GameDisplay extends JPanel {
         if (shiftIsPressed) {
           selectionEnd.x = (e.getX() / scaling) + viewport.x;
           selectionEnd.y = (e.getY() / scaling) + viewport.y;
+          selectionCreation = true;
+        } else {
+          clearSelection();
+          selectionCreation = false;
         }
       }
     });
@@ -256,6 +325,8 @@ public class GameDisplay extends JPanel {
         } else {
           clearSelection();
         }
+        
+        selectionCreation = false;
       }
       
       @Override
@@ -263,8 +334,10 @@ public class GameDisplay extends JPanel {
         if (shiftIsPressed) {
           selectionStart.x = (e.getX() / scaling) + viewport.x;
           selectionStart.y = (e.getY() / scaling) + viewport.y;
+          selectionCreation = true;
         } else {
           clearSelection();
+          selectionCreation = false;
         }
       }
       
@@ -303,14 +376,17 @@ public class GameDisplay extends JPanel {
       
       @Override
       public void mouseClicked(MouseEvent e) {
-        System.out.println(e.getButton());
         grabFocus();
-        if (LogicManager.isPaused() && !ctrlIsPressed) {
-          if (e.getButton() == 1) {
-            fillCell(e);
-          } else if (e.getButton() == 3) {
-            clearCell(e);
+        if (selectionStart.x == -1 && selectionEnd.x == -1) {
+          if (LogicManager.isPaused() && !ctrlIsPressed && !selectionCreation) {
+            if (e.getButton() == 1) {
+              fillCell(e);
+            } else if (e.getButton() == 3) {
+              clearCell(e);
+            }
           }
+        } else {
+          clearSelection();
         }
       }
     });
@@ -323,7 +399,7 @@ public class GameDisplay extends JPanel {
       
       @Override
       public void mouseDragged(MouseEvent e) {
-        if (!ctrlIsPressed && LogicManager.isPaused()) { // draw
+        if (!ctrlIsPressed && LogicManager.isPaused() && !selectionCreation) { // draw
           if (SwingUtilities.isLeftMouseButton(e)) {
             fillCell(e);
           } else if (SwingUtilities.isRightMouseButton(e)) {
