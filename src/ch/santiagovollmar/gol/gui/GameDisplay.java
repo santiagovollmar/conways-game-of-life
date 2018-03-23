@@ -206,6 +206,23 @@ public class GameDisplay extends JPanel {
         selectionEnd.y += direction.y;
       }
     }, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT);
+    
+    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
+      if (!LogicManager.isPaused() || selectionStart.x == -1 || selectionEnd.x == -1) {
+        return;
+      }
+      
+      Point min = getSelectionMin();
+      Point max = getSelectionMax();
+      
+      for (int x = min.x; x < max.x; x++) {
+        for (int y = min.y; y < max.y; y++) {
+          GridManager.fill(new Point(x, y), false);
+        }
+      }
+    }, KeyEvent.VK_F);
+    
+    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> clearSelection(), KeyEvent.VK_ESCAPE);
   }
   
   public GameDisplay(JFrame parent, int hsize, int vsize, Color fillColor) {
@@ -250,7 +267,7 @@ public class GameDisplay extends JPanel {
           GridManager.clear(points, false);
         }
       }
-    }, KeyEvent.VK_DELETE);
+    }, KeyEvent.VK_DELETE, KeyEvent.VK_C);
   }
   
   private void setupCopyPasteAction() {
