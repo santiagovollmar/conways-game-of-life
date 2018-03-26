@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import org.apache.bcel.generic.IF_ACMPEQ;
+import org.apache.xerces.impl.ExternalSubsetResolver;
 
 import ch.santiagovollmar.gol.logic.GridManager;
 import ch.santiagovollmar.gol.logic.LogicManager;
@@ -63,22 +64,16 @@ public class GameDisplay extends JPanel {
   
   private volatile boolean ctrlIsPressed;
   private volatile boolean shiftIsPressed;
-  private volatile boolean selectionCreation;
   
   @SuppressWarnings("unused")
   private final JFrame parent;
   
   private final Point dragStart = new Point(-1, -1);
   
-  private final Point selectionStart = new Point(-1, -1);
-  private final Point selectionEnd = new Point(-1, -1);
-  
-  private Point lastSelection;
-  
   private Point copyBufferStart;
   private HashSet<Point> copyBuffer;
   
-  int i;
+  private final SelectionManager selectionManager;
   
   /*
    * getters and setters
@@ -133,6 +128,9 @@ public class GameDisplay extends JPanel {
     setFillColor(fillColor);
     this.parent = parent;
     this.viewport = new Point(45000, 45000);
+    
+    // setup selection manager
+    this.selectionManager = new SelectionManager();
     
     // set sizes
     setPreferredSize(new Dimension(hsize * scaling, vsize * scaling));
@@ -196,26 +194,26 @@ public class GameDisplay extends JPanel {
         viewport.x += direction.x;
         viewport.y += direction.y;
       } else if (shiftIsPressed) {
-        ensureSelection();
-        selectionEnd.x += direction.x;
-        selectionEnd.y += direction.y;
+        selectionManager.ensureSelection();
+        selectionManager.getSelectionEnd().x += direction.x;
+        selectionManager.getSelectionEnd().y += direction.y;
       } else {
-        ensureSelection();
-        selectionStart.x += direction.x;
-        selectionStart.y += direction.y;
+        selectionManager.ensureSelection();
+        selectionManager.getSelectionStart().x += direction.x;
+        selectionManager.getSelectionStart().y += direction.y;
         
-        selectionEnd.x += direction.x;
-        selectionEnd.y += direction.y;
+        selectionManager.getSelectionEnd().x += direction.x;
+        selectionManager.getSelectionEnd().y += direction.y;
       }
     }, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT);
     
     GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
-      if (!LogicManager.isPaused() || selectionStart.x == -1 || selectionEnd.x == -1) {
+      if (!LogicManager.isPaused() || !selectionManager.hasActiveSelection()) {
         return;
       }
       
-      Point min = getSelectionMin();
-      Point max = getSelectionMax();
+      Point min = selectionManager.getSelectionMin();
+      Point max = selectionManager.getSelectionMax();
       
       for (int x = min.x; x < max.x; x++) {
         for (int y = min.y; y < max.y; y++) {
@@ -224,7 +222,7 @@ public class GameDisplay extends JPanel {
       }
     }, KeyEvent.VK_F);
     
-    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> clearSelection(), KeyEvent.VK_ESCAPE);
+    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> selectionManager.clearSelection(), KeyEvent.VK_ESCAPE);
   }
   
   public GameDisplay(JFrame parent, int hsize, int vsize, Color fillColor) {
@@ -253,9 +251,9 @@ public class GameDisplay extends JPanel {
   private void setupDeleteAction() {
     GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
       if (LogicManager.isPaused() && !ctrlIsPressed ) { // check if game is paused
-        if (selectionStart.x != -1 && selectionEnd.x != -1) { // user has an active selection
-          Point min = getSelectionMin();
-          Point max = getSelectionMax();
+        if (selectionManager.hasActiveSelection()) { // user has an active selection
+          Point min = selectionManager.getSelectionMin();
+          Point max = selectionManager.getSelectionMax();
           
           // put points to be cleared into a list
           ArrayList<Point> points = new ArrayList<>((max.x - min.x) * (max.y - min.y));
@@ -276,9 +274,9 @@ public class GameDisplay extends JPanel {
     // copy
     GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
       if (LogicManager.isPaused() && ctrlIsPressed) { // check if ctrl is pressed and game is paused
-        if (selectionStart.x != -1 && selectionEnd.x != -1) { // check if there is an active selection
-          Point min = getSelectionMin();
-          Point max = getSelectionMax();
+        if (selectionManager.hasActiveSelection()) { // check if there is an active selection
+          Point min = selectionManager.getSelectionMin();
+          Point max = selectionManager.getSelectionMax();
           
           copyBufferStart = min; // save start of copy selection
           
@@ -300,12 +298,12 @@ public class GameDisplay extends JPanel {
     // paste
     GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
       if (LogicManager.isPaused() && ctrlIsPressed) { // check if game is paused and ctrl is pressed
-        if (copyBufferStart != null && selectionStart.x != -1 && selectionEnd.x != -1) { // check if clipboard contains
+        if (copyBufferStart != null && selectionManager.hasActiveSelection()) { // check if clipboard contains
                                                                                          // data and there is a
                                                                                          // selection
           // get selection
-          Point min = getSelectionMin();
-          Point max = getSelectionMax();
+          Point min = selectionManager.getSelectionMin();
+          Point max = selectionManager.getSelectionMax();
           
           // calculate offset
           Point offset = new Point(-1, -1);
@@ -343,11 +341,10 @@ public class GameDisplay extends JPanel {
       @Override
       public void mouseDragged(MouseEvent e) {
         if (shiftIsPressed) {
-          selectionEnd.x = (e.getX() / scaling) + viewport.x;
-          selectionEnd.y = (e.getY() / scaling) + viewport.y;
-          selectionCreation = true;
+          selectionManager.setSelectionEnd((e.getX() / scaling) + viewport.x, (e.getY() / scaling) + viewport.y);
+          selectionManager.setSelectionCreation(true);
         } else {
-          selectionCreation = false;
+          selectionManager.setSelectionCreation(false);
         }
       }
     });
@@ -357,22 +354,20 @@ public class GameDisplay extends JPanel {
       @Override
       public void mouseReleased(MouseEvent e) {
         if (shiftIsPressed) {
-          selectionEnd.x = (e.getX() / scaling) + viewport.x;
-          selectionEnd.y = (e.getY() / scaling) + viewport.y;
+          selectionManager.setSelectionEnd((e.getX() / scaling) + viewport.x, (e.getY() / scaling) + viewport.y);
         }
         
-        selectionCreation = false;
+        selectionManager.setSelectionCreation(false);
       }
       
       @Override
       public void mousePressed(MouseEvent e) {
         if (shiftIsPressed) {
-          clearSelection();
-          selectionStart.x = (e.getX() / scaling) + viewport.x;
-          selectionStart.y = (e.getY() / scaling) + viewport.y;
-          selectionCreation = true;
+          selectionManager.clearSelection();
+          selectionManager.setSelectionStart((e.getX() / scaling) + viewport.x, (e.getY() / scaling) + viewport.y);
+          selectionManager.setSelectionCreation(true);
         } else {
-          selectionCreation = false;
+          selectionManager.setSelectionCreation(false);
         }
       }
       
@@ -411,12 +406,9 @@ public class GameDisplay extends JPanel {
       
       @Override
       public void mouseClicked(MouseEvent e) {
-        System.out.println("e { x: " + e.getX() + ", y: " + e.getY() + " }");
-        System.out.println("selection_start: " + selectionStart);
-        System.out.println("selection_end: " + selectionEnd);
         grabFocus();
-        if (selectionStart.x == -1 && selectionEnd.x == -1) {
-          if (LogicManager.isPaused() && !ctrlIsPressed && !selectionCreation) {
+        if (!selectionManager.hasActiveSelection()) {
+          if (LogicManager.isPaused() && !ctrlIsPressed && !selectionManager.getSelectionCreation()) {
             if (e.getButton() == 1) {
               fillCell(e);
             } else if (e.getButton() == 3) {
@@ -424,7 +416,7 @@ public class GameDisplay extends JPanel {
             }
           }
         } else {
-          clearSelection();
+          selectionManager.clearSelection();
         }
       }
     });
@@ -437,8 +429,8 @@ public class GameDisplay extends JPanel {
       
       @Override
       public void mouseDragged(MouseEvent e) {
-        if (!ctrlIsPressed && LogicManager.isPaused() && !selectionCreation) { // draw
-          clearSelection();
+        if (!ctrlIsPressed && LogicManager.isPaused() && !selectionManager.getSelectionCreation()) { // draw
+          selectionManager.clearSelection();
           
           if (SwingUtilities.isLeftMouseButton(e)) {
             fillCell(e);
@@ -563,46 +555,100 @@ public class GameDisplay extends JPanel {
       GridManager.clear(new Point((e.getX() / scaling) + viewport.x, (e.getY() / scaling) + viewport.y), false);
     }
   }
-  
-  public void clearSelection() {
-    lastSelection = selectionStart.clone();
     
-    selectionStart.x = -1;
-    selectionStart.y = -1;
+  private class ContentManager {
     
-    selectionEnd.x = -1;
-    selectionEnd.y = -1;
   }
   
-  public Point getSelectionMin() {
-    int x = selectionStart.x < selectionEnd.x ? selectionStart.x : selectionEnd.x;
-    int y = selectionStart.y < selectionEnd.y ? selectionStart.y : selectionEnd.y;
+  private class ViewportManager {
     
-    return new Point(x, y);
   }
   
-  public Point getSelectionMax() {
-    int x = selectionStart.x > selectionEnd.x ? selectionStart.x : selectionEnd.x;
-    int y = selectionStart.y > selectionEnd.y ? selectionStart.y : selectionEnd.y;
+  private class SelectionManager {
+    private final Point selectionStart = new Point(-1, -1);
+    private final Point selectionEnd = new Point(-1, -1);
     
-    return new Point(x, y);
-  }
-  
-  private void ensureSelection() {
-    if (selectionStart.x == -1 || selectionEnd.x == -1) { // no active selection
-      if (lastSelection == null) {
-        // spawn new selection in center
-        selectionStart.x = viewport.x + hsize / 2;
-        selectionStart.y = viewport.y + vsize / 2;
-        selectionEnd.x = selectionStart.x + 1;
-        selectionEnd.y = selectionStart.y + 1;
-      } else {
-        // spawn new selection at previous selection place
-        selectionStart.x = lastSelection.x;
-        selectionStart.y = lastSelection.y;
-        selectionEnd.x = selectionStart.x + 1;
-        selectionEnd.y = selectionStart.y + 1;
+    private volatile boolean selectionCreation;
+    private Point lastSelection;
+    
+    public void setSelectionStart(int x, int y) {
+      selectionStart.x = x;
+      selectionStart.y = y;
+    }
+    
+    public void setSelectionEnd(int x, int y) {
+      selectionEnd.x = x;
+      selectionEnd.y = y;
+    }
+    
+    public void setSelectionCreation(boolean selectionCreation) {
+      this.selectionCreation = selectionCreation;
+    }
+    
+    public boolean getSelectionCreation() {
+      return selectionCreation;
+    }
+    
+    public Point getSelectionMin() {
+      int x = selectionStart.x < selectionEnd.x ? selectionStart.x : selectionEnd.x;
+      int y = selectionStart.y < selectionEnd.y ? selectionStart.y : selectionEnd.y;
+      
+      return new Point(x, y);
+    }
+    
+    public Point getSelectionMax() {
+      int x = selectionStart.x > selectionEnd.x ? selectionStart.x : selectionEnd.x;
+      int y = selectionStart.y > selectionEnd.y ? selectionStart.y : selectionEnd.y;
+      
+      return new Point(x, y);
+    }
+    
+    public Point getSelectionStart() {
+      return selectionStart;
+    }
+    
+    public Point getSelectionEnd() {
+      return selectionEnd;
+    }
+    
+    public void clearSelection() {
+      lastSelection = selectionStart.clone();
+      
+      selectionStart.x = -1;
+      selectionStart.y = -1;
+      
+      selectionEnd.x = -1;
+      selectionEnd.y = -1;
+    }
+    
+    public void ensureSelection() {
+      if (selectionStart.x == -1 || selectionEnd.x == -1) { // no active selection
+        if (lastSelection == null) {
+          // spawn new selection in center
+          selectionStart.x = viewport.x + hsize / 2;
+          selectionStart.y = viewport.y + vsize / 2;
+          selectionEnd.x = selectionStart.x + 1;
+          selectionEnd.y = selectionStart.y + 1;
+        } else {
+          // spawn new selection at previous selection place
+          selectionStart.x = lastSelection.x;
+          selectionStart.y = lastSelection.y;
+          selectionEnd.x = selectionStart.x + 1;
+          selectionEnd.y = selectionStart.y + 1;
+        }
       }
+    }
+    
+    public boolean hasActiveSelection() {
+      return selectionStart.x != -1 && selectionEnd.x != -1; 
+    }
+      
+    public int getSelectionWidth() {
+      return Math.abs(selectionStart.x - selectionEnd.x);
+    }
+    
+    public int getSelectionHeight() {
+      return Math.abs(selectionStart.y - selectionEnd.y);
     }
   }
   
@@ -661,7 +707,7 @@ public class GameDisplay extends JPanel {
   }
   
   protected final void drawSelection(Graphics graphics) {
-    if (selectionEnd.x == -1 || selectionStart.x == -1) {
+    if (!selectionManager.hasActiveSelection()) {
       return;
     }
     
@@ -671,20 +717,19 @@ public class GameDisplay extends JPanel {
     b = 255 - 60 + 40;
     
     graphics.setColor(new Color(r, g, b, 100));
-    Point selectionMin = getSelectionMin();
+    Point selectionMin = selectionManager.getSelectionMin();
     selectionMin.x -= viewport.x;
     selectionMin.y -= viewport.y;
     
-    int selectionHeight = Math.abs(selectionStart.y - selectionEnd.y);
-    int selectionWidth = Math.abs(selectionStart.x - selectionEnd.x);
-    graphics.fillRect(selectionMin.x * scaling, selectionMin.y * scaling, selectionWidth * scaling,
-        selectionHeight * scaling);
+    graphics.fillRect(selectionMin.x * scaling, selectionMin.y * scaling, selectionManager.getSelectionWidth() * scaling,
+        selectionManager.getSelectionHeight() * scaling);
     
     ((Graphics2D) graphics).setStroke(new BasicStroke(2f));
     graphics.setColor(new Color(r, g, b, 255));
-    graphics.drawRect(selectionMin.x * scaling, selectionMin.y * scaling, selectionWidth * scaling,
-        selectionHeight * scaling);
+    graphics.drawRect(selectionMin.x * scaling, selectionMin.y * scaling, selectionManager.getSelectionWidth() * scaling,
+        selectionManager.getSelectionHeight() * scaling);
   }
+  
   
   @Override
   protected void paintComponent(Graphics graphics) {
