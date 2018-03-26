@@ -3,6 +3,8 @@ package ch.santiagovollmar.gol.logic;
 import java.io.Serializable;
 import java.util.concurrent.Callable;
 
+import org.apache.bcel.generic.NEW;
+
 public class Point implements Callable<Object>, Serializable {
   private static final long serialVersionUID = 741323992140637769L;
   
@@ -57,5 +59,9 @@ public class Point implements Callable<Object>, Serializable {
     return null;
   }
   
+  @Override
+  public Point clone() {
+    return new Point(x, y);
+  }
   
 }

@@ -73,6 +73,8 @@ public class GameDisplay extends JPanel {
   private final Point selectionStart = new Point(-1, -1);
   private final Point selectionEnd = new Point(-1, -1);
   
+  private Point lastSelection;
+  
   private Point copyBufferStart;
   private HashSet<Point> copyBuffer;
   
@@ -250,7 +252,7 @@ public class GameDisplay extends JPanel {
    */
   private void setupDeleteAction() {
     GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
-      if (LogicManager.isPaused()) { // check if game is paused
+      if (LogicManager.isPaused() && !ctrlIsPressed ) { // check if game is paused
         if (selectionStart.x != -1 && selectionEnd.x != -1) { // user has an active selection
           Point min = getSelectionMin();
           Point max = getSelectionMax();
@@ -563,6 +565,8 @@ public class GameDisplay extends JPanel {
   }
   
   public void clearSelection() {
+    lastSelection = selectionStart.clone();
+    
     selectionStart.x = -1;
     selectionStart.y = -1;
     
@@ -586,11 +590,19 @@ public class GameDisplay extends JPanel {
   
   private void ensureSelection() {
     if (selectionStart.x == -1 || selectionEnd.x == -1) { // no active selection
-      // spawn new selection in center
-      selectionStart.x = viewport.x + hsize / 2;
-      selectionStart.y = viewport.y + vsize / 2;
-      selectionEnd.x = selectionStart.x + 1;
-      selectionEnd.y = selectionStart.y + 1;
+      if (lastSelection == null) {
+        // spawn new selection in center
+        selectionStart.x = viewport.x + hsize / 2;
+        selectionStart.y = viewport.y + vsize / 2;
+        selectionEnd.x = selectionStart.x + 1;
+        selectionEnd.y = selectionStart.y + 1;
+      } else {
+        // spawn new selection at previous selection place
+        selectionStart.x = lastSelection.x;
+        selectionStart.y = lastSelection.y;
+        selectionEnd.x = selectionStart.x + 1;
+        selectionEnd.y = selectionStart.y + 1;
+      }
     }
   }
   
