@@ -305,7 +305,12 @@ public class GameDisplay extends JPanel {
           offset.x = copyBufferStart.x - min.x;
           offset.y = copyBufferStart.y - min.y;
           
-          if (max.x - min.x <= 1 && max.y - min.y <= -1) { // only a "one field selection"
+          System.out.println(max);
+          System.out.println(min);
+          
+          if ((max.x - min.x) <= 1 && (max.y - min.y) <= 1) { // only a "one field selection"
+            System.out.println("one");
+            
             // get maximum point
             Point bufferMax = new Point(-1, -1);
             for (Point p : copyBuffer) {
@@ -313,10 +318,15 @@ public class GameDisplay extends JPanel {
               bufferMax.y = p.y > bufferMax.y ? p.y : bufferMax.y;
             }
             
+            System.out.println("max: " + max);
             max = bufferMax;
+            System.out.println("after: " + max);
             
-            max.x += offset.x;
-            max.y += offset.y;
+            System.out.println("x: " + offset.x + " y: " + offset.y);
+            
+            max.x -= offset.x - 1;
+            max.y -= offset.y - 1;
+            System.out.println("new: " + max);
           }
           
           // overwrite selected area
