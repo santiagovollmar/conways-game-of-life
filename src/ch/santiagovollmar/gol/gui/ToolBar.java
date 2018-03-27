@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JSlider;
 import javax.swing.JToolBar;
 import javax.swing.SpringLayout;
 import javax.swing.SwingUtilities;
@@ -48,6 +49,16 @@ public class ToolBar extends JToolBar {
     addPauseButton();
     addColorChooser();
     addResetButton();
+    addSpeedSlider();
+  }
+  
+  private void addSpeedSlider() {
+    JSlider slider = new JSlider();
+    add(slider);
+    
+    slider.addChangeListener(e -> {
+      LogicManager.setPercentageSleepTime(slider.getValue());
+    });
   }
   
   private void addResetButton() {

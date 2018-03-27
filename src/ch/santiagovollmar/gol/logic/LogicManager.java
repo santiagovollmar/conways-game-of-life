@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.batik.apps.svgbrowser.TransformHistory;
+
 import ch.santiagovollmar.gol.gui.ToolBar;
 
 public class LogicManager {
@@ -12,6 +14,18 @@ public class LogicManager {
   private static volatile boolean updating;
   public static boolean isUpdating() {
     return updating;
+  }
+  
+  public static volatile long sleepTime; static{setPercentageSleepTime(50);}
+  public static void setPercentageSleepTime(int percentage) {
+    // ensure bounds
+    percentage = percentage > 100 ? 100: percentage;
+    percentage = percentage < 0 ? 0: percentage;
+    
+    sleepTime = ((long) (1_000_000_000 * (percentage / 100d)));
+    if (sleepTime < 1_000_000) {
+      sleepTime = 1_000_000;
+    }
   }
   
   public static synchronized void renderNext() {

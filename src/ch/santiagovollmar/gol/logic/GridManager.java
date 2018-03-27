@@ -67,10 +67,12 @@ public class GridManager {
   private static synchronized Collection<Point> fetchOperation(int x1, int y1, int x2, int y2) {
     // fill all points into a list which are within given bounds
     LinkedList<Point> list = new LinkedList<Point>();
-    for (Point e : map) {
-      if (e.x >= x1 && e.y >= y1) {
-        if (e.x <= x2 && e.y <= y2) {
-          list.add(e);
+    synchronized (map) {
+      for (Point e : map) {
+        if (e.x >= x1 && e.y >= y1) {
+          if (e.x <= x2 && e.y <= y2) {
+            list.add(e);
+          }
         }
       }
     }

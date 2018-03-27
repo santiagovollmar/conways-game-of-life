@@ -2,6 +2,7 @@ package ch.santiagovollmar.gol;
 
 import javax.swing.SwingUtilities;
 
+import ch.santiagovollmar.gol.gui.GameDisplay;
 import ch.santiagovollmar.gol.gui.Window;
 import ch.santiagovollmar.gol.logic.LogicManager;
 import ch.santiagovollmar.gol.util.GlobalKeyListener;
@@ -12,7 +13,7 @@ public class Main {
     PropertyManager.readProperties();
     Window.open();
     new Thread(Main::run_normal).start();
-    
+    new Thread(Main::run_gui_update).start();
     GlobalKeyListener.apply(Window.getCurrentInstance().getFrame().getContentPane());
     
     SwingUtilities.invokeLater(Window.getCurrentInstance().getGameDisplay()::grabFocus);
@@ -24,11 +25,19 @@ public class Main {
       try {
         long start = System.nanoTime();
         LogicManager.renderNext();
-        SwingUtilities.invokeLater(Window.getCurrentInstance().getGameDisplay()::repaint);
-        long sleepTime = 50_000_000 - (System.nanoTime() - start);
+        long sleepTime = LogicManager.sleepTime - (System.nanoTime() - start);
         if (sleepTime > 0) {
           Thread.sleep(sleepTime / 1_000_000, (int) (sleepTime % 1_000_000));
         }
+      } catch (Exception e) {}
+    }
+  }
+  
+  private static void run_gui_update() {
+    for (;;) {
+      try {
+        SwingUtilities.invokeAndWait(Window.getCurrentInstance().getGameDisplay()::repaint);
+        Thread.sleep(15);
       } catch (Exception e) {}
     }
   }
