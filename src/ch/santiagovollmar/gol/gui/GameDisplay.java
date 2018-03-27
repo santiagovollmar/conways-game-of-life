@@ -245,7 +245,7 @@ public class GameDisplay extends JPanel {
    */
   private void setupDeleteAction() {
     GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
-      if (LogicManager.isPaused() && !ctrlIsPressed ) { // check if game is paused
+      if (LogicManager.isPaused() && !ctrlIsPressed) { // check if game is paused
         if (selectionStart.x != -1 && selectionEnd.x != -1) { // user has an active selection
           Point min = getSelectionMin();
           Point max = getSelectionMax();
@@ -305,6 +305,20 @@ public class GameDisplay extends JPanel {
           offset.x = copyBufferStart.x - min.x;
           offset.y = copyBufferStart.y - min.y;
           
+          if (max.x - min.x <= 1 && max.y - min.y <= -1) { // only a "one field selection"
+            // get maximum point
+            Point bufferMax = new Point(-1, -1);
+            for (Point p : copyBuffer) {
+              bufferMax.x = p.x > bufferMax.x ? p.x : bufferMax.x;
+              bufferMax.y = p.y > bufferMax.y ? p.y : bufferMax.y;
+            }
+            
+            max = bufferMax;
+            
+            max.x += offset.x;
+            max.y += offset.y;
+          }
+          
           // overwrite selected area
           for (int x = min.x; x < max.x; x++) {
             for (int y = min.y; y < max.y; y++) {
@@ -322,6 +336,7 @@ public class GameDisplay extends JPanel {
             }
           }
         }
+        
       }
     }, KeyEvent.VK_V);
   }
