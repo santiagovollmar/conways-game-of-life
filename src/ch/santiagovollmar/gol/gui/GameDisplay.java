@@ -9,19 +9,15 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.nio.channels.SeekableByteChannel;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ConcurrentModificationException;
 import java.util.HashSet;
 import java.util.LinkedList;
 
-import javax.security.auth.x500.X500Principal;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-
-import org.apache.bcel.generic.IF_ACMPEQ;
 
 import ch.santiagovollmar.gol.logic.GridManager;
 import ch.santiagovollmar.gol.logic.LogicManager;
@@ -78,8 +74,6 @@ public class GameDisplay extends JPanel {
   private Point copyBufferStart;
   private HashSet<Point> copyBuffer;
   
-  int i;
-  
   /*
    * getters and setters
    */
@@ -102,7 +96,6 @@ public class GameDisplay extends JPanel {
     paneColor = new Color(paneColorAvg, paneColorAvg, paneColorAvg);
     selectionColor = new Color(paneColorAvg + 20, paneColorAvg + 20, 255);
     selectionColor = Color.WHITE;
-    System.out.printf("%d %d %d\n", selectionColor.getRed(), selectionColor.getGreen(), selectionColor.getBlue());
   }
   
   public Point getViewport() {
@@ -411,9 +404,6 @@ public class GameDisplay extends JPanel {
       
       @Override
       public void mouseClicked(MouseEvent e) {
-        System.out.println("e { x: " + e.getX() + ", y: " + e.getY() + " }");
-        System.out.println("selection_start: " + selectionStart);
-        System.out.println("selection_end: " + selectionEnd);
         grabFocus();
         if (selectionStart.x == -1 && selectionEnd.x == -1) {
           if (LogicManager.isPaused() && !ctrlIsPressed && !selectionCreation) {

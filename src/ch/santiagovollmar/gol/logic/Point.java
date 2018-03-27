@@ -11,18 +11,14 @@ public class Point implements Callable<Object>, Serializable {
   public int x;
   public int y;
   
-  public Point(int x, int y) throws IllegalArgumentException {
-    if (x > 90000 || y > 90000) {
-      throw new IllegalArgumentException("Coordinates must not exceed 90000");
-    }
-    
+  public Point(int x, int y) {
     this.x = x;
     this.y = y;
   }
   
   @Override
   public int hashCode() {
-    return x * 90000 + y;
+    return (x * 7) ^ (y * 31);
   }
 
   @Override
