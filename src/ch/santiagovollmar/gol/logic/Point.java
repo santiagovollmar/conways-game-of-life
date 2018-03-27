@@ -22,7 +22,7 @@ public class Point implements Callable<Object>, Serializable {
   
   @Override
   public int hashCode() {
-    return x * 90000 + y;
+    return ((x << 16) & 0xFFFF0000) | (y & 0x0000FFFF);
   }
 
   @Override

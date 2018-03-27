@@ -56,12 +56,6 @@ public class GameDisplay extends JPanel {
   private Color paneColor = Color.GRAY;
   private Color selectionColor = Color.WHITE;
   
-  private final Point viewport;
-  
-  private volatile int vsize;
-  private volatile int hsize;
-  private volatile int scaling;
-  
   private volatile boolean ctrlIsPressed;
   private volatile boolean shiftIsPressed;
   
@@ -74,6 +68,7 @@ public class GameDisplay extends JPanel {
   private HashSet<Point> copyBuffer;
   
   private final SelectionManager selectionManager;
+  private final ViewportManager viewportManager;
   
   /*
    * getters and setters
@@ -101,20 +96,19 @@ public class GameDisplay extends JPanel {
   }
   
   public Point getViewport() {
-    return new Point(viewport.x, viewport.y);
+    return viewportManager.getViewport().clone();
   }
   
   public void setViewport(Point edge) {
-    viewport.x = edge.x;
-    viewport.y = edge.y;
+    viewportManager.setViewport(edge.x, edge.y);
   }
   
   public int getScaling() {
-    return scaling;
+    return viewportManager.getScaling();
   }
   
   public void setScaling(int scaling) {
-    this.scaling = scaling;
+    viewportManager.zoom(viewportManager.getScaling() - scaling);
   }
   
   /*
@@ -122,15 +116,8 @@ public class GameDisplay extends JPanel {
    */
   public GameDisplay(JFrame parent, int hsize, int vsize, int scaling, Color fillColor) {
     super();
-    this.vsize = vsize;
-    this.hsize = hsize;
-    this.scaling = scaling;
     setFillColor(fillColor);
     this.parent = parent;
-    this.viewport = new Point(45000, 45000);
-    
-    // setup selection manager
-    this.selectionManager = new SelectionManager();
     
     // set sizes
     setPreferredSize(new Dimension(hsize * scaling, vsize * scaling));
@@ -142,6 +129,9 @@ public class GameDisplay extends JPanel {
     requestFocus();
     
     // functionality
+    this.selectionManager = new SelectionManager();
+    this.viewportManager = new ViewportManager(new Point(45000, 45000), vsize, hsize, scaling);
+    
     setupDraw();
     setupDrag();
     setupZoom();
@@ -191,8 +181,10 @@ public class GameDisplay extends JPanel {
       }
       
       if (ctrlIsPressed) {
-        viewport.x += direction.x;
-        viewport.y += direction.y;
+        synchronized (viewportManager.getViewport()) {
+          viewportManager.getViewport().x += direction.x;
+          viewportManager.getViewport().y += direction.y;
+        }
       } else if (shiftIsPressed) {
         selectionManager.ensureSelection();
         selectionManager.getSelectionEnd().x += direction.x;
@@ -250,7 +242,7 @@ public class GameDisplay extends JPanel {
    */
   private void setupDeleteAction() {
     GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
-      if (LogicManager.isPaused() && !ctrlIsPressed ) { // check if game is paused
+      if (LogicManager.isPaused() && !ctrlIsPressed) { // check if game is paused
         if (selectionManager.hasActiveSelection()) { // user has an active selection
           Point min = selectionManager.getSelectionMin();
           Point max = selectionManager.getSelectionMax();
@@ -299,8 +291,8 @@ public class GameDisplay extends JPanel {
     GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
       if (LogicManager.isPaused() && ctrlIsPressed) { // check if game is paused and ctrl is pressed
         if (copyBufferStart != null && selectionManager.hasActiveSelection()) { // check if clipboard contains
-                                                                                         // data and there is a
-                                                                                         // selection
+                                                                                // data and there is a
+                                                                                // selection
           // get selection
           Point min = selectionManager.getSelectionMin();
           Point max = selectionManager.getSelectionMax();
@@ -341,7 +333,8 @@ public class GameDisplay extends JPanel {
       @Override
       public void mouseDragged(MouseEvent e) {
         if (shiftIsPressed) {
-          selectionManager.setSelectionEnd((e.getX() / scaling) + viewport.x, (e.getY() / scaling) + viewport.y);
+          selectionManager.setSelectionEnd((e.getX() / viewportManager.getScaling()) + viewportManager.getViewport().x,
+              (e.getY() / viewportManager.getScaling()) + viewportManager.getViewport().y);
           selectionManager.setSelectionCreation(true);
         } else {
           selectionManager.setSelectionCreation(false);
@@ -354,7 +347,8 @@ public class GameDisplay extends JPanel {
       @Override
       public void mouseReleased(MouseEvent e) {
         if (shiftIsPressed) {
-          selectionManager.setSelectionEnd((e.getX() / scaling) + viewport.x, (e.getY() / scaling) + viewport.y);
+          selectionManager.setSelectionEnd((e.getX() / viewportManager.getScaling()) + viewportManager.getViewport().x,
+              (e.getY() / viewportManager.getScaling()) + viewportManager.getViewport().y);
         }
         
         selectionManager.setSelectionCreation(false);
@@ -364,7 +358,9 @@ public class GameDisplay extends JPanel {
       public void mousePressed(MouseEvent e) {
         if (shiftIsPressed) {
           selectionManager.clearSelection();
-          selectionManager.setSelectionStart((e.getX() / scaling) + viewport.x, (e.getY() / scaling) + viewport.y);
+          selectionManager.setSelectionStart(
+              (e.getX() / viewportManager.getScaling()) + viewportManager.getViewport().x,
+              (e.getY() / viewportManager.getScaling()) + viewportManager.getViewport().y);
           selectionManager.setSelectionCreation(true);
         } else {
           selectionManager.setSelectionCreation(false);
@@ -491,27 +487,29 @@ public class GameDisplay extends JPanel {
             int mouse_x = e.getX();
             int mouse_y = e.getY();
             
-            if ((((double) Math.abs(x - mouse_x)) / ((double) scaling)) > 0) {
+            if ((((double) Math.abs(x - mouse_x)) / ((double) viewportManager.getScaling())) > 0) {
               int difference_x;
               synchronized (dragStart) {
                 dragStart.x = mouse_x;
                 difference_x = (x - dragStart.x);
               }
               
-              synchronized (viewport) {
-                viewport.x += (int) Math.round(((double) (difference_x)) / ((double) parentDisplay.scaling));// parentDisplay.scaling;
+              synchronized (viewportManager.getViewport()) {
+                viewportManager.getViewport().x += (int) Math
+                    .round(((double) (difference_x)) / ((double) viewportManager.getScaling())); // parentDisplay.scaling;
               }
             }
             
-            if ((((double) Math.abs(y - mouse_y)) / ((double) scaling)) > 0) {
+            if ((((double) Math.abs(y - mouse_y)) / ((double) viewportManager.getScaling())) > 0) {
               int difference_y;
               synchronized (dragStart) {
                 dragStart.y = mouse_y;
                 difference_y = (y - dragStart.y);
               }
               
-              synchronized (viewport) {
-                viewport.y += (int) Math.round(((double) (difference_y)) / ((double) parentDisplay.scaling));// parentDisplay.scaling;
+              synchronized (viewportManager.getViewport()) {
+                viewportManager.getViewport().y += (int) Math
+                    .round(((double) (difference_y)) / ((double) parentDisplay.viewportManager.getScaling()));// parentDisplay.scaling;
               }
             }
           }
@@ -525,15 +523,7 @@ public class GameDisplay extends JPanel {
     
     addMouseWheelListener(e -> {
       if (ctrlIsPressed) {
-        if (e.getWheelRotation() > 0) {
-          if (parentDisplay.scaling > 4) {
-            parentDisplay.scaling--;
-          }
-        } else if (e.getWheelRotation() < 0) {
-          if (scaling < 100) {
-            parentDisplay.scaling++;
-          }
-        }
+        viewportManager.zoom(e.getScrollAmount());
         
         SwingUtilities.invokeLater(parentDisplay::revalidate);
         SwingUtilities.invokeLater(parentDisplay::repaint);
@@ -545,23 +535,75 @@ public class GameDisplay extends JPanel {
    * User editing
    */
   public void fillCell(MouseEvent e) {
-    synchronized (viewport) {
-      GridManager.fill(new Point((e.getX() / scaling) + viewport.x, (e.getY() / scaling) + viewport.y), false);
-    }
+    GridManager.fill(new Point((e.getX() / viewportManager.getScaling()) + viewportManager.getViewport().x,
+        (e.getY() / viewportManager.getViewport().x) + viewportManager.getViewport().y), false);
   }
   
   public void clearCell(MouseEvent e) {
-    synchronized (viewport) {
-      GridManager.clear(new Point((e.getX() / scaling) + viewport.x, (e.getY() / scaling) + viewport.y), false);
-    }
+    GridManager.fill(new Point((e.getX() / viewportManager.getScaling()) + viewportManager.getViewport().x,
+        (e.getY() / viewportManager.getViewport().x) + viewportManager.getViewport().y), false);
   }
-    
+  
   private class ContentManager {
     
   }
   
   private class ViewportManager {
+    private final Point viewport;
     
+    private volatile int vsize;
+    private volatile int hsize;
+    private volatile int scaling;
+    
+    public ViewportManager(Point viewport, int vsize, int hsize, int scaling) {
+      this.viewport = viewport.clone();
+      this.vsize = vsize;
+      this.hsize = hsize;
+      this.scaling = scaling;
+    }
+    
+    public Point getViewport() {
+      synchronized (viewport) {
+        return viewport;
+      }
+    }
+    
+    public int getScaling() {
+      return scaling;
+    }
+    
+    public int getHsize() {
+      return hsize;
+    }
+    
+    public int getVsize() {
+      return vsize;
+    }
+    
+    public void setViewport(int x, int y) {
+      synchronized (viewport) {
+        viewport.x = x;
+        viewport.y = y;
+      }
+    }
+    
+    public void zoom(int amount) {
+      int temp = scaling;
+      temp += amount;
+      
+      if (temp < 3) {
+        temp = 3;
+      } else if (temp > 50) {
+        temp = 50;
+      }
+      
+      scaling = temp;
+    }
+    
+    public void resize(int hsize, int vsize) {
+      this.hsize = hsize;
+      this.vsize = vsize;
+    }
   }
   
   private class SelectionManager {
@@ -625,8 +667,8 @@ public class GameDisplay extends JPanel {
       if (selectionStart.x == -1 || selectionEnd.x == -1) { // no active selection
         if (lastSelection == null) {
           // spawn new selection in center
-          selectionStart.x = viewport.x + hsize / 2;
-          selectionStart.y = viewport.y + vsize / 2;
+          selectionStart.x = viewportManager.getViewport().x + viewportManager.getHsize() / 2;
+          selectionStart.y = viewportManager.getViewport().y + viewportManager.getVsize() / 2;
           selectionEnd.x = selectionStart.x + 1;
           selectionEnd.y = selectionStart.y + 1;
         } else {
@@ -640,9 +682,9 @@ public class GameDisplay extends JPanel {
     }
     
     public boolean hasActiveSelection() {
-      return selectionStart.x != -1 && selectionEnd.x != -1; 
+      return selectionStart.x != -1 && selectionEnd.x != -1;
     }
-      
+    
     public int getSelectionWidth() {
       return Math.abs(selectionStart.x - selectionEnd.x);
     }
@@ -661,8 +703,7 @@ public class GameDisplay extends JPanel {
     
     setPreferredSize(new Dimension(width, height));
     setMinimumSize(new Dimension(width, height));
-    this.vsize = (int) Math.ceil(((double) height) / scaling);
-    this.hsize = (int) Math.ceil(((double) width) / scaling);
+    viewportManager.resize((int) Math.ceil(((double) width) / viewportManager.getScaling()), (int) Math.ceil(((double) height) / viewportManager.getScaling()));
   }
   
   protected final void drawLines(Graphics graphics, Color color, int stroke) {
@@ -671,13 +712,13 @@ public class GameDisplay extends JPanel {
     graphics.setColor(color);
     
     // draw vertical lines
-    for (int i = 0; i < hsize + 1; i++) {
-      graphics.fillRect(i * scaling, 0, stroke, vsize * scaling);
+    for (int i = 0; i < viewportManager.getHsize() + 1; i++) {
+      graphics.fillRect(i * viewportManager.getScaling(), 0, stroke, viewportManager.getVsize() * viewportManager.getScaling());
     }
     
     // draw horizontal lines
-    for (int i = 0; i < vsize + 1; i++) {
-      graphics.fillRect(0, i * scaling, hsize * scaling, stroke);
+    for (int i = 0; i < viewportManager.getVsize() + 1; i++) {
+      graphics.fillRect(0, i * viewportManager.getScaling(), viewportManager.getHsize() * viewportManager.getScaling(), stroke);
     }
     
     // set color back to old one
@@ -691,7 +732,7 @@ public class GameDisplay extends JPanel {
     }
     
     try {
-      Collection<Point> points = fetchOperation.fetch(viewport.x, viewport.y, viewport.x + hsize - 1,
+      Collection<Point> points = fetchOperation.fetch(viewportManager.viewport.x, viewportManager.viewport.y, viewport.x + hsize - 1,
           viewport.y + vsize - 1);
       
       synchronized (viewport) {
@@ -721,15 +762,14 @@ public class GameDisplay extends JPanel {
     selectionMin.x -= viewport.x;
     selectionMin.y -= viewport.y;
     
-    graphics.fillRect(selectionMin.x * scaling, selectionMin.y * scaling, selectionManager.getSelectionWidth() * scaling,
-        selectionManager.getSelectionHeight() * scaling);
+    graphics.fillRect(selectionMin.x * scaling, selectionMin.y * scaling,
+        selectionManager.getSelectionWidth() * scaling, selectionManager.getSelectionHeight() * scaling);
     
     ((Graphics2D) graphics).setStroke(new BasicStroke(2f));
     graphics.setColor(new Color(r, g, b, 255));
-    graphics.drawRect(selectionMin.x * scaling, selectionMin.y * scaling, selectionManager.getSelectionWidth() * scaling,
-        selectionManager.getSelectionHeight() * scaling);
+    graphics.drawRect(selectionMin.x * scaling, selectionMin.y * scaling,
+        selectionManager.getSelectionWidth() * scaling, selectionManager.getSelectionHeight() * scaling);
   }
-  
   
   @Override
   protected void paintComponent(Graphics graphics) {
