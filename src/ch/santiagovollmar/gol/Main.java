@@ -1,19 +1,41 @@
 package ch.santiagovollmar.gol;
 
+import java.awt.BorderLayout;
+import java.awt.Rectangle;
+import java.util.HashSet;
+
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import ch.santiagovollmar.gol.gui.GameDisplay;
+import ch.santiagovollmar.gol.gui.SnippetPreview;
 import ch.santiagovollmar.gol.gui.Window;
+import ch.santiagovollmar.gol.logic.GridManager;
 import ch.santiagovollmar.gol.logic.LogicManager;
+import ch.santiagovollmar.gol.logic.Point;
+import ch.santiagovollmar.gol.logic.Snippet;
 import ch.santiagovollmar.gol.util.GlobalKeyListener;
 import ch.santiagovollmar.gol.util.PropertyManager;
+import javafx.scene.layout.Border;
 
 public class Main {
   public static void main(String[] arguments) {
     PropertyManager.readProperties();
     Window.open();
+    
+    JFrame frame = new JFrame("test");
+    frame.setBounds(new Rectangle(10, 10, 100, 100));
+    frame.setVisible(true);
+    HashSet<Point> scene = new HashSet<>();
+    for (int i = 0; i < 10; i++) {
+      for (int j = i % 2; j < 10; j += 2) {
+        scene.add(new Point(j, i));
+      }
+    }
+    
+    frame.getContentPane().add(new SnippetPreview(new Snippet(scene, "ss", "sss")), BorderLayout.CENTER);
+    
     new Thread(Main::run_normal).start();
-    new Thread(Main::run_gui_update).start();
     GlobalKeyListener.apply(Window.getCurrentInstance().getFrame().getContentPane());
     
     SwingUtilities.invokeLater(Window.getCurrentInstance().getGameDisplay()::grabFocus);
@@ -29,15 +51,6 @@ public class Main {
         if (sleepTime > 0) {
           Thread.sleep(sleepTime / 1_000_000, (int) (sleepTime % 1_000_000));
         }
-      } catch (Exception e) {}
-    }
-  }
-  
-  private static void run_gui_update() {
-    for (;;) {
-      try {
-        SwingUtilities.invokeAndWait(Window.getCurrentInstance().getGameDisplay()::repaint);
-        Thread.sleep(15);
       } catch (Exception e) {}
     }
   }

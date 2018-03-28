@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 import ch.santiagovollmar.gol.gui.GameDisplay;
 
 public class GridManager {
-  private static Set<Point> map = Collections.synchronizedSet(new HashSet<Point>(10000, 1f));
+  public static Set<Point> map = Collections.synchronizedSet(new HashSet<Point>(10000, 1f));
   private static ArrayDeque<Point> fillStash = new ArrayDeque<Point>();
   private static ArrayDeque<Point> clearStash = new ArrayDeque<Point>();
   private static ExecutorService executor = Executors.newFixedThreadPool(16);
@@ -80,7 +80,7 @@ public class GridManager {
   }
   
   static {
-    GameDisplay.setFetchOperation(GridManager::fetchOperation);
+    GameDisplay.setDefaultFetchOperation(GridManager::fetchOperation);
   }
   
   /**

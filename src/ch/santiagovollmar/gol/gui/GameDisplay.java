@@ -19,9 +19,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import ch.santiagovollmar.gol.logic.FunctionalityMatrix;
 import ch.santiagovollmar.gol.logic.GridManager;
 import ch.santiagovollmar.gol.logic.LogicManager;
 import ch.santiagovollmar.gol.logic.Point;
+import ch.santiagovollmar.gol.logic.FunctionalityMatrix.Functionality;
 import ch.santiagovollmar.gol.util.GlobalKeyListener;
 import ch.santiagovollmar.gol.util.GlobalKeyListener.KeyListenerType;
 
@@ -35,17 +37,23 @@ public class GameDisplay extends JPanel {
   }
   
   private static LinkedList<Point> dataPlaceholder = new LinkedList<>();
-  private static FetchOperation fetchOperation = (x1, y1, x2, y2) -> {
+  private static FetchOperation defaultFetchOperation = (x1, y1, x2, y2) -> {
     return dataPlaceholder;
   };
   
-  public static void setFetchOperation(FetchOperation o) {
-    fetchOperation = o;
+  public static void setDefaultFetchOperation(FetchOperation o) {
+    defaultFetchOperation = o;
   }
   
   /*
    * fields
    */
+  private FetchOperation fetchOperation;
+  
+  public void setFetchoperation(FetchOperation fetchOperation) {
+    this.fetchOperation = fetchOperation;
+  }
+  
   private Color fillColor = Color.BLUE;
   private Color lineColor = Color.WHITE;
   private Color paneColor = Color.GRAY;
@@ -57,9 +65,9 @@ public class GameDisplay extends JPanel {
   private volatile int hsize;
   private volatile int scaling;
   
-  private volatile boolean ctrlIsPressed;
-  private volatile boolean shiftIsPressed;
-  private volatile boolean selectionCreation;
+  private static volatile boolean ctrlIsPressed;
+  private static volatile boolean shiftIsPressed;
+  private static volatile boolean selectionCreation;
   
   @SuppressWarnings("unused")
   private final JFrame parent;
@@ -118,7 +126,7 @@ public class GameDisplay extends JPanel {
   /*
    * Constructors
    */
-  public GameDisplay(JFrame parent, int hsize, int vsize, int scaling, Color fillColor) {
+  public GameDisplay(JFrame parent, FunctionalityMatrix fMatrix, int hsize, int vsize, int scaling, Color fillColor) {
     super();
     this.vsize = vsize;
     this.hsize = hsize;
@@ -137,13 +145,28 @@ public class GameDisplay extends JPanel {
     requestFocus();
     
     // functionality
-    setupDraw();
-    setupDrag();
-    setupZoom();
-    setupSelection();
-    setupDeleteAction();
-    setupCopyPasteAction();
+    fMatrix.execute(Functionality.DRAW, this::setupDraw);
+    fMatrix.execute(Functionality.DRAG, this::setupDrag);
+    fMatrix.execute(Functionality.ZOOM, this::setupZoom);
+    fMatrix.execute(Functionality.SELECTION, this::setupSelection);
+    fMatrix.execute(Functionality.DELETE_ACTION, this::setupDeleteAction);
+    fMatrix.execute(Functionality.COPY_PASTE_ACTION, this::setupCopyPasteAction);
+    fMatrix.execute(Functionality.ARROW_ACTIONS, this::setupArrowActions);
     
+    // update cycle
+    new Thread(this::run_gui_update).start();
+  }
+  
+  private void run_gui_update() {
+    for (;;) {
+      try {
+        SwingUtilities.invokeAndWait(this::repaint);
+        Thread.sleep(15);
+      } catch (Exception e) {}
+    }
+  }
+  
+  static {
     // add global key listeners
     GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
       LogicManager.setPaused(!LogicManager.isPaused());
@@ -164,80 +187,26 @@ public class GameDisplay extends JPanel {
     GlobalKeyListener.attach(KeyListenerType.RELEASED, e -> {
       shiftIsPressed = false;
     }, KeyEvent.VK_SHIFT);
-    
-    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
-      Point direction = new Point(0, 0);
-      switch (e.getKeyCode()) {
-        case KeyEvent.VK_UP:
-          direction.y--;
-          break;
-        
-        case KeyEvent.VK_DOWN:
-          direction.y++;
-          break;
-        
-        case KeyEvent.VK_LEFT:
-          direction.x--;
-          break;
-        
-        case KeyEvent.VK_RIGHT:
-          direction.x++;
-          break;
-      }
-      
-      if (ctrlIsPressed) {
-        viewport.x += direction.x;
-        viewport.y += direction.y;
-      } else if (shiftIsPressed) {
-        ensureSelection();
-        selectionEnd.x += direction.x;
-        selectionEnd.y += direction.y;
-      } else {
-        ensureSelection();
-        selectionStart.x += direction.x;
-        selectionStart.y += direction.y;
-        
-        selectionEnd.x += direction.x;
-        selectionEnd.y += direction.y;
-      }
-    }, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT);
-    
-    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
-      if (!LogicManager.isPaused() || selectionStart.x == -1 || selectionEnd.x == -1) {
-        return;
-      }
-      
-      Point min = getSelectionMin();
-      Point max = getSelectionMax();
-      
-      for (int x = min.x; x < max.x; x++) {
-        for (int y = min.y; y < max.y; y++) {
-          GridManager.fill(new Point(x, y), false);
-        }
-      }
-    }, KeyEvent.VK_F);
-    
-    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> clearSelection(), KeyEvent.VK_ESCAPE);
   }
   
-  public GameDisplay(JFrame parent, int hsize, int vsize, Color fillColor) {
-    this(parent, hsize, vsize, 10, fillColor);
+  public GameDisplay(JFrame parent, FunctionalityMatrix fMatrix, int hsize, int vsize, Color fillColor) {
+    this(parent, fMatrix, hsize, vsize, 10, fillColor);
   }
   
-  public GameDisplay(JFrame parent, int hsize, int vsize, int scaling) {
-    this(parent, hsize, vsize, scaling, Color.MAGENTA);
+  public GameDisplay(JFrame parent, FunctionalityMatrix fMatrix, int hsize, int vsize, int scaling) {
+    this(parent, fMatrix, hsize, vsize, scaling, Color.MAGENTA);
   }
   
-  public GameDisplay(JFrame parent, int scaling) {
-    this(parent, 100, 100, scaling);
+  public GameDisplay(JFrame parent, FunctionalityMatrix fMatrix, int scaling) {
+    this(parent, fMatrix, 100, 100, scaling);
   }
   
-  public GameDisplay(JFrame parent, Color fillColor) {
-    this(parent, 100, 100, fillColor);
+  public GameDisplay(JFrame parent, FunctionalityMatrix fMatrix, Color fillColor) {
+    this(parent, fMatrix, 100, 100, fillColor);
   }
   
-  public GameDisplay(JFrame parent) {
-    this(parent, 10);
+  public GameDisplay(JFrame parent, FunctionalityMatrix fMatrix) {
+    this(parent, fMatrix, 10);
   }
   
   /*
@@ -344,12 +313,50 @@ public class GameDisplay extends JPanel {
     }, KeyEvent.VK_V);
   }
   
+  private void setupArrowActions() {
+    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
+      Point direction = new Point(0, 0);
+      switch (e.getKeyCode()) {
+        case KeyEvent.VK_UP:
+          direction.y--;
+          break;
+        
+        case KeyEvent.VK_DOWN:
+          direction.y++;
+          break;
+        
+        case KeyEvent.VK_LEFT:
+          direction.x--;
+          break;
+        
+        case KeyEvent.VK_RIGHT:
+          direction.x++;
+          break;
+      }
+      
+      if (ctrlIsPressed) {
+        viewport.x += direction.x;
+        viewport.y += direction.y;
+      } else if (shiftIsPressed) {
+        ensureSelection();
+        selectionEnd.x += direction.x;
+        selectionEnd.y += direction.y;
+      } else {
+        ensureSelection();
+        selectionStart.x += direction.x;
+        selectionStart.y += direction.y;
+        
+        selectionEnd.x += direction.x;
+        selectionEnd.y += direction.y;
+      }
+    }, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT);
+  }
+  
   private void setupSelection() {
     addMouseMotionListener(new MouseMotionListener() {
       
       @Override
-      public void mouseMoved(MouseEvent arg0) {
-      }
+      public void mouseMoved(MouseEvent arg0) {}
       
       @Override
       public void mouseDragged(MouseEvent e) {
@@ -388,37 +395,32 @@ public class GameDisplay extends JPanel {
       }
       
       @Override
-      public void mouseExited(MouseEvent arg0) {
-      }
+      public void mouseExited(MouseEvent arg0) {}
       
       @Override
-      public void mouseEntered(MouseEvent arg0) {
-      }
+      public void mouseEntered(MouseEvent arg0) {}
       
       @Override
-      public void mouseClicked(MouseEvent arg0) {
-      }
+      public void mouseClicked(MouseEvent arg0) {}
     });
+    
+    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> clearSelection(), KeyEvent.VK_ESCAPE);
   }
   
   private void setupDraw() {
     addMouseListener(new MouseListener() {
       
       @Override
-      public void mouseReleased(MouseEvent arg0) {
-      }
+      public void mouseReleased(MouseEvent arg0) {}
       
       @Override
-      public void mousePressed(MouseEvent arg0) {
-      }
+      public void mousePressed(MouseEvent arg0) {}
       
       @Override
-      public void mouseExited(MouseEvent arg0) {
-      }
+      public void mouseExited(MouseEvent arg0) {}
       
       @Override
-      public void mouseEntered(MouseEvent arg0) {
-      }
+      public void mouseEntered(MouseEvent arg0) {}
       
       @Override
       public void mouseClicked(MouseEvent e) {
@@ -440,8 +442,7 @@ public class GameDisplay extends JPanel {
     addMouseMotionListener(new MouseMotionListener() {
       
       @Override
-      public void mouseMoved(MouseEvent e) {
-      }
+      public void mouseMoved(MouseEvent e) {}
       
       @Override
       public void mouseDragged(MouseEvent e) {
@@ -456,6 +457,21 @@ public class GameDisplay extends JPanel {
         }
       }
     });
+    
+    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
+      if (!LogicManager.isPaused() || selectionStart.x == -1 || selectionEnd.x == -1) {
+        return;
+      }
+      
+      Point min = getSelectionMin();
+      Point max = getSelectionMax();
+      
+      for (int x = min.x; x < max.x; x++) {
+        for (int y = min.y; y < max.y; y++) {
+          GridManager.fill(new Point(x, y), false);
+        }
+      }
+    }, KeyEvent.VK_F);
   }
   
   private void setupDrag() {
@@ -478,8 +494,7 @@ public class GameDisplay extends JPanel {
       }
       
       @Override
-      public void mouseExited(MouseEvent arg0) {
-      }
+      public void mouseExited(MouseEvent arg0) {}
       
       @Override
       public void mouseEntered(MouseEvent arg0) {
@@ -487,15 +502,13 @@ public class GameDisplay extends JPanel {
       }
       
       @Override
-      public void mouseClicked(MouseEvent arg0) {
-      }
+      public void mouseClicked(MouseEvent arg0) {}
     });
     
     addMouseMotionListener(new MouseMotionListener() {
       
       @Override
-      public void mouseMoved(MouseEvent e) {
-      }
+      public void mouseMoved(MouseEvent e) {}
       
       @Override
       public void mouseDragged(MouseEvent e) {
@@ -653,8 +666,12 @@ public class GameDisplay extends JPanel {
     }
     
     try {
-      Collection<Point> points = fetchOperation.fetch(viewport.x, viewport.y, viewport.x + hsize - 1,
-          viewport.y + vsize - 1);
+      Collection<Point> points;
+      if (fetchOperation != null) {
+        points = fetchOperation.fetch(viewport.x, viewport.y, viewport.x + hsize - 1, viewport.y + vsize - 1);
+      } else {
+        points = defaultFetchOperation.fetch(viewport.x, viewport.y, viewport.x + hsize - 1, viewport.y + vsize - 1);
+      }
       
       synchronized (viewport) {
         points.forEach((e) -> {

@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import ch.santiagovollmar.gol.logic.FunctionalityMatrix;
 import ch.santiagovollmar.gol.logic.GridManager;
 import ch.santiagovollmar.gol.logic.Point;
 import ch.santiagovollmar.gol.util.PropertyManager;
@@ -86,6 +87,7 @@ public class Window {
     
     String[] rgbValues = PropertyManager.get("display.color").split("\\s*\\,\\s*");
     gd = new GameDisplay(this.frame, 
+        new FunctionalityMatrix(true),
         Integer.valueOf(PropertyManager.get("display.width")),
         Integer.valueOf(PropertyManager.get("display.height")),
         Integer.valueOf(PropertyManager.get("display.scaling")), 
