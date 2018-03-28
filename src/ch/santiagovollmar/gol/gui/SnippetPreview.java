@@ -3,6 +3,8 @@ package ch.santiagovollmar.gol.gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.LinkedList;
 
 import javax.swing.JPanel;
@@ -52,6 +54,70 @@ public class SnippetPreview extends JPanel {
     gd.setFetchoperation((int x1, int y1, int x2, int y2) -> {
       return snippet.getScene();
     });
+    
+    addMouseListener(new MouseListener() {
+      
+      @Override
+      public void mouseReleased(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+      }
+      
+      @Override
+      public void mousePressed(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+      }
+      
+      @Override
+      public void mouseExited(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+      }
+      
+      @Override
+      public void mouseEntered(MouseEvent e) {
+        System.out.println("entered");
+      }
+      
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+      }
+    });
+    
+    gd.addMouseListener(new MouseListener() {
+      
+      @Override
+      public void mouseReleased(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+      }
+      
+      @Override
+      public void mousePressed(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+      }
+      
+      @Override
+      public void mouseExited(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+      }
+      
+      @Override
+      public void mouseEntered(MouseEvent e) {
+        System.out.println("entered display");
+      }
+      
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+      }
+    });
   }
   
   /*
@@ -68,8 +134,15 @@ public class SnippetPreview extends JPanel {
     gd.setBounds(x, y, width, height);
     SwingUtilities.invokeLater(gd::revalidate);
     
-    setMinimumSize(new Dimension(width, snippetHeight * scaling));
+    SwingUtilities.invokeLater(() -> {
+      Dimension size = new Dimension(width, snippetHeight * scaling);
+      setMinimumSize(size);
+      setMaximumSize(size);
+      setPreferredSize(size);
+      setSize(size);
+    });
     SwingUtilities.invokeLater(this::revalidate);
+    SwingUtilities.invokeLater(gd::revalidate);
   }
   
   @Override

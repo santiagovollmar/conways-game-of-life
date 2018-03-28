@@ -10,6 +10,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import ch.santiagovollmar.gol.logic.FunctionalityMatrix;
+import ch.santiagovollmar.gol.logic.FunctionalityMatrix.Functionality;
 import ch.santiagovollmar.gol.logic.GridManager;
 import ch.santiagovollmar.gol.logic.Point;
 import ch.santiagovollmar.gol.util.PropertyManager;
