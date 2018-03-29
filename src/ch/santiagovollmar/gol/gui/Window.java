@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -13,6 +15,7 @@ import ch.santiagovollmar.gol.logic.FunctionalityMatrix;
 import ch.santiagovollmar.gol.logic.FunctionalityMatrix.Functionality;
 import ch.santiagovollmar.gol.logic.GridManager;
 import ch.santiagovollmar.gol.logic.Point;
+import ch.santiagovollmar.gol.logic.Snippet;
 import ch.santiagovollmar.gol.util.GlobalKeyListener;
 import ch.santiagovollmar.gol.util.PropertyManager;
 
@@ -31,6 +34,8 @@ public class Window {
     }
 
     private GameDisplay gd;
+
+    private SnippetPreviewBar spb;
 
     public GameDisplay getGameDisplay() {
         return gd;
@@ -101,6 +106,20 @@ public class Window {
         frame.add(new MenuBar(), BorderLayout.NORTH);
         frame.add(gd, BorderLayout.CENTER);
         frame.add(new ToolBar(), BorderLayout.SOUTH);
+        frame.add(spb = new SnippetPreviewBar(), BorderLayout.EAST);
+
+        HashSet<Point> scene = new HashSet<>();
+        for (int i = 0; i < 10; i++) {
+            for (int j = i % 2; j < 10; j += 2) {
+                scene.add(new Point(j, i));
+            }
+        }
+
+        ArrayList<Snippet> content = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            content.add(new Snippet((HashSet<Point>) scene.clone(), "Chess Field", "This is some random description containing no meaning at all. Just some fill text. No meaning here!! Why are you still reading this? U boosted?"));
+        }
+        spb.setContent(content);
         frame.pack();
 
         for (int x = 0; x < 100; x++) {

@@ -49,7 +49,7 @@ public class SnippetPreview extends JButton {
 
         String[] rgbValues = PropertyManager.get("display.color").split("\\s*\\,\\s*");
         gd = new GameDisplay("dump",
-                new FunctionalityMatrix(Functionality.DRAG, Functionality.ZOOM, Functionality.SELECTION, Functionality.ARROW_ACTIONS),
+                new FunctionalityMatrix(false),
                 snippetWidth,
                 snippetHeight,
                 Integer.valueOf(PropertyManager.get("display.scaling")),
@@ -62,13 +62,16 @@ public class SnippetPreview extends JButton {
         //add(gd, BorderLayout.CENTER);
         addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {}
+            public void mouseClicked(MouseEvent e) {
+            }
 
             @Override
-            public void mousePressed(MouseEvent e) {}
+            public void mousePressed(MouseEvent e) {
+            }
 
             @Override
-            public void mouseReleased(MouseEvent e) {}
+            public void mouseReleased(MouseEvent e) {
+            }
 
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -82,6 +85,34 @@ public class SnippetPreview extends JButton {
                 repaint();
             }
         });
+    }
+
+    public int getSnippetHeight() {
+        return snippetHeight;
+    }
+
+    public int getSnippetWidth() {
+        return snippetWidth;
+    }
+
+    public int getScaling() {
+        return scaling;
+    }
+
+    public int projectHeight(int width) {
+        return snippetHeight * (width / snippetWidth);
+    }
+
+    public int projectWidth(int height) {
+        return snippetWidth * (height / snippetHeight);
+    }
+
+    public int projectScalingByWidth(int width) {
+        return width / snippetWidth;
+    }
+
+    public int projectScalingByHeight(int height) {
+        return height / snippetHeight;
     }
 
     /*
@@ -117,11 +148,11 @@ public class SnippetPreview extends JButton {
         Color foreground = Color.LIGHT_GRAY;
 
         // paint name
-        int yOffset = paintName(graphics, graphics.getFont().deriveFont(18f), background, foreground);
+        int yOffset = paintName(graphics, graphics.getFont().deriveFont(16f), background, foreground);
 
         // paint description
         if (showDescription) {
-            paintDescription(graphics, yOffset, graphics.getFont().deriveFont(12f), background, foreground);
+            paintDescription(graphics, yOffset, graphics.getFont().deriveFont(10f), background, foreground);
         }
     }
 
