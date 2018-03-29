@@ -3,6 +3,7 @@ package ch.santiagovollmar.gol.util;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.function.Consumer;
 
@@ -10,35 +11,41 @@ import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 
 public class GlobalKeyListener implements KeyListener {
-  public static final KeyListener KEY_LISTENER = new GlobalKeyListener(); 
+  private static HashMap<String, GlobalKeyListener> keyListeners;
   
-  public static void apply(Component parent) {
+  public static void apply(String listenerSpace, Component parent) {
     if (parent instanceof JComponent) {
       for (Component component : ((JComponent) parent).getComponents()) {
-        apply(component);
+        apply(listenerSpace, component);
       }
     }
     
-    SwingUtilities.invokeLater(() -> parent.addKeyListener(KEY_LISTENER));
+    // apply KeyListener from KeyListenerSpace to component
+    SwingUtilities.invokeLater(() -> parent.addKeyListener(keyListeners.get(listenerSpace)));
+  }
+  
+  public static void attach(String listenerSpace, KeyListenerType type, Consumer<KeyEvent> action, int ...codes) {
+    keyListeners.get(listenerSpace).eventHandlers.get(type).add(new ListenerPair(action, codes));
+  }
+  
+  public static void createListenerSpace(String listenerSpace) {
+    keyListeners.put(listenerSpace, new GlobalKeyListener());
   }
   
   public enum KeyListenerType {
-    PRESSED(new LinkedList<Consumer<KeyEvent>>(), new LinkedList<int[]>()),
-    RELEASED(new LinkedList<Consumer<KeyEvent>>(), new LinkedList<int[]>()),
-    TYPED(new LinkedList<Consumer<KeyEvent>>(), new LinkedList<int[]>());
-    
-    protected final LinkedList<Consumer<KeyEvent>> listeners;
-    protected final LinkedList<int[]> codes;
-    
-    private KeyListenerType(LinkedList<Consumer<KeyEvent>> list, LinkedList<int[]> codes) {
-      listeners = list;
-      this.codes = codes;
-    }
+    PRESSED,
+    RELEASED,
+    TYPED;
   }
   
-  public static void attach(KeyListenerType type, Consumer<KeyEvent> action, int ...codes) {
-    type.listeners.add(action);
-    type.codes.add(codes);
+  private HashMap<KeyListenerType, LinkedList<ListenerPair>> eventHandlers;
+  
+  public GlobalKeyListener() {
+    this.eventHandlers = new HashMap<>();
+    
+    for (KeyListenerType type : KeyListenerType.values()) {
+      eventHandlers.put(type, new LinkedList<>());
+    }
   }
   
   @Override
@@ -57,10 +64,12 @@ public class GlobalKeyListener implements KeyListener {
   }
   
   private void evaluateType(KeyListenerType type, KeyEvent e) {
-    for (int i = 0; i < type.listeners.size(); i++) {
-      for (int code : type.codes.get(i)) {
+    LinkedList<ListenerPair> listeners = eventHandlers.get(type);
+    
+    for (int i = 0; i < listeners.size(); i++) {
+      for (int code : listeners.get(i).getCodes()) {
         if (code == e.getKeyCode()) {
-          type.listeners.get(i).accept(e);
+          listeners.get(i).getConsumer().accept(e);
         }
       }
     }

@@ -87,7 +87,7 @@ public class Window {
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
     String[] rgbValues = PropertyManager.get("display.color").split("\\s*\\,\\s*");
-    gd = new GameDisplay(this.frame, 
+    gd = new GameDisplay("main", 
         new FunctionalityMatrix(true),
         Integer.valueOf(PropertyManager.get("display.width")),
         Integer.valueOf(PropertyManager.get("display.height")),

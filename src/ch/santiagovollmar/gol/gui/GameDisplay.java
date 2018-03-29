@@ -61,16 +61,14 @@ public class GameDisplay extends JPanel {
   
   private final Point viewport;
   
+  private final String listenerSpace;
   private volatile int vsize;
   private volatile int hsize;
   private volatile int scaling;
   
-  private static volatile boolean ctrlIsPressed;
-  private static volatile boolean shiftIsPressed;
-  private static volatile boolean selectionCreation;
-  
-  @SuppressWarnings("unused")
-  private final JFrame parent;
+  private volatile boolean ctrlIsPressed;
+  private volatile boolean shiftIsPressed;
+  private volatile boolean selectionCreation;
   
   private final Point dragStart = new Point(-1, -1);
   
@@ -126,13 +124,13 @@ public class GameDisplay extends JPanel {
   /*
    * Constructors
    */
-  public GameDisplay(JFrame parent, FunctionalityMatrix fMatrix, int hsize, int vsize, int scaling, Color fillColor) {
+  public GameDisplay(String listenerSpace, FunctionalityMatrix fMatrix, int hsize, int vsize, int scaling, Color fillColor) {
     super();
     this.vsize = vsize;
     this.hsize = hsize;
     this.scaling = scaling;
+    this.listenerSpace = listenerSpace;
     setFillColor(fillColor);
-    this.parent = parent;
     this.viewport = new Point(45000, 45000);
     
     // set sizes
@@ -153,6 +151,27 @@ public class GameDisplay extends JPanel {
     fMatrix.execute(Functionality.COPY_PASTE_ACTION, this::setupCopyPasteAction);
     fMatrix.execute(Functionality.ARROW_ACTIONS, this::setupArrowActions);
     
+    // add global key listeners
+    GlobalKeyListener.attach(listenerSpace, KeyListenerType.PRESSED, e -> {
+      LogicManager.setPaused(!LogicManager.isPaused());
+    }, KeyEvent.VK_SPACE);
+    
+    GlobalKeyListener.attach(listenerSpace, KeyListenerType.PRESSED, e -> {
+      ctrlIsPressed = true;
+    }, KeyEvent.VK_CONTROL);
+    
+    GlobalKeyListener.attach(listenerSpace, KeyListenerType.RELEASED, e -> {
+      ctrlIsPressed = false;
+    }, KeyEvent.VK_CONTROL);
+    
+    GlobalKeyListener.attach(listenerSpace, KeyListenerType.PRESSED, e -> {
+      shiftIsPressed = true;
+    }, KeyEvent.VK_SHIFT);
+    
+    GlobalKeyListener.attach(listenerSpace, KeyListenerType.RELEASED, e -> {
+      shiftIsPressed = false;
+    }, KeyEvent.VK_SHIFT);
+    
     // update cycle
     new Thread(this::run_gui_update).start();
   }
@@ -166,54 +185,31 @@ public class GameDisplay extends JPanel {
     }
   }
   
-  static {
-    // add global key listeners
-    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
-      LogicManager.setPaused(!LogicManager.isPaused());
-    }, KeyEvent.VK_SPACE);
-    
-    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
-      ctrlIsPressed = true;
-    }, KeyEvent.VK_CONTROL);
-    
-    GlobalKeyListener.attach(KeyListenerType.RELEASED, e -> {
-      ctrlIsPressed = false;
-    }, KeyEvent.VK_CONTROL);
-    
-    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
-      shiftIsPressed = true;
-    }, KeyEvent.VK_SHIFT);
-    
-    GlobalKeyListener.attach(KeyListenerType.RELEASED, e -> {
-      shiftIsPressed = false;
-    }, KeyEvent.VK_SHIFT);
+  public GameDisplay(String listenerSpace, FunctionalityMatrix fMatrix, int hsize, int vsize, Color fillColor) {
+    this(listenerSpace, fMatrix, hsize, vsize, 10, fillColor);
   }
   
-  public GameDisplay(JFrame parent, FunctionalityMatrix fMatrix, int hsize, int vsize, Color fillColor) {
-    this(parent, fMatrix, hsize, vsize, 10, fillColor);
+  public GameDisplay(String listenerSpace, FunctionalityMatrix fMatrix, int hsize, int vsize, int scaling) {
+    this(listenerSpace, fMatrix, hsize, vsize, scaling, Color.MAGENTA);
   }
   
-  public GameDisplay(JFrame parent, FunctionalityMatrix fMatrix, int hsize, int vsize, int scaling) {
-    this(parent, fMatrix, hsize, vsize, scaling, Color.MAGENTA);
+  public GameDisplay(String listenerSpace, FunctionalityMatrix fMatrix, int scaling) {
+    this(listenerSpace, fMatrix, 100, 100, scaling);
   }
   
-  public GameDisplay(JFrame parent, FunctionalityMatrix fMatrix, int scaling) {
-    this(parent, fMatrix, 100, 100, scaling);
+  public GameDisplay(String listenerSpace, FunctionalityMatrix fMatrix, Color fillColor) {
+    this(listenerSpace, fMatrix, 100, 100, fillColor);
   }
   
-  public GameDisplay(JFrame parent, FunctionalityMatrix fMatrix, Color fillColor) {
-    this(parent, fMatrix, 100, 100, fillColor);
-  }
-  
-  public GameDisplay(JFrame parent, FunctionalityMatrix fMatrix) {
-    this(parent, fMatrix, 10);
+  public GameDisplay(String listenerSpace, FunctionalityMatrix fMatrix) {
+    this(listenerSpace, fMatrix, 10);
   }
   
   /*
    * Functionality
    */
   private void setupDeleteAction() {
-    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
+    GlobalKeyListener.attach(listenerSpace, KeyListenerType.PRESSED, e -> {
       if (LogicManager.isPaused() && !ctrlIsPressed) { // check if game is paused
         if (selectionStart.x != -1 && selectionEnd.x != -1) { // user has an active selection
           Point min = getSelectionMin();
@@ -236,7 +232,7 @@ public class GameDisplay extends JPanel {
   
   private void setupCopyPasteAction() {
     // copy
-    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
+    GlobalKeyListener.attach(listenerSpace, KeyListenerType.PRESSED, e -> {
       if (LogicManager.isPaused() && ctrlIsPressed) { // check if ctrl is pressed and game is paused
         if (selectionStart.x != -1 && selectionEnd.x != -1) { // check if there is an active selection
           Point min = getSelectionMin();
@@ -260,7 +256,7 @@ public class GameDisplay extends JPanel {
     }, KeyEvent.VK_C);
     
     // paste
-    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
+    GlobalKeyListener.attach(listenerSpace, KeyListenerType.PRESSED, e -> {
       if (LogicManager.isPaused() && ctrlIsPressed) { // check if game is paused and ctrl is pressed
         if (copyBufferStart != null && selectionStart.x != -1 && selectionEnd.x != -1) { // check if clipboard contains
                                                                                          // data and there is a
@@ -314,7 +310,7 @@ public class GameDisplay extends JPanel {
   }
   
   private void setupArrowActions() {
-    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
+    GlobalKeyListener.attach(listenerSpace, KeyListenerType.PRESSED, e -> {
       Point direction = new Point(0, 0);
       switch (e.getKeyCode()) {
         case KeyEvent.VK_UP:
@@ -404,7 +400,7 @@ public class GameDisplay extends JPanel {
       public void mouseClicked(MouseEvent arg0) {}
     });
     
-    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> clearSelection(), KeyEvent.VK_ESCAPE);
+    GlobalKeyListener.attach(listenerSpace, KeyListenerType.PRESSED, e -> clearSelection(), KeyEvent.VK_ESCAPE);
   }
   
   private void setupDraw() {
@@ -458,7 +454,7 @@ public class GameDisplay extends JPanel {
       }
     });
     
-    GlobalKeyListener.attach(KeyListenerType.PRESSED, e -> {
+    GlobalKeyListener.attach(listenerSpace, KeyListenerType.PRESSED, e -> {
       if (!LogicManager.isPaused() || selectionStart.x == -1 || selectionEnd.x == -1) {
         return;
       }

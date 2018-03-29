@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import org.apache.commons.io.output.ThresholdingOutputStream;
 import org.apache.xpath.operations.Variable;
 
 import ch.santiagovollmar.gol.logic.FunctionalityMatrix;
@@ -48,9 +49,12 @@ public class SnippetPreview extends JPanel {
     
     snippetHeight = max.y - min.y + 3;
     snippetWidth = max.x - min.x + 3;
+    
     String[] rgbValues = PropertyManager.get("display.color").split("\\s*\\,\\s*");
-    gd = new GameDisplay(Window.getCurrentInstance().getFrame(),
-        new FunctionalityMatrix(Functionality.DRAG, Functionality.ZOOM, Functionality.SELECTION, Functionality.ARROW_ACTIONS), snippetWidth, 0,
+    gd = new GameDisplay(this.toString(),
+        new FunctionalityMatrix(Functionality.DRAG, Functionality.ZOOM, Functionality.SELECTION, Functionality.ARROW_ACTIONS), 
+        snippetWidth, 
+        snippetHeight,
         Integer.valueOf(PropertyManager.get("display.scaling")),
         new Color(Integer.valueOf(rgbValues[0]), Integer.valueOf(rgbValues[1]), Integer.valueOf(rgbValues[2])));
     gd.setFetchoperation((int x1, int y1, int x2, int y2) -> {

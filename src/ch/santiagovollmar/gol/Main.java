@@ -1,22 +1,20 @@
 package ch.santiagovollmar.gol;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Rectangle;
 import java.util.HashSet;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import ch.santiagovollmar.gol.gui.GameDisplay;
 import ch.santiagovollmar.gol.gui.SnippetPreview;
 import ch.santiagovollmar.gol.gui.Window;
-import ch.santiagovollmar.gol.logic.GridManager;
 import ch.santiagovollmar.gol.logic.LogicManager;
 import ch.santiagovollmar.gol.logic.Point;
 import ch.santiagovollmar.gol.logic.Snippet;
 import ch.santiagovollmar.gol.util.GlobalKeyListener;
 import ch.santiagovollmar.gol.util.PropertyManager;
-import javafx.scene.layout.Border;
 
 public class Main {
   public static void main(String[] arguments) {
@@ -36,9 +34,11 @@ public class Main {
     frame.getContentPane().add(new SnippetPreview(new Snippet(scene, "ss", "sss")), BorderLayout.CENTER);
     
     new Thread(Main::run_normal).start();
-    GlobalKeyListener.apply(Window.getCurrentInstance().getFrame().getContentPane());
+    GlobalKeyListener.createListenerSpace("main");
+    GlobalKeyListener.apply("main", Window.getCurrentInstance().getFrame().getContentPane());
     
-    GlobalKeyListener.apply(frame);
+    GlobalKeyListener.createListenerSpace(frame.toString());
+    GlobalKeyListener.apply(frame.toString(), frame);
     
     SwingUtilities.invokeLater(Window.getCurrentInstance().getGameDisplay()::grabFocus);
   }
