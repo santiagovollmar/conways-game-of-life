@@ -38,6 +38,8 @@ public class Main {
     new Thread(Main::run_normal).start();
     GlobalKeyListener.apply(Window.getCurrentInstance().getFrame().getContentPane());
     
+    GlobalKeyListener.apply(frame);
+    
     SwingUtilities.invokeLater(Window.getCurrentInstance().getGameDisplay()::grabFocus);
   }
   

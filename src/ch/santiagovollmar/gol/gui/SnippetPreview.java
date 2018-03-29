@@ -1,5 +1,6 @@
 package ch.santiagovollmar.gol.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -15,6 +16,7 @@ import org.apache.xpath.operations.Variable;
 import ch.santiagovollmar.gol.logic.FunctionalityMatrix;
 import ch.santiagovollmar.gol.logic.FunctionalityMatrix.Functionality;
 import ch.santiagovollmar.gol.util.PropertyManager;
+import javafx.scene.layout.Border;
 import ch.santiagovollmar.gol.logic.Point;
 import ch.santiagovollmar.gol.logic.Snippet;
 
@@ -44,80 +46,19 @@ public class SnippetPreview extends JPanel {
       min.y = point.y < min.y ? point.y : min.y;
     }
     
-    snippetHeight = max.y - min.y + 2;
-    snippetWidth = max.x - min.x + 2;
+    snippetHeight = max.y - min.y + 3;
+    snippetWidth = max.x - min.x + 3;
     String[] rgbValues = PropertyManager.get("display.color").split("\\s*\\,\\s*");
     gd = new GameDisplay(Window.getCurrentInstance().getFrame(),
-        new FunctionalityMatrix(Functionality.DRAG, Functionality.ZOOM), snippetWidth, 0,
+        new FunctionalityMatrix(Functionality.DRAG, Functionality.ZOOM, Functionality.SELECTION, Functionality.ARROW_ACTIONS), snippetWidth, 0,
         Integer.valueOf(PropertyManager.get("display.scaling")),
         new Color(Integer.valueOf(rgbValues[0]), Integer.valueOf(rgbValues[1]), Integer.valueOf(rgbValues[2])));
     gd.setFetchoperation((int x1, int y1, int x2, int y2) -> {
       return snippet.getScene();
     });
     
-    addMouseListener(new MouseListener() {
-      
-      @Override
-      public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-      }
-      
-      @Override
-      public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-      }
-      
-      @Override
-      public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-      }
-      
-      @Override
-      public void mouseEntered(MouseEvent e) {
-        System.out.println("entered");
-      }
-      
-      @Override
-      public void mouseClicked(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-      }
-    });
-    
-    gd.addMouseListener(new MouseListener() {
-      
-      @Override
-      public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-      }
-      
-      @Override
-      public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-      }
-      
-      @Override
-      public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-      }
-      
-      @Override
-      public void mouseEntered(MouseEvent e) {
-        System.out.println("entered display");
-      }
-      
-      @Override
-      public void mouseClicked(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-      }
-    });
+    setLayout(new BorderLayout(0, 0));
+    add(gd, BorderLayout.CENTER);
   }
   
   /*
@@ -131,28 +72,26 @@ public class SnippetPreview extends JPanel {
     
     gd.setScaling(scaling);
     gd.setViewport(new Point(min.x - 1, min.y - 1));
-    gd.setBounds(x, y, width, height);
-    SwingUtilities.invokeLater(gd::revalidate);
     
     SwingUtilities.invokeLater(() -> {
       Dimension size = new Dimension(width, snippetHeight * scaling);
       setMinimumSize(size);
       setMaximumSize(size);
       setPreferredSize(size);
-      setSize(size);
+      System.out.println(size);
     });
-    SwingUtilities.invokeLater(this::revalidate);
-    SwingUtilities.invokeLater(gd::revalidate);
   }
   
   @Override
   protected void paintComponent(Graphics graphics) {
+    super.paintComponent(graphics);
+    
     // paint border
     try {
       getBorder().paintBorder(this, graphics, getBounds().x, getBounds().y, getBounds().width, getBounds().height);
     } catch (NullPointerException e) {}
     
     // paint snippet
-    gd.paintComponent(graphics);
+    // gd.paintComponent(graphics);
   }
 }
