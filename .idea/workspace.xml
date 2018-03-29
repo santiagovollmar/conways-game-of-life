@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0af854a-8ddc-45c8-9d38-ba0b767e0a74" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java" afterPath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java" />
-      <change beforePath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetPreview.java" afterPath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetPreview.java" />
-      <change beforePath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetPreviewBar.java" afterPath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetPreviewBar.java" />
-      <change beforePath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/Window.java" afterPath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/Window.java" />
-    </list>
+    <list default="true" id="b0af854a-8ddc-45c8-9d38-ba0b767e0a74" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -260,12 +255,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1522309829245</updated>
-      <workItem from="1522309841061" duration="16614000" />
+      <workItem from="1522309841061" duration="17258000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16614000" />
+    <option name="totallyTimeSpent" value="17258000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1200" extended-state="6" />
