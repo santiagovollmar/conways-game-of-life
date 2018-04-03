@@ -119,7 +119,7 @@ public class Window {
         for (int i = 0; i < 4; i++) {
             content.add(new Snippet((HashSet<Point>) scene.clone(), "Chess Field", "This is some random description containing no meaning at all. Just some fill text. No meaning here!! Why are you still reading this? U boosted?"));
         }
-        spb.setContent(content);
+        spb.setContent(content, 1.);
         frame.pack();
 
         for (int x = 0; x < 100; x++) {

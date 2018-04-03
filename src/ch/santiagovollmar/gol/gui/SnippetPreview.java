@@ -1,20 +1,14 @@
 package ch.santiagovollmar.gol.gui;
 
+import ch.santiagovollmar.gol.logic.FunctionalityMatrix;
+import ch.santiagovollmar.gol.logic.Point;
+import ch.santiagovollmar.gol.logic.Snippet;
+import ch.santiagovollmar.gol.util.PropertyManager;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.LinkedList;
-
-import javax.swing.*;
-
-import ch.santiagovollmar.gol.util.GlobalKeyListener;
-
-import ch.santiagovollmar.gol.logic.FunctionalityMatrix;
-import ch.santiagovollmar.gol.logic.FunctionalityMatrix.Functionality;
-import ch.santiagovollmar.gol.util.PropertyManager;
-import javafx.scene.layout.Border;
-import ch.santiagovollmar.gol.logic.Point;
-import ch.santiagovollmar.gol.logic.Snippet;
 
 public class SnippetPreview extends JButton {
     private final Snippet snippet;
@@ -127,12 +121,12 @@ public class SnippetPreview extends JButton {
         gd.setScaling(scaling);
         gd.setViewport(new Point(min.x - 1, min.y - 1));
 
-        SwingUtilities.invokeLater(() -> {
+        /*SwingUtilities.invokeLater(() -> {
             Dimension size = new Dimension(width, snippetHeight * scaling);
             setMinimumSize(size);
             setMaximumSize(size);
             setPreferredSize(size);
-        });
+        });*/
 
         SwingUtilities.invokeLater(this::repaint);
     }
