@@ -1,23 +1,17 @@
 package ch.santiagovollmar.gol.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashSet;
-
-import javax.swing.JFrame;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
 import ch.santiagovollmar.gol.logic.FunctionalityMatrix;
-import ch.santiagovollmar.gol.logic.FunctionalityMatrix.Functionality;
 import ch.santiagovollmar.gol.logic.GridManager;
 import ch.santiagovollmar.gol.logic.Point;
 import ch.santiagovollmar.gol.logic.Snippet;
 import ch.santiagovollmar.gol.util.GlobalKeyListener;
 import ch.santiagovollmar.gol.util.PropertyManager;
+
+import javax.swing.*;
+import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Window {
 
@@ -77,13 +71,11 @@ public class Window {
         // set LAF
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-                | UnsupportedLookAndFeelException e) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             System.err.println("Could not find system LAF.\n\tChanging to cross-plattform LAF");
             try {
                 UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-                    | UnsupportedLookAndFeelException e1) {
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e1) {
                 System.err.println("Could not find cross-plattform LAF.\n\texiting...");
             }
         }
@@ -93,15 +85,13 @@ public class Window {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         GlobalKeyListener.createListenerSpace("main");
-        String[] rgbValues = PropertyManager.get("display.color").split("\\s*\\,\\s*");
-        gd = new GameDisplay("main",
-                new FunctionalityMatrix(true),
+        String[] rgbValues = PropertyManager.get("display.color")
+                .split("\\s*\\,\\s*");
+        gd = new GameDisplay("main", new FunctionalityMatrix(true),
                 Integer.valueOf(PropertyManager.get("display.width")),
                 Integer.valueOf(PropertyManager.get("display.height")),
                 Integer.valueOf(PropertyManager.get("display.scaling")),
-                new Color(Integer.valueOf(rgbValues[0]),
-                        Integer.valueOf(rgbValues[1]),
-                        Integer.valueOf(rgbValues[2])));
+                new Color(Integer.valueOf(rgbValues[0]), Integer.valueOf(rgbValues[1]), Integer.valueOf(rgbValues[2])));
 
         frame.add(new MenuBar(), BorderLayout.NORTH);
         frame.add(gd, BorderLayout.CENTER);
@@ -117,7 +107,8 @@ public class Window {
 
         ArrayList<Snippet> content = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            content.add(new Snippet((HashSet<Point>) scene.clone(), "Chess Field", "This is some random description containing no meaning at all. Just some fill text. No meaning here!! Why are you still reading this? U boosted?"));
+            content.add(new Snippet((HashSet<Point>) scene.clone(), "Chess Field",
+                    "This is some random description containing no meaning at all. Just some fill text. No meaning here!! Why are you still reading this? U boosted?"));
         }
         spb.setContent(content, 1.);
         frame.pack();

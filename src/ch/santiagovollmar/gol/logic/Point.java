@@ -3,61 +3,58 @@ package ch.santiagovollmar.gol.logic;
 import java.io.Serializable;
 import java.util.concurrent.Callable;
 
-import org.apache.bcel.generic.NEW;
-
 public class Point implements Callable<Object>, Serializable {
-  private static final long serialVersionUID = 741323992140637769L;
-  
-  public int x;
-  public int y;
-  
-  public Point(int x, int y) {
-    this.x = x;
-    this.y = y;
-  }
-  
-  @Override
-  public int hashCode() {
-    return (x * 7) ^ (y * 31);
-  }
+    private static final long serialVersionUID = 741323992140637769L;
 
-  @Override
-  public boolean equals(Object other) {
-    if (other instanceof Point) {
-      if (((Point)other).x == x && ((Point)other).y == y)
-        return true;
-    }
-    return false;
-  }
-  
-  @Override
-  public String toString() {
-    return "Point[x=" + x + ", y=" + y + "];";
-  }
+    public int x;
+    public int y;
 
-  public byte[] getBytes() {
-    byte[] bytes = new byte[8];
-    
-    for (int i = 0; i < 4; i++) {
-      bytes[i] = (byte) ((x >>> (i * 8)) & 0xFF);
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
-    
-    for (int i = 0; i < 4; i++) {
-      bytes[i + 4] = (byte) ((y >>> (i * 8)) & 0xFF);
+
+    @Override
+    public int hashCode() {
+        return (x * 7) ^ (y * 31);
     }
-    
-    return bytes;
-  }
-  
-  @Override
-  public Object call() throws Exception {
-    LogicManager.compute(this);
-    return null;
-  }
-  
-  @Override
-  public Point clone() {
-    return new Point(x, y);
-  }
-  
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Point) {
+            if (((Point) other).x == x && ((Point) other).y == y) return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Point[x=" + x + ", y=" + y + "];";
+    }
+
+    public byte[] getBytes() {
+        byte[] bytes = new byte[8];
+
+        for (int i = 0; i < 4; i++) {
+            bytes[i] = (byte) ((x >>> (i * 8)) & 0xFF);
+        }
+
+        for (int i = 0; i < 4; i++) {
+            bytes[i + 4] = (byte) ((y >>> (i * 8)) & 0xFF);
+        }
+
+        return bytes;
+    }
+
+    @Override
+    public Object call() throws Exception {
+        LogicManager.compute(this);
+        return null;
+    }
+
+    @Override
+    public Point clone() {
+        return new Point(x, y);
+    }
+
 }

@@ -1,17 +1,16 @@
 package ch.santiagovollmar.gol.util;
 
-import java.awt.Component;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.function.Consumer;
 
-import javax.swing.JComponent;
-import javax.swing.SwingUtilities;
-
 public class GlobalKeyListener implements KeyListener {
     private static final HashMap<String, GlobalKeyListener> KEY_LISTENERS = new HashMap<>();
+
     static {
         KEY_LISTENERS.put("dump", new GlobalKeyListener());
     }
@@ -28,7 +27,8 @@ public class GlobalKeyListener implements KeyListener {
     }
 
     public static void attach(String listenerSpace, KeyListenerType type, Consumer<KeyEvent> action, int... codes) {
-        KEY_LISTENERS.get(listenerSpace).eventHandlers.get(type).add(new ListenerPair(action, codes));
+        KEY_LISTENERS.get(listenerSpace).eventHandlers.get(type)
+                .add(new ListenerPair(action, codes));
     }
 
     public static void createListenerSpace(String listenerSpace) {
@@ -36,9 +36,7 @@ public class GlobalKeyListener implements KeyListener {
     }
 
     public enum KeyListenerType {
-        PRESSED,
-        RELEASED,
-        TYPED;
+        PRESSED, RELEASED, TYPED;
     }
 
     private HashMap<KeyListenerType, LinkedList<ListenerPair>> eventHandlers;
@@ -70,9 +68,12 @@ public class GlobalKeyListener implements KeyListener {
         LinkedList<ListenerPair> listeners = eventHandlers.get(type);
 
         for (int i = 0; i < listeners.size(); i++) {
-            for (int code : listeners.get(i).getCodes()) {
+            for (int code : listeners.get(i)
+                    .getCodes()) {
                 if (code == e.getKeyCode()) {
-                    listeners.get(i).getConsumer().accept(e);
+                    listeners.get(i)
+                            .getConsumer()
+                            .accept(e);
                 }
             }
         }

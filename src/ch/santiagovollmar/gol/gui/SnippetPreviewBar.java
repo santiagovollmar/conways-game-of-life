@@ -15,6 +15,8 @@ public class SnippetPreviewBar extends JPanel {
     private JScrollPane scrollPane;
 
     public SnippetPreviewBar() {
+        GameDisplay.addRepaintList(this);
+
         setLayout(new BorderLayout());
 
         JLabel title = new JLabel("Snippets:");

@@ -1,13 +1,5 @@
 package ch.santiagovollmar.gol;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Rectangle;
-import java.util.HashSet;
-
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-
 import ch.santiagovollmar.gol.gui.SnippetPreview;
 import ch.santiagovollmar.gol.gui.Window;
 import ch.santiagovollmar.gol.logic.LogicManager;
@@ -15,6 +7,10 @@ import ch.santiagovollmar.gol.logic.Point;
 import ch.santiagovollmar.gol.logic.Snippet;
 import ch.santiagovollmar.gol.util.GlobalKeyListener;
 import ch.santiagovollmar.gol.util.PropertyManager;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.HashSet;
 
 public class Main {
     public static void main(String[] arguments) {
@@ -32,14 +28,20 @@ public class Main {
         }
 
         GlobalKeyListener.createListenerSpace(frame.toString());
-        frame.getContentPane().add(new SnippetPreview(new Snippet(scene, "Chess Field", "This is some random description containing no meaning at all. Just some fill text. No meaning here!! Why are you still reading this? U boosted?")), BorderLayout.CENTER);
+        frame.getContentPane()
+                .add(new SnippetPreview(new Snippet(scene, "Chess Field",
+                                "This is some random description containing no meaning at all. Just some fill text. No meaning here!! Why are you still reading this? U boosted?")),
+                        BorderLayout.CENTER);
 
         new Thread(Main::run_normal).start();
 
-        GlobalKeyListener.apply("main", Window.getCurrentInstance().getFrame().getContentPane());
+        GlobalKeyListener.apply("main", Window.getCurrentInstance()
+                .getFrame()
+                .getContentPane());
         GlobalKeyListener.apply(frame.toString(), frame);
 
-        SwingUtilities.invokeLater(Window.getCurrentInstance().getGameDisplay()::grabFocus);
+        SwingUtilities.invokeLater(Window.getCurrentInstance()
+                .getGameDisplay()::grabFocus);
     }
 
     @SuppressWarnings("unused")
@@ -66,7 +68,8 @@ public class Main {
             try {
                 long start = System.nanoTime();
                 LogicManager.renderNext();
-                SwingUtilities.invokeLater(Window.getCurrentInstance().getGameDisplay()::repaint);
+                SwingUtilities.invokeLater(Window.getCurrentInstance()
+                        .getGameDisplay()::repaint);
                 long sleepTime = 50_000_000 - (System.nanoTime() - start);
                 if (sleepTime > 0) {
                     Thread.sleep(sleepTime / 1_000_000, (int) (sleepTime % 1_000_000));
