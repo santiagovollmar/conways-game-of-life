@@ -1,31 +1,20 @@
 package ch.santiagovollmar.gol.gui;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import ch.santiagovollmar.gol.logic.FunctionalityMatrix;
+import ch.santiagovollmar.gol.logic.FunctionalityMatrix.Functionality;
+import ch.santiagovollmar.gol.logic.GridManager;
+import ch.santiagovollmar.gol.logic.LogicManager;
+import ch.santiagovollmar.gol.logic.Point;
+import ch.santiagovollmar.gol.util.GlobalKeyListener;
+import ch.santiagovollmar.gol.util.GlobalKeyListener.KeyListenerType;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.ConcurrentModificationException;
-import java.util.HashSet;
-import java.util.LinkedList;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
-import ch.santiagovollmar.gol.logic.FunctionalityMatrix;
-import ch.santiagovollmar.gol.logic.GridManager;
-import ch.santiagovollmar.gol.logic.LogicManager;
-import ch.santiagovollmar.gol.logic.Point;
-import ch.santiagovollmar.gol.logic.FunctionalityMatrix.Functionality;
-import ch.santiagovollmar.gol.util.GlobalKeyListener;
-import ch.santiagovollmar.gol.util.GlobalKeyListener.KeyListenerType;
+import java.util.*;
 
 @SuppressWarnings("serial")
 public class GameDisplay extends JPanel {
@@ -47,6 +36,18 @@ public class GameDisplay extends JPanel {
         defaultFetchOperation = o;
     }
 
+    private static LinkedList<Component> displays = new LinkedList<>();
+    public static void repaintAll() {
+        System.out.println(displays.size());
+        for (Component gd : displays) {
+            SwingUtilities.invokeLater(gd::repaint);
+        }
+    }
+
+    public static void addRepaintList(Component component) {
+        displays.add(component);
+    }
+
     /*
      * fields
      */
@@ -56,10 +57,10 @@ public class GameDisplay extends JPanel {
         this.fetchOperation = fetchOperation;
     }
 
-    private Color fillColor = Color.BLUE;
-    private Color lineColor = Color.WHITE;
-    private Color paneColor = Color.GRAY;
-    private Color selectionColor = Color.WHITE;
+    private static Color fillColor = Color.BLUE;
+    private static Color lineColor = Color.WHITE;
+    private static Color paneColor = Color.GRAY;
+    private static Color selectionColor = Color.WHITE;
 
     private final Point viewport;
 
@@ -85,16 +86,12 @@ public class GameDisplay extends JPanel {
     /*
      * getters and setters
      */
-    public Color getFillColor() {
-        synchronized (fillColor) {
-            return fillColor;
-        }
+    public static Color getFillColor() {
+        return fillColor;
     }
 
-    public void setFillColor(Color fillColor) {
-        synchronized (fillColor) {
-            this.fillColor = fillColor;
-        }
+    public static void setFillColor(Color fillColor) {
+        GameDisplay.fillColor = fillColor;
 
         int lineColorAvg = ((fillColor.getGreen() + fillColor.getRed() + fillColor.getBlue()) / 3) + 30;
         lineColorAvg = lineColorAvg > 255 ? 255 : lineColorAvg;
@@ -128,6 +125,8 @@ public class GameDisplay extends JPanel {
      */
     public GameDisplay(String listenerSpace, FunctionalityMatrix fMatrix, int hsize, int vsize, int scaling, Color fillColor) {
         super();
+        displays.add(this);
+
         this.vsize = vsize;
         this.hsize = hsize;
         this.scaling = scaling;
@@ -539,7 +538,8 @@ public class GameDisplay extends JPanel {
                             }
 
                             synchronized (viewport) {
-                                viewport.x += (int) Math.round(((double) (difference_x)) / ((double) parentDisplay.scaling));// parentDisplay.scaling;
+                                viewport.x += (int) Math.round(
+                                        ((double) (difference_x)) / ((double) parentDisplay.scaling));// parentDisplay.scaling;
                             }
                         }
 
@@ -551,7 +551,8 @@ public class GameDisplay extends JPanel {
                             }
 
                             synchronized (viewport) {
-                                viewport.y += (int) Math.round(((double) (difference_y)) / ((double) parentDisplay.scaling));// parentDisplay.scaling;
+                                viewport.y += (int) Math.round(
+                                        ((double) (difference_y)) / ((double) parentDisplay.scaling));// parentDisplay.scaling;
                             }
                         }
                     }
@@ -681,7 +682,8 @@ public class GameDisplay extends JPanel {
             if (fetchOperation != null) {
                 points = fetchOperation.fetch(viewport.x, viewport.y, viewport.x + hsize - 1, viewport.y + vsize - 1);
             } else {
-                points = defaultFetchOperation.fetch(viewport.x, viewport.y, viewport.x + hsize - 1, viewport.y + vsize - 1);
+                points = defaultFetchOperation.fetch(viewport.x, viewport.y, viewport.x + hsize - 1,
+                        viewport.y + vsize - 1);
             }
 
             synchronized (viewport) {

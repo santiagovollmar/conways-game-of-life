@@ -25,6 +25,7 @@ public class SnippetPreview extends JButton {
 
     public SnippetPreview(Snippet snippet) {
         this.snippet = snippet;
+        GameDisplay.addRepaintList(this);
 
         // determine snippet height and width
         min = new Point(Integer.MAX_VALUE, Integer.MAX_VALUE);
