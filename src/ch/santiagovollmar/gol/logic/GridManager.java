@@ -7,6 +7,9 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Manages the main game grid
+ */
 public class GridManager {
     private static final Set<Point> map = Collections.synchronizedSet(new HashSet<Point>(10000, 1f));
     private static final ArrayDeque<Point> fillStash = new ArrayDeque<Point>();
