@@ -1,19 +1,27 @@
 package ch.santiagovollmar.gol;
 
-import ch.santiagovollmar.gol.gui.SnippetPreview;
 import ch.santiagovollmar.gol.gui.Window;
 import ch.santiagovollmar.gol.logic.LogicManager;
-import ch.santiagovollmar.gol.logic.Point;
-import ch.santiagovollmar.gol.logic.Snippet;
 import ch.santiagovollmar.gol.util.GlobalKeyListener;
 import ch.santiagovollmar.gol.util.PropertyManager;
+import com.sun.net.httpserver.HttpContext;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.HashSet;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.concurrent.Executor;
 
 public class Main {
     public static void main(String[] arguments) {
+        long start = System.currentTimeMillis();
         PropertyManager.readProperties();
         Window.open();
 
@@ -25,6 +33,14 @@ public class Main {
 
         SwingUtilities.invokeLater(Window.getCurrentInstance()
                 .getGameDisplay()::grabFocus);
+
+        Logger logger = LogManager.getLogger("main");
+        logger.trace("trace");
+        logger.debug("debug");
+        logger.info("info");
+        logger.warn("warn");
+        logger.error("error");
+        logger.fatal("fatal");
     }
 
     @SuppressWarnings("unused")
