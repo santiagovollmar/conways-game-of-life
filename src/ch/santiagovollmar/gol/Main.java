@@ -17,28 +17,11 @@ public class Main {
         PropertyManager.readProperties();
         Window.open();
 
-        JFrame frame = new JFrame("test");
-        frame.setBounds(new Rectangle(10, 10, 100, 100));
-        frame.setVisible(true);
-        HashSet<Point> scene = new HashSet<>();
-        for (int i = 0; i < 10; i++) {
-            for (int j = i % 2; j < 10; j += 2) {
-                scene.add(new Point(j, i));
-            }
-        }
-
-        GlobalKeyListener.createListenerSpace(frame.toString());
-        frame.getContentPane()
-                .add(new SnippetPreview(new Snippet(scene, "Chess Field",
-                                "This is some random description containing no meaning at all. Just some fill text. No meaning here!! Why are you still reading this? U boosted?")),
-                        BorderLayout.CENTER);
-
         new Thread(Main::run_normal).start();
 
         GlobalKeyListener.apply("main", Window.getCurrentInstance()
                 .getFrame()
                 .getContentPane());
-        GlobalKeyListener.apply(frame.toString(), frame);
 
         SwingUtilities.invokeLater(Window.getCurrentInstance()
                 .getGameDisplay()::grabFocus);
