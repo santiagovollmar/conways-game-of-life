@@ -174,7 +174,7 @@ public class GameDisplay extends JPanel {
         }, KeyEvent.VK_SHIFT);
 
         // update cycle
-        new Thread(this::run_gui_update).start();
+        new Thread(this::run_gui_update, "GameDisplay::refresh@" + this).start();
     }
 
     private void run_gui_update() {

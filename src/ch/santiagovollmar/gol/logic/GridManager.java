@@ -8,18 +8,22 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class GridManager {
-    public static Set<Point> map = Collections.synchronizedSet(new HashSet<Point>(10000, 1f));
-    private static ArrayDeque<Point> fillStash = new ArrayDeque<Point>();
-    private static ArrayDeque<Point> clearStash = new ArrayDeque<Point>();
-    private static ExecutorService executor = Executors.newFixedThreadPool(16);
+    private static final Set<Point> map = Collections.synchronizedSet(new HashSet<Point>(10000, 1f));
+    private static final ArrayDeque<Point> fillStash = new ArrayDeque<Point>();
+    private static final ArrayDeque<Point> clearStash = new ArrayDeque<Point>();
+    private static final ExecutorService executor = Executors.newFixedThreadPool(16);
 
+    /**
+     * Removes all points from the map and clears all buffers
+     */
     public static void clearScene() {
         update(); // clear buffers
         map.clear();
     }
 
     /**
-     * @return
+     * Collects and dumps all Points which are currently on the map. The game will be paused after this operation.
+     * @return An Array of all Points which are currently on the map
      */
     public static Point[] dumpScene() {
         // ensure game is paused
@@ -32,7 +36,8 @@ public class GridManager {
     }
 
     /**
-     * @param data
+     * Clears all Points which are currently on the map and adds the points provided to it. All existing buffers are cleared and game will be paused after the operation
+     * @param data The points to add to the grid
      */
     public static void loadScene(Point[] data) {
         // ensure game is paused
@@ -74,7 +79,7 @@ public class GridManager {
     }
 
     /**
-     * Invokes calculation of each point
+     * Invokes calculation of each point. Effectively moves the game to the next generation
      */
     public static void consume() {
         ArrayList<Callable<Object>> tasks = new ArrayList<Callable<Object>>(map.size());
@@ -98,11 +103,13 @@ public class GridManager {
      */
     public static void update() {
         synchronized (fillStash) {
+            // apply and clear points to be filled
             fill(fillStash, false);
             fillStash.clear();
         }
 
         synchronized (clearStash) {
+            // apply and clear points to be cleared
             clear(clearStash, false);
             clearStash.clear();
         }
@@ -116,13 +123,13 @@ public class GridManager {
      * @param stashed
      */
     public static void fill(Point point, boolean stashed) {
-        if (stashed) {
+        if (stashed) {  // changes should be held back
             synchronized (fillStash) {
                 if (!fillStash.contains(point)) {
                     fillStash.add(point);
                 }
             }
-        } else {
+        } else {    // add points instantly
             map.add(point);
         }
     }
@@ -135,7 +142,7 @@ public class GridManager {
      * @param stashed
      */
     public static void fill(Collection<Point> points, boolean stashed) {
-        if (stashed) {
+        if (stashed) {  // changes should be held back
             synchronized (fillStash) {
                 for (Point point : points) {
                     if (!fillStash.contains(point)) {
@@ -143,7 +150,7 @@ public class GridManager {
                     }
                 }
             }
-        } else {
+        } else {    // remove points instantly
             map.addAll(points);
         }
     }
@@ -156,13 +163,13 @@ public class GridManager {
      * @param stashed
      */
     public static void clear(Point point, boolean stashed) {
-        if (stashed) {
+        if (stashed) {  // changes should be held back
             synchronized (clearStash) {
                 if (!clearStash.contains(point)) {
                     clearStash.add(point);
                 }
             }
-        } else {
+        } else {    // remove points instantly
             map.remove(point);
         }
     }
@@ -175,7 +182,7 @@ public class GridManager {
      * @param stashed
      */
     public static void clear(Collection<Point> points, boolean stashed) {
-        if (stashed) {
+        if (stashed) {  // changes should be held back
             synchronized (clearStash) {
                 for (Point point : points) {
                     if (!clearStash.contains(point)) {
@@ -183,7 +190,7 @@ public class GridManager {
                     }
                 }
             }
-        } else {
+        } else {    // remove points instantly
             map.removeAll(points);
         }
     }
