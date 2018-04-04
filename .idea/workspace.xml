@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0af854a-8ddc-45c8-9d38-ba0b767e0a74" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java" afterPath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java" />
-      <change beforePath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/GridManager.java" afterPath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/GridManager.java" />
+      <change beforePath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/LogicManager.java" afterPath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/LogicManager.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -108,7 +107,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FunctionalityMatrix.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FunctionalityMatrix.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
@@ -121,12 +120,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LogicManager.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LogicManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/LogicManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="15" column="5" lean-forward="false" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-              <folding />
+            <state relative-caret-position="2040">
+              <caret line="124" column="47" lean-forward="true" selection-start-line="124" selection-start-column="47" selection-end-line="124" selection-end-column="47" />
+              <folding>
+                <element signature="e#455#456#0" expanded="true" />
+                <element signature="e#486#487#0" expanded="true" />
+                <element signature="e#1902#1903#0" expanded="true" />
+                <element signature="e#1942#1943#0" expanded="true" />
+                <element signature="e#4035#4036#0" expanded="true" />
+                <element signature="e#4066#4067#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -213,7 +219,6 @@
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetPreview.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/MenuBar.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/Window.java" />
-        <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/LogicManager.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/Point.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/Snippet.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/FileManager.java" />
@@ -225,6 +230,7 @@
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/GridManager.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java" />
+        <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/LogicManager.java" />
       </list>
     </option>
   </component>
@@ -441,12 +447,12 @@
       <updated>1522309829245</updated>
       <workItem from="1522309841061" duration="17258000" />
       <workItem from="1522737164956" duration="10744000" />
-      <workItem from="1522824041649" duration="2306000" />
+      <workItem from="1522824041649" duration="4589000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30308000" />
+    <option name="totallyTimeSpent" value="32591000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1200" extended-state="6" />
@@ -762,14 +768,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/LogicManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="15" column="5" lean-forward="false" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -866,6 +864,21 @@
           <folding>
             <element signature="e#1805#1806#0" expanded="true" />
             <element signature="e#1843#1844#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/LogicManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2040">
+          <caret line="124" column="47" lean-forward="true" selection-start-line="124" selection-start-column="47" selection-end-line="124" selection-end-column="47" />
+          <folding>
+            <element signature="e#455#456#0" expanded="true" />
+            <element signature="e#486#487#0" expanded="true" />
+            <element signature="e#1902#1903#0" expanded="true" />
+            <element signature="e#1942#1943#0" expanded="true" />
+            <element signature="e#4035#4036#0" expanded="true" />
+            <element signature="e#4066#4067#0" expanded="true" />
           </folding>
         </state>
       </provider>
