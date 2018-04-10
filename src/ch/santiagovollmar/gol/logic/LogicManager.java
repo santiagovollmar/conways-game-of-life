@@ -17,7 +17,7 @@ public class LogicManager {
     /**
      * Returns whether or not the game is currently updating
      *
-     * @return
+     * @return {@code true} if the game is updating and {@code false} if no update is currently taking place
      */
     public static boolean isUpdating() {
         return updating;
@@ -110,7 +110,7 @@ public class LogicManager {
      * Pauses or unpauses the game based on the given argument.
      * This method directly affects {@link LogicManager#renderNext()}
      * and changes the appearance of the GUI by invoking {@link ToolBar#setPaused(boolean)} on the current {@link ToolBar} instance.
-     * @param paused
+     * @param paused The desired state of the game
      */
     public static synchronized void setPaused(boolean paused) {
         isPaused = paused;

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0af854a-8ddc-45c8-9d38-ba0b767e0a74" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/org_apache_logging_log4j_log4j_core_2_11_0.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/conways-game-of-life.iml" afterPath="$PROJECT_DIR$/conways-game-of-life.iml" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_apache_logging_log4j_log4j_core_2_11_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conways-game-of-life.iml" beforeDir="false" afterPath="$PROJECT_DIR$/conways-game-of-life.iml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,90 +20,83 @@
         <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/GridManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
-              <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+              <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#6306#6307#0" expanded="true" />
                 <element signature="e#6348#6349#0" expanded="true" />
-                <marker date="1522826005583" expanded="true" signature="6813:6816" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameDisplay.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GameDisplay.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+            <state relative-caret-position="183">
+              <caret line="409" column="21" lean-forward="true" selection-start-line="409" selection-start-column="21" selection-end-line="409" selection-end-column="21" />
               <folding>
-                <element signature="class#FetchOperation#0;class#GameDisplay#0" expanded="false" />
-                <element signature="e#1035#1094#0" expanded="false" />
-                <element signature="method#repaintAll#0;class#GameDisplay#0" expanded="false" />
-                <element signature="method#setFillColor#0;class#GameDisplay#0" expanded="false" />
-                <element signature="method#setViewport#0;class#GameDisplay#0" expanded="false" />
-                <element signature="e#4935#5013#0" expanded="false" />
-                <element signature="e#5109#5159#0" expanded="false" />
-                <element signature="e#5258#5309#0" expanded="false" />
-                <element signature="e#5407#5458#0" expanded="false" />
-                <element signature="e#5555#5607#0" expanded="false" />
-                <element signature="method#GameDisplay#1;class#GameDisplay#0" expanded="false" />
-                <element signature="method#GameDisplay#2;class#GameDisplay#0" expanded="false" />
-                <element signature="method#GameDisplay#3;class#GameDisplay#0" expanded="false" />
-                <element signature="method#GameDisplay#4;class#GameDisplay#0" expanded="false" />
-                <element signature="method#setupDeleteAction#0;class#GameDisplay#0" expanded="false" />
-                <element signature="e#6948#7767#0" expanded="false" />
-                <element signature="method#setupCopyPasteAction#0;class#GameDisplay#0" expanded="false" />
-                <element signature="e#7943#8861#0" expanded="false" />
-                <element signature="e#8970#11118#0" expanded="false" />
-                <element signature="e#9181#9211#0" expanded="false" />
-                <element signature="e#9802#9833#0" expanded="false" />
-                <element signature="method#setupArrowActions#0;class#GameDisplay#0" expanded="false" />
-                <element signature="e#11255#12329#0" expanded="false" />
-                <element signature="method#setupSelection#0;class#GameDisplay#0" expanded="false" />
-                <element signature="class#12481:13013" expanded="false" />
-                <element signature="method#mouseMoved#0;class#12481:13013" expanded="false" />
-                <element signature="method#mouseDragged#0;class#12481:13013" expanded="false" />
-                <element signature="class#13046:14136" expanded="false" />
-                <element signature="method#mouseReleased#0;class#13046:14136" expanded="false" />
-                <element signature="method#mousePressed#0;class#13046:14136" expanded="false" />
-                <element signature="method#mouseExited#0;class#13046:14136" expanded="false" />
-                <element signature="method#mouseEntered#0;class#13046:14136" expanded="false" />
-                <element signature="method#mouseClicked#0;class#13046:14136" expanded="false" />
-                <element signature="method#setupDraw#0;class#GameDisplay#0" expanded="false" />
-                <element signature="class#14324:15322" expanded="false" />
-                <element signature="method#mouseReleased#0;class#14324:15322" expanded="false" />
-                <element signature="method#mousePressed#0;class#14324:15322" expanded="false" />
-                <element signature="method#mouseExited#0;class#14324:15322" expanded="false" />
-                <element signature="method#mouseEntered#0;class#14324:15322" expanded="false" />
-                <element signature="method#mouseClicked#0;class#14324:15322" expanded="false" />
-                <element signature="class#15361:15955" expanded="false" />
-                <element signature="method#mouseMoved#0;class#15361:15955" expanded="false" />
-                <element signature="method#mouseDragged#0;class#15361:15955" expanded="false" />
-                <element signature="e#16032#16466#0" expanded="false" />
-                <element signature="method#setupDrag#0;class#GameDisplay#0" expanded="false" />
-                <element signature="class#16594:17320" expanded="false" />
-                <element signature="method#mouseReleased#0;class#16594:17320" expanded="false" />
-                <element signature="method#mousePressed#0;class#16594:17320" expanded="false" />
-                <element signature="method#mouseExited#0;class#16594:17320" expanded="false" />
-                <element signature="method#mouseClicked#0;class#16594:17320" expanded="false" />
-                <element signature="class#17359:19190" expanded="false" />
-                <element signature="method#mouseMoved#0;class#17359:19190" expanded="false" />
-                <element signature="method#mouseDragged#0;class#17359:19190" expanded="false" />
-                <element signature="method#setupZoom#0;class#GameDisplay#0" expanded="false" />
-                <element signature="e#19304#19864#0" expanded="false" />
-                <element signature="method#fillCell#0;class#GameDisplay#0" expanded="false" />
-                <element signature="method#clearCell#0;class#GameDisplay#0" expanded="false" />
-                <element signature="method#clearSelection#0;class#GameDisplay#0" expanded="false" />
-                <element signature="method#getSelectionMin#0;class#GameDisplay#0" expanded="false" />
-                <element signature="method#getSelectionMax#0;class#GameDisplay#0" expanded="false" />
-                <element signature="method#ensureSelection#0;class#GameDisplay#0" expanded="false" />
-                <element signature="method#setBounds#0;class#GameDisplay#0" expanded="false" />
-                <element signature="method#drawLines#0;class#GameDisplay#0" expanded="false" />
-                <element signature="method#drawSquares#0;class#GameDisplay#0" expanded="false" />
-                <element signature="e#23514#23657#0" expanded="false" />
-                <element signature="method#drawSelection#0;class#GameDisplay#0" expanded="false" />
-                <element signature="method#paintComponent#0;class#GameDisplay#0" expanded="false" />
+                <element signature="e#760#900#0" />
+                <element signature="e#1035#1094#0" />
+                <element signature="e#1283#1470#0" />
+                <element signature="e#2686#3272#0" />
+                <element signature="e#3368#3469#0" />
+                <element signature="e#4935#5013#0" />
+                <element signature="e#5109#5159#0" />
+                <element signature="e#5258#5309#0" />
+                <element signature="e#5407#5458#0" />
+                <element signature="e#5555#5607#0" />
+                <element signature="e#5984#6167#0" />
+                <element signature="e#6173#6361#0" />
+                <element signature="e#6367#6514#0" />
+                <element signature="e#6520#6673#0" />
+                <element signature="e#6804#7810#0" />
+                <element signature="e#6948#7767#0" />
+                <element signature="e#7816#11141#0" />
+                <element signature="e#7943#8861#0" />
+                <element signature="e#8970#11118#0" />
+                <element signature="e#9181#9211#0" />
+                <element signature="e#9802#9833#0" />
+                <element signature="e#11147#12408#0" />
+                <element signature="e#11255#12329#0" />
+                <element signature="method#mouseMoved#0;class#12481:13013" />
+                <element signature="method#mouseReleased#0;class#13046:14136" />
+                <element signature="method#mouseExited#0;class#13046:14136" />
+                <element signature="method#mouseEntered#0;class#13046:14136" />
+                <element signature="e#14268#16489#0" />
+                <element signature="class#14324:15322" />
+                <element signature="method#mouseReleased#0;class#14324:15322" />
+                <element signature="method#mousePressed#0;class#14324:15322" />
+                <element signature="method#mouseExited#0;class#14324:15322" />
+                <element signature="method#mouseEntered#0;class#14324:15322" />
+                <element signature="method#mouseClicked#0;class#14324:15322" />
+                <element signature="class#15361:15955" />
+                <element signature="method#mouseMoved#0;class#15361:15955" />
+                <element signature="method#mouseDragged#0;class#15361:15955" />
+                <element signature="e#16032#16466#0" />
+                <element signature="e#16495#19198#0" />
+                <element signature="class#16594:17320" />
+                <element signature="method#mouseReleased#0;class#16594:17320" />
+                <element signature="method#mousePressed#0;class#16594:17320" />
+                <element signature="method#mouseExited#0;class#16594:17320" />
+                <element signature="method#mouseClicked#0;class#16594:17320" />
+                <element signature="class#17359:19190" />
+                <element signature="method#mouseMoved#0;class#17359:19190" />
+                <element signature="method#mouseDragged#0;class#17359:19190" />
+                <element signature="e#19204#19872#0" />
+                <element signature="e#19304#19864#0" />
+                <element signature="e#19878#20117#0" />
+                <element signature="e#20123#20329#0" />
+                <element signature="e#20335#20541#0" />
+                <element signature="e#20547#20792#0" />
+                <element signature="e#20798#21043#0" />
+                <element signature="e#21049#21816#0" />
+                <element signature="e#21822#22230#0" />
+                <element signature="e#22236#22851#0" />
+                <element signature="e#22857#23829#0" />
+                <element signature="e#23514#23657#0" />
+                <element signature="e#23835#24821#0" />
+                <element signature="e#24827#25109#0" />
               </folding>
             </state>
           </provider>
@@ -113,7 +106,7 @@
         <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
-              <caret line="12" column="7" lean-forward="false" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
+              <caret line="12" column="7" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
               <folding>
                 <element signature="e#1805#1806#0" expanded="true" />
                 <element signature="e#1843#1844#0" expanded="true" />
@@ -122,19 +115,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LogicManager.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LogicManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/LogicManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="34" column="6" lean-forward="true" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
-              <folding>
-                <element signature="e#455#456#0" expanded="true" />
-                <element signature="e#486#487#0" expanded="true" />
-                <element signature="e#1902#1903#0" expanded="true" />
-                <element signature="e#1942#1943#0" expanded="true" />
-                <element signature="e#4035#4036#0" expanded="true" />
-                <element signature="e#4066#4067#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="68">
+              <caret line="8" column="3" lean-forward="true" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -143,8 +128,7 @@
         <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/Point.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="578">
-              <caret line="39" column="2" lean-forward="false" selection-start-line="39" selection-start-column="2" selection-end-line="39" selection-end-column="2" />
-              <folding />
+              <caret line="39" column="2" selection-start-line="39" selection-start-column="2" selection-end-line="39" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -153,8 +137,7 @@
         <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/Snippet.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
-              <caret line="14" column="24" lean-forward="false" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-              <folding />
+              <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -163,10 +146,7 @@
         <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/FileManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
-              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-              <folding>
-                <marker date="1522823053175" expanded="true" signature="2528:2531" ph="{...}" />
-              </folding>
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
             </state>
           </provider>
         </entry>
@@ -175,8 +155,7 @@
         <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/GlobalKeyListener.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
-              <caret line="24" column="18" lean-forward="false" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-              <folding />
+              <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -185,8 +164,7 @@
         <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/ListenerPair.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
-              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-              <folding />
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
             </state>
           </provider>
         </entry>
@@ -195,23 +173,20 @@
         <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/PropertyManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
-              <caret line="8" column="12" lean-forward="false" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
-              <folding>
-                <marker date="1522823053175" expanded="true" signature="1728:1731" ph="{...}" />
-              </folding>
+              <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>setupselection</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GradleLocalSettings">
-    <option name="externalProjectsViewState">
-      <projects_view />
-    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -229,10 +204,10 @@
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/PropertyManager.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/SVGReader.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/Main.java" />
-        <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/GridManager.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/LogicManager.java" />
+        <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java" />
       </list>
     </option>
   </component>
@@ -245,28 +220,16 @@
   <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="x" value="-9" />
     <option name="y" value="-9" />
-    <option name="width" value="1613" />
+    <option name="width" value="1614" />
     <option name="height" value="876" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
+    <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -307,22 +270,23 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="GameD&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/GameDisplay.java&#10;Window&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/Window.java&#10;Sn&#9;FILE&#9;file://C:/Users/admin/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/SnippetPreview.java&#10;Gam&#9;FILE&#9;file://C:/Users/admin/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/GameDisplay.java&#10;Snippet&#9;PSI&#9;JAVA://ch.santiagovollmar.gol.gui.SnippetPreview&#10;G&#9;FILE&#9;file://C:/Users/admin/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/GameDisplay.java&#10;Game&#9;FILE&#9;file://C:/Users/admin/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/GameDisplay.java&#10;Bar&#9;PSI&#9;JAVA://ch.santiagovollmar.gol.gui.ToolBar&#10;S&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/SnippetPreviewBar.java&#10;W&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/Window.java&#10;M&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/Main.java&#10;Main&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/Main.java&#10;Win&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/Window.java" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="true" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="SearchEverywhereHistoryKey" value="Gam&#9;FILE&#9;file://C:/Users/admin/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/GameDisplay.java&#10;GameD&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/GameDisplay.java&#10;Window&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/Window.java&#10;Sn&#9;FILE&#9;file://C:/Users/admin/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/SnippetPreview.java&#10;Snippet&#9;PSI&#9;JAVA://ch.santiagovollmar.gol.gui.SnippetPreview&#10;G&#9;FILE&#9;file://C:/Users/admin/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/GameDisplay.java&#10;Game&#9;FILE&#9;file://C:/Users/admin/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/GameDisplay.java&#10;Bar&#9;PSI&#9;JAVA://ch.santiagovollmar.gol.gui.ToolBar&#10;S&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/SnippetPreviewBar.java&#10;W&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/Window.java&#10;M&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/Main.java&#10;Main&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/Main.java&#10;Win&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/Window.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="full.screen.before.presentation.mode" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
-    <property name="full.screen.before.presentation.mode" value="true" />
-    <property name="Downloaded.Files.Path.Enabled" value="false" />
-    <property name="Repository.Attach.JavaDocs" value="true" />
-    <property name="Repository.Attach.Sources" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -338,47 +302,25 @@
   </component>
   <component name="RunManager">
     <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HEIGHT" value="0" />
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <option name="WIDTH" value="0" />
-      <option name="HEIGHT" value="0" />
-      <module />
     </configuration>
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" runner="idea">
+      <option name="MAIN_CLASS_NAME" value="ch.santiagovollmar.gol.Main" />
+      <module name="conways-game-of-life" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="ch.santiagovollmar.gol.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="ch.santiagovollmar.gol.Main" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="conways-game-of-life" />
-      <envs />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" />
@@ -388,24 +330,13 @@
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="singleModule" />
       </option>
-      <envs />
       <patterns />
     </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
@@ -418,17 +349,21 @@
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="singleModule" />
       </option>
       <option name="USE_DEFAULT_REPORTERS" value="false" />
       <option name="PROPERTIES_FILE" />
-      <envs />
       <properties />
       <listeners />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
@@ -436,9 +371,6 @@
       <option name="PROGRAM_PARAMETERS" />
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -453,74 +385,77 @@
       <workItem from="1522309841061" duration="17258000" />
       <workItem from="1522737164956" duration="10744000" />
       <workItem from="1522824041649" duration="6178000" />
+      <workItem from="1523341465193" duration="1647000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34180000" />
+    <option name="totallyTimeSpent" value="35827000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1200" extended-state="6" />
+    <frame x="0" y="0" width="1280" height="720" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32949513" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32949513" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Learn" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="combo" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info anchor="right" id="Palette" order="5" />
+      <window_info anchor="bottom" id="TODO" order="10" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32886904" />
+      <window_info anchor="right" id="Palette&#9;" order="1" />
+      <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" weight="0.32949513" />
+      <window_info anchor="right" id="Maven Projects" order="0" />
+      <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.32886904" />
+      <window_info anchor="bottom" id="Version Control" order="2" />
+      <window_info anchor="bottom" id="Terminal" order="3" />
+      <window_info id="Designer" order="1" />
+      <window_info content_ui="combo" id="Project" order="5" weight="0.25" />
+      <window_info anchor="right" id="Database" order="2" />
+      <window_info id="Learn" order="3" />
+      <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="7" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
+      <window_info id="Favorites" order="4" side_tool="true" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="8" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
+      <window_info anchor="right" id="Theme Preview" order="4" />
+      <window_info anchor="right" id="Commander" order="6" weight="0.4" />
+      <window_info id="Image Layers" order="7" />
+      <window_info id="Capture Tool" order="0" />
+      <window_info anchor="bottom" id="Message" order="4" />
+      <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="5" />
     </layout>
     <layout-to-restore>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32949513" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32949513" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32949513" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Learn" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info anchor="right" id="Palette" order="5" />
+      <window_info anchor="bottom" id="Find" order="5" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="8" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="Run" order="6" visible="true" weight="0.32886904" />
+      <window_info anchor="right" id="Ant Build" order="7" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="4" />
+      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.25" />
+      <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Theme Preview" order="4" />
+      <window_info anchor="bottom" id="TODO" order="10" />
+      <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" />
+      <window_info id="Image Layers" order="7" />
+      <window_info id="Designer" order="1" />
+      <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32886904" />
+      <window_info id="Learn" order="3" />
+      <window_info anchor="right" id="Palette&#9;" order="1" />
+      <window_info anchor="bottom" id="Terminal" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" weight="0.32949513" />
+      <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
+      <window_info anchor="bottom" id="Version Control" order="2" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
+      <window_info id="Capture Tool" order="0" />
+      <window_info anchor="right" id="Commander" order="6" weight="0.4" />
+      <window_info anchor="right" id="Database" order="2" />
+      <window_info anchor="right" id="Maven Projects" order="0" />
+      <window_info id="Favorites" order="4" side_tool="true" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -541,7 +476,6 @@
       </breakpoints>
       <option name="time" value="4" />
     </breakpoint-manager>
-    <watches-manager />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -560,13 +494,154 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/GridManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="18" column="5" lean-forward="false" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+        <state relative-caret-position="170">
+          <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#6306#6307#0" expanded="true" />
             <element signature="e#6348#6349#0" expanded="true" />
-            <marker date="1522826005583" expanded="true" signature="6813:6816" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+          <folding>
+            <element signature="e#760#900#0" />
+            <element signature="e#1035#1094#0" />
+            <element signature="e#1283#1470#0" />
+            <element signature="e#2686#3272#0" />
+            <element signature="e#3368#3469#0" />
+            <element signature="e#4935#5013#0" />
+            <element signature="e#5109#5159#0" />
+            <element signature="e#5258#5309#0" />
+            <element signature="e#5407#5458#0" />
+            <element signature="e#5555#5607#0" />
+            <element signature="e#5984#6167#0" />
+            <element signature="e#6173#6361#0" />
+            <element signature="e#6367#6514#0" />
+            <element signature="e#6520#6673#0" />
+            <element signature="e#6804#7810#0" />
+            <element signature="e#6948#7767#0" />
+            <element signature="e#7816#11141#0" />
+            <element signature="e#7943#8861#0" />
+            <element signature="e#8970#11118#0" />
+            <element signature="e#9181#9211#0" />
+            <element signature="e#9802#9833#0" />
+            <element signature="e#11147#12408#0" />
+            <element signature="e#11255#12329#0" />
+            <element signature="method#mouseMoved#0;class#12481:13013" />
+            <element signature="method#mouseReleased#0;class#13046:14136" />
+            <element signature="method#mouseExited#0;class#13046:14136" />
+            <element signature="method#mouseEntered#0;class#13046:14136" />
+            <element signature="e#14268#16489#0" />
+            <element signature="class#14324:15322" />
+            <element signature="method#mouseReleased#0;class#14324:15322" />
+            <element signature="method#mousePressed#0;class#14324:15322" />
+            <element signature="method#mouseExited#0;class#14324:15322" />
+            <element signature="method#mouseEntered#0;class#14324:15322" />
+            <element signature="method#mouseClicked#0;class#14324:15322" />
+            <element signature="class#15361:15955" />
+            <element signature="method#mouseMoved#0;class#15361:15955" />
+            <element signature="method#mouseDragged#0;class#15361:15955" />
+            <element signature="e#16032#16466#0" />
+            <element signature="e#16495#19198#0" />
+            <element signature="class#16594:17320" />
+            <element signature="method#mouseReleased#0;class#16594:17320" />
+            <element signature="method#mousePressed#0;class#16594:17320" />
+            <element signature="method#mouseExited#0;class#16594:17320" />
+            <element signature="method#mouseClicked#0;class#16594:17320" />
+            <element signature="class#17359:19190" />
+            <element signature="method#mouseMoved#0;class#17359:19190" />
+            <element signature="method#mouseDragged#0;class#17359:19190" />
+            <element signature="e#19204#19872#0" />
+            <element signature="e#19304#19864#0" />
+            <element signature="e#19878#20117#0" />
+            <element signature="e#20123#20329#0" />
+            <element signature="e#20335#20541#0" />
+            <element signature="e#20547#20792#0" />
+            <element signature="e#20798#21043#0" />
+            <element signature="e#21049#21816#0" />
+            <element signature="e#21822#22230#0" />
+            <element signature="e#22236#22851#0" />
+            <element signature="e#22857#23829#0" />
+            <element signature="e#23514#23657#0" />
+            <element signature="e#23835#24821#0" />
+            <element signature="e#24827#25109#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="12" column="7" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
+          <folding>
+            <element signature="e#1805#1806#0" expanded="true" />
+            <element signature="e#1843#1844#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/Point.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="39" column="2" selection-start-line="39" selection-start-column="2" selection-end-line="39" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/Snippet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/FileManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/GlobalKeyListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/ListenerPair.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/PropertyManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/LogicManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="34" column="6" lean-forward="true" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/GridManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6306#6307#0" expanded="true" />
+            <element signature="e#6348#6349#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -574,8 +649,7 @@
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/LogicManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
-          <caret line="24" column="20" lean-forward="false" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
-          <folding />
+          <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -583,15 +657,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="17" column="2" lean-forward="true" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/Snippet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="14" column="24" lean-forward="false" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-          <folding />
+          <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -599,62 +671,50 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="24" column="4" lean-forward="true" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
-          <folding>
-            <marker date="1522823053175" expanded="true" signature="2528:2531" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/GlobalKeyListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
-          <caret line="25" column="18" lean-forward="false" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
-          <folding />
+          <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/ListenerPair.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/PropertyManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="12" column="12" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
-          <folding>
-            <marker date="1522823053175" expanded="true" signature="1728:1731" ph="{...}" />
-          </folding>
+          <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/SVGReader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
-          <caret line="19" column="11" lean-forward="false" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
-          <folding>
-            <marker date="1522823053175" expanded="true" signature="1686:1689" ph="{...}" />
-          </folding>
+          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="27" column="9" lean-forward="false" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-          <folding />
+          <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetPreviewBar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1122">
-          <caret line="66" column="16" lean-forward="false" selection-start-line="66" selection-start-column="16" selection-end-line="66" selection-end-column="16" />
+          <caret line="66" column="16" selection-start-line="66" selection-start-column="16" selection-end-line="66" selection-end-column="16" />
           <folding>
-            <element signature="imports" expanded="false" />
+            <element signature="imports" />
           </folding>
         </state>
       </provider>
@@ -662,7 +722,7 @@
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/MenuBar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
         </state>
       </provider>
     </entry>
@@ -671,7 +731,7 @@
         <state relative-caret-position="257">
           <caret line="40" column="34" lean-forward="true" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
           <folding>
-            <element signature="imports" expanded="false" />
+            <element signature="imports" />
           </folding>
         </state>
       </provider>
@@ -679,9 +739,9 @@
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetPreviewBar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
-          <caret line="16" column="20" lean-forward="false" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
           <folding>
-            <element signature="imports" expanded="false" />
+            <element signature="imports" />
           </folding>
         </state>
       </provider>
@@ -689,26 +749,23 @@
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/ToolBar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="251">
-          <caret line="90" column="0" lean-forward="false" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
+          <caret line="90" selection-start-line="90" selection-end-line="90" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/SVGReader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="782">
-          <caret line="50" column="11" lean-forward="false" selection-start-line="50" selection-start-column="11" selection-end-line="50" selection-end-column="11" />
-          <folding>
-            <marker date="1522823053175" expanded="true" signature="1686:1689" ph="{...}" />
-          </folding>
+          <caret line="50" column="11" selection-start-line="50" selection-start-column="11" selection-end-line="50" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/Window.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1138">
-          <caret line="117" column="42" lean-forward="false" selection-start-line="117" selection-start-column="42" selection-end-line="117" selection-end-column="42" />
+          <caret line="117" column="42" selection-start-line="117" selection-start-column="42" selection-end-line="117" selection-end-column="42" />
           <folding>
-            <element signature="method#Window#0;class#Window#0" expanded="false" />
+            <element signature="method#Window#0;class#Window#0" />
           </folding>
         </state>
       </provider>
@@ -716,156 +773,56 @@
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="23" column="35" lean-forward="false" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
-          <folding />
+          <caret line="23" column="35" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/PropertyManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="8" column="12" lean-forward="false" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
-          <folding>
-            <marker date="1522823053175" expanded="true" signature="1728:1731" ph="{...}" />
-          </folding>
+          <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/ListenerPair.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/GlobalKeyListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
-          <caret line="24" column="18" lean-forward="false" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-          <folding />
+          <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/FileManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <marker date="1522823053175" expanded="true" signature="2528:2531" ph="{...}" />
-          </folding>
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/Snippet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="14" column="24" lean-forward="false" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-          <folding />
+          <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/Point.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
-          <caret line="39" column="2" lean-forward="false" selection-start-line="39" selection-start-column="2" selection-end-line="39" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding>
-            <element signature="class#FetchOperation#0;class#GameDisplay#0" expanded="false" />
-            <element signature="e#1035#1094#0" expanded="false" />
-            <element signature="method#repaintAll#0;class#GameDisplay#0" expanded="false" />
-            <element signature="method#setFillColor#0;class#GameDisplay#0" expanded="false" />
-            <element signature="method#setViewport#0;class#GameDisplay#0" expanded="false" />
-            <element signature="e#4935#5013#0" expanded="false" />
-            <element signature="e#5109#5159#0" expanded="false" />
-            <element signature="e#5258#5309#0" expanded="false" />
-            <element signature="e#5407#5458#0" expanded="false" />
-            <element signature="e#5555#5607#0" expanded="false" />
-            <element signature="method#GameDisplay#1;class#GameDisplay#0" expanded="false" />
-            <element signature="method#GameDisplay#2;class#GameDisplay#0" expanded="false" />
-            <element signature="method#GameDisplay#3;class#GameDisplay#0" expanded="false" />
-            <element signature="method#GameDisplay#4;class#GameDisplay#0" expanded="false" />
-            <element signature="method#setupDeleteAction#0;class#GameDisplay#0" expanded="false" />
-            <element signature="e#6948#7767#0" expanded="false" />
-            <element signature="method#setupCopyPasteAction#0;class#GameDisplay#0" expanded="false" />
-            <element signature="e#7943#8861#0" expanded="false" />
-            <element signature="e#8970#11118#0" expanded="false" />
-            <element signature="e#9181#9211#0" expanded="false" />
-            <element signature="e#9802#9833#0" expanded="false" />
-            <element signature="method#setupArrowActions#0;class#GameDisplay#0" expanded="false" />
-            <element signature="e#11255#12329#0" expanded="false" />
-            <element signature="method#setupSelection#0;class#GameDisplay#0" expanded="false" />
-            <element signature="class#12481:13013" expanded="false" />
-            <element signature="method#mouseMoved#0;class#12481:13013" expanded="false" />
-            <element signature="method#mouseDragged#0;class#12481:13013" expanded="false" />
-            <element signature="class#13046:14136" expanded="false" />
-            <element signature="method#mouseReleased#0;class#13046:14136" expanded="false" />
-            <element signature="method#mousePressed#0;class#13046:14136" expanded="false" />
-            <element signature="method#mouseExited#0;class#13046:14136" expanded="false" />
-            <element signature="method#mouseEntered#0;class#13046:14136" expanded="false" />
-            <element signature="method#mouseClicked#0;class#13046:14136" expanded="false" />
-            <element signature="method#setupDraw#0;class#GameDisplay#0" expanded="false" />
-            <element signature="class#14324:15322" expanded="false" />
-            <element signature="method#mouseReleased#0;class#14324:15322" expanded="false" />
-            <element signature="method#mousePressed#0;class#14324:15322" expanded="false" />
-            <element signature="method#mouseExited#0;class#14324:15322" expanded="false" />
-            <element signature="method#mouseEntered#0;class#14324:15322" expanded="false" />
-            <element signature="method#mouseClicked#0;class#14324:15322" expanded="false" />
-            <element signature="class#15361:15955" expanded="false" />
-            <element signature="method#mouseMoved#0;class#15361:15955" expanded="false" />
-            <element signature="method#mouseDragged#0;class#15361:15955" expanded="false" />
-            <element signature="e#16032#16466#0" expanded="false" />
-            <element signature="method#setupDrag#0;class#GameDisplay#0" expanded="false" />
-            <element signature="class#16594:17320" expanded="false" />
-            <element signature="method#mouseReleased#0;class#16594:17320" expanded="false" />
-            <element signature="method#mousePressed#0;class#16594:17320" expanded="false" />
-            <element signature="method#mouseExited#0;class#16594:17320" expanded="false" />
-            <element signature="method#mouseClicked#0;class#16594:17320" expanded="false" />
-            <element signature="class#17359:19190" expanded="false" />
-            <element signature="method#mouseMoved#0;class#17359:19190" expanded="false" />
-            <element signature="method#mouseDragged#0;class#17359:19190" expanded="false" />
-            <element signature="method#setupZoom#0;class#GameDisplay#0" expanded="false" />
-            <element signature="e#19304#19864#0" expanded="false" />
-            <element signature="method#fillCell#0;class#GameDisplay#0" expanded="false" />
-            <element signature="method#clearCell#0;class#GameDisplay#0" expanded="false" />
-            <element signature="method#clearSelection#0;class#GameDisplay#0" expanded="false" />
-            <element signature="method#getSelectionMin#0;class#GameDisplay#0" expanded="false" />
-            <element signature="method#getSelectionMax#0;class#GameDisplay#0" expanded="false" />
-            <element signature="method#ensureSelection#0;class#GameDisplay#0" expanded="false" />
-            <element signature="method#setBounds#0;class#GameDisplay#0" expanded="false" />
-            <element signature="method#drawLines#0;class#GameDisplay#0" expanded="false" />
-            <element signature="method#drawSquares#0;class#GameDisplay#0" expanded="false" />
-            <element signature="e#23514#23657#0" expanded="false" />
-            <element signature="method#drawSelection#0;class#GameDisplay#0" expanded="false" />
-            <element signature="method#paintComponent#0;class#GameDisplay#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/GridManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#6306#6307#0" expanded="true" />
-            <element signature="e#6348#6349#0" expanded="true" />
-            <marker date="1522826005583" expanded="true" signature="6813:6816" ph="{...}" />
-          </folding>
+          <caret line="39" column="2" selection-start-line="39" selection-start-column="2" selection-end-line="39" selection-end-column="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
-          <caret line="12" column="7" lean-forward="false" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
+          <caret line="12" column="7" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
           <folding>
             <element signature="e#1805#1806#0" expanded="true" />
             <element signature="e#1843#1844#0" expanded="true" />
@@ -873,17 +830,91 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/GridManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6306#6307#0" expanded="true" />
+            <element signature="e#6348#6349#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/LogicManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="6" lean-forward="true" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
+        <state relative-caret-position="68">
+          <caret line="8" column="3" lean-forward="true" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="409" column="21" lean-forward="true" selection-start-line="409" selection-start-column="21" selection-end-line="409" selection-end-column="21" />
           <folding>
-            <element signature="e#455#456#0" expanded="true" />
-            <element signature="e#486#487#0" expanded="true" />
-            <element signature="e#1902#1903#0" expanded="true" />
-            <element signature="e#1942#1943#0" expanded="true" />
-            <element signature="e#4035#4036#0" expanded="true" />
-            <element signature="e#4066#4067#0" expanded="true" />
+            <element signature="e#760#900#0" />
+            <element signature="e#1035#1094#0" />
+            <element signature="e#1283#1470#0" />
+            <element signature="e#2686#3272#0" />
+            <element signature="e#3368#3469#0" />
+            <element signature="e#4935#5013#0" />
+            <element signature="e#5109#5159#0" />
+            <element signature="e#5258#5309#0" />
+            <element signature="e#5407#5458#0" />
+            <element signature="e#5555#5607#0" />
+            <element signature="e#5984#6167#0" />
+            <element signature="e#6173#6361#0" />
+            <element signature="e#6367#6514#0" />
+            <element signature="e#6520#6673#0" />
+            <element signature="e#6804#7810#0" />
+            <element signature="e#6948#7767#0" />
+            <element signature="e#7816#11141#0" />
+            <element signature="e#7943#8861#0" />
+            <element signature="e#8970#11118#0" />
+            <element signature="e#9181#9211#0" />
+            <element signature="e#9802#9833#0" />
+            <element signature="e#11147#12408#0" />
+            <element signature="e#11255#12329#0" />
+            <element signature="method#mouseMoved#0;class#12481:13013" />
+            <element signature="method#mouseReleased#0;class#13046:14136" />
+            <element signature="method#mouseExited#0;class#13046:14136" />
+            <element signature="method#mouseEntered#0;class#13046:14136" />
+            <element signature="e#14268#16489#0" />
+            <element signature="class#14324:15322" />
+            <element signature="method#mouseReleased#0;class#14324:15322" />
+            <element signature="method#mousePressed#0;class#14324:15322" />
+            <element signature="method#mouseExited#0;class#14324:15322" />
+            <element signature="method#mouseEntered#0;class#14324:15322" />
+            <element signature="method#mouseClicked#0;class#14324:15322" />
+            <element signature="class#15361:15955" />
+            <element signature="method#mouseMoved#0;class#15361:15955" />
+            <element signature="method#mouseDragged#0;class#15361:15955" />
+            <element signature="e#16032#16466#0" />
+            <element signature="e#16495#19198#0" />
+            <element signature="class#16594:17320" />
+            <element signature="method#mouseReleased#0;class#16594:17320" />
+            <element signature="method#mousePressed#0;class#16594:17320" />
+            <element signature="method#mouseExited#0;class#16594:17320" />
+            <element signature="method#mouseClicked#0;class#16594:17320" />
+            <element signature="class#17359:19190" />
+            <element signature="method#mouseMoved#0;class#17359:19190" />
+            <element signature="method#mouseDragged#0;class#17359:19190" />
+            <element signature="e#19204#19872#0" />
+            <element signature="e#19304#19864#0" />
+            <element signature="e#19878#20117#0" />
+            <element signature="e#20123#20329#0" />
+            <element signature="e#20335#20541#0" />
+            <element signature="e#20547#20792#0" />
+            <element signature="e#20798#21043#0" />
+            <element signature="e#21049#21816#0" />
+            <element signature="e#21822#22230#0" />
+            <element signature="e#22236#22851#0" />
+            <element signature="e#22857#23829#0" />
+            <element signature="e#23514#23657#0" />
+            <element signature="e#23835#24821#0" />
+            <element signature="e#24827#25109#0" />
           </folding>
         </state>
       </provider>

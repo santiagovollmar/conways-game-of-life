@@ -402,7 +402,16 @@ public class GameDisplay extends JPanel {
             }
 
             @Override
-            public void mouseClicked(MouseEvent arg0) {
+            public void mouseClicked(MouseEvent e) {
+                if (shiftIsPressed) {
+                    clearSelection();
+                    selectionStart.x = (e.getX() / scaling) + viewport.x;
+                    selectionStart.y = (e.getY() / scaling) + viewport.y;
+                    selectionEnd.x = selectionStart.x + 1;
+                    selectionEnd.y = selectionStart.y + 1;
+                } else {
+                    selectionCreation = false;
+                }
             }
         });
 
