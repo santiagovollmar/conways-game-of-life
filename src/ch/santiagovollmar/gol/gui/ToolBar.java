@@ -48,7 +48,7 @@ public class ToolBar extends JToolBar {
         add(slider);
 
         slider.addChangeListener(e -> {
-            LogicManager.setPercentageSleepTime(slider.getValue());
+            LogicManager.setPercentageSleepTime(100 - slider.getValue());
         });
     }
 

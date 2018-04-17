@@ -18,7 +18,6 @@ import java.util.*;
 
 @SuppressWarnings("serial")
 public class GameDisplay extends JPanel {
-    // TODO: implement color synchronization
 
     /*
      * static

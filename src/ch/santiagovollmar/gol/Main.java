@@ -33,14 +33,6 @@ public class Main {
 
         SwingUtilities.invokeLater(Window.getCurrentInstance()
                 .getGameDisplay()::grabFocus);
-
-        Logger logger = LogManager.getLogger("main");
-        logger.trace("trace");
-        logger.debug("debug");
-        logger.info("info");
-        logger.warn("warn");
-        logger.error("error");
-        logger.fatal("fatal");
     }
 
     @SuppressWarnings("unused")
