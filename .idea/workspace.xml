@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d679f6da-71e2-42c3-94b9-0367c02c7cf3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetCreationDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetCreationDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/GlobalKeyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/GlobalKeyListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java" afterDir="false" />
     </list>
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,11 +25,95 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameDisplay.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GameDisplay.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="58" column="54" lean-forward="true" selection-start-line="58" selection-start-column="54" selection-end-line="58" selection-end-column="54" />
+            <state relative-caret-position="688">
+              <caret line="153" column="29" lean-forward="true" selection-start-line="153" selection-start-column="29" selection-end-line="153" selection-end-column="29" />
+              <folding>
+                <element signature="e#598#738#0" />
+                <element signature="e#873#932#0" />
+                <element signature="e#1121#1263#0" />
+                <element signature="e#2479#3065#0" />
+                <element signature="e#3161#3262#0" />
+                <element signature="e#4902#4952#0" />
+                <element signature="e#5051#5102#0" />
+                <element signature="e#5200#5251#0" />
+                <element signature="e#5348#5400#0" />
+                <element signature="e#5540#5771#0" />
+                <element signature="e#5777#5960#0" />
+                <element signature="e#5966#6154#0" />
+                <element signature="e#6160#6307#0" />
+                <element signature="e#6313#6466#0" />
+                <element signature="e#6542#6543#0" expanded="true" />
+                <element signature="e#6590#6591#0" expanded="true" />
+                <element signature="e#6597#6992#0" />
+                <element signature="e#6744#6969#0" />
+                <element signature="e#6998#7968#0" />
+                <element signature="e#7106#7925#0" />
+                <element signature="e#7974#11208#0" />
+                <element signature="e#8101#9019#0" />
+                <element signature="e#9128#11185#0" />
+                <element signature="e#9339#9369#0" />
+                <element signature="e#9869#9900#0" />
+                <element signature="e#11214#12475#0" />
+                <element signature="e#12481#14758#0" />
+                <element signature="class#12548:13080" />
+                <element signature="method#mouseMoved#0;class#12548:13080" />
+                <element signature="method#mouseDragged#0;class#12548:13080" />
+                <element signature="class#13113:14632" />
+                <element signature="method#mouseReleased#0;class#13113:14632" />
+                <element signature="method#mousePressed#0;class#13113:14632" />
+                <element signature="method#mouseExited#0;class#13113:14632" />
+                <element signature="method#mouseEntered#0;class#13113:14632" />
+                <element signature="method#mouseClicked#0;class#13113:14632" />
+                <element signature="e#14764#16985#0" />
+                <element signature="class#14820:15818" />
+                <element signature="method#mouseReleased#0;class#14820:15818" />
+                <element signature="method#mousePressed#0;class#14820:15818" />
+                <element signature="method#mouseExited#0;class#14820:15818" />
+                <element signature="method#mouseEntered#0;class#14820:15818" />
+                <element signature="method#mouseClicked#0;class#14820:15818" />
+                <element signature="class#15857:16451" />
+                <element signature="method#mouseMoved#0;class#15857:16451" />
+                <element signature="method#mouseDragged#0;class#15857:16451" />
+                <element signature="e#16528#16962#0" />
+                <element signature="e#16991#19694#0" />
+                <element signature="class#17090:17816" />
+                <element signature="method#mouseReleased#0;class#17090:17816" />
+                <element signature="method#mousePressed#0;class#17090:17816" />
+                <element signature="method#mouseExited#0;class#17090:17816" />
+                <element signature="method#mouseClicked#0;class#17090:17816" />
+                <element signature="class#17855:19686" />
+                <element signature="method#mouseMoved#0;class#17855:19686" />
+                <element signature="method#mouseDragged#0;class#17855:19686" />
+                <element signature="e#19700#20368#0" />
+                <element signature="e#19800#20360#0" />
+                <element signature="e#20374#20613#0" />
+                <element signature="e#20619#20825#0" />
+                <element signature="e#20831#21037#0" />
+                <element signature="e#21043#21288#0" />
+                <element signature="e#21294#21539#0" />
+                <element signature="e#21545#22312#0" />
+                <element signature="e#22318#22726#0" />
+                <element signature="e#22732#23347#0" />
+                <element signature="e#23353#24325#0" />
+                <element signature="e#24010#24153#0" />
+                <element signature="e#24331#25317#0" />
+                <element signature="e#25323#26901#0" />
+                <element signature="e#25475#25505#0" />
+                <element signature="e#25925#25956#0" />
+                <element signature="e#26907#27229#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FunctionalityMatrix.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="595">
+              <caret line="36" column="86" selection-start-line="36" selection-start-column="86" selection-end-line="36" selection-end-column="86" />
             </state>
           </provider>
         </entry>
@@ -104,20 +188,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GlobalKeyListener.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GlobalKeyListener.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/GlobalKeyListener.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
               <caret line="15" column="56" selection-start-line="15" selection-start-column="56" selection-end-line="15" selection-end-column="56" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/FileManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
             </state>
           </provider>
         </entry>
@@ -148,9 +223,10 @@
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/PropertyManager.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/SnippetManager.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/Snippet.java" />
-        <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetCreationDialog.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/GlobalKeyListener.java" />
+        <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java" />
+        <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java" />
       </list>
     </option>
   </component>
@@ -253,7 +329,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="GameD&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/GameDisplay.java&#10;Global&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/util/GlobalKeyListener.java&#10;Prope&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/util/PropertyManager.java" />
+    <property name="SearchEverywhereHistoryKey" value="Gam&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/GameDisplay.java&#10;Fun&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java&#10;Function&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java&#10;Funci&#9;PSI&#9;JAVA://com.sun.org.apache.xpath.internal.functions.FuncId&#10;GameD&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/GameDisplay.java&#10;Global&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/util/GlobalKeyListener.java&#10;Prope&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/util/PropertyManager.java" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -360,7 +436,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15156000" />
+    <option name="totallyTimeSpent" value="16437000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
@@ -376,11 +452,11 @@
       <window_info anchor="right" id="Maven Projects" order="0" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="2" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.33141762" />
+      <window_info anchor="bottom" id="Run" order="6" weight="0.33141762" />
       <window_info anchor="bottom" id="Terminal" order="3" />
       <window_info id="Capture Tool" order="0" />
       <window_info id="Designer" order="1" />
-      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.2553305" />
+      <window_info content_ui="combo" id="Project" order="5" weight="0.2553305" />
       <window_info anchor="right" id="Database" order="2" />
       <window_info id="Learn" order="3" />
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
@@ -421,31 +497,31 @@
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Palette" order="5" />
-      <window_info anchor="bottom" id="Version Control" order="2" />
+      <window_info anchor="bottom" id="Message" order="4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="8" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="right" id="Database" order="2" />
-      <window_info anchor="bottom" id="Run" order="6" visible="true" weight="0.32886904" />
-      <window_info anchor="right" id="Theme Preview" order="4" />
-      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.25" />
-      <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Commander" order="6" weight="0.4" />
+      <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.32886904" />
       <window_info anchor="right" id="Ant Build" order="7" weight="0.25" />
-      <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="5" weight="0.25" />
+      <window_info id="Learn" order="3" />
+      <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info anchor="bottom" id="TODO" order="10" />
+      <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" />
       <window_info id="Image Layers" order="7" />
       <window_info id="Designer" order="1" />
       <window_info id="UI Designer" order="2" />
-      <window_info anchor="bottom" id="Find" order="5" />
-      <window_info id="Learn" order="3" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
+      <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Database" order="2" />
       <window_info anchor="right" id="Palette&#9;" order="1" />
       <window_info anchor="bottom" id="Terminal" order="3" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" weight="0.32949513" />
-      <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="5" />
+      <window_info anchor="bottom" id="Version Control" order="2" />
       <window_info id="Capture Tool" order="0" />
-      <window_info anchor="bottom" id="Message" order="4" />
+      <window_info anchor="right" id="Commander" order="6" weight="0.4" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32886904" />
       <window_info anchor="right" id="Maven Projects" order="0" />
       <window_info id="Favorites" order="4" side_tool="true" />
@@ -456,20 +532,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="3" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/GridManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
-          <folding>
-            <marker date="1522826005583" expanded="true" signature="6813:6816" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/configuration/log4j2.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -515,6 +581,81 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="746" column="12" selection-start-line="746" selection-start-column="12" selection-end-line="746" selection-end-column="12" />
+          <folding>
+            <element signature="e#598#738#0" />
+            <element signature="e#873#932#0" />
+            <element signature="e#1121#1263#0" />
+            <element signature="e#2479#3065#0" />
+            <element signature="e#3161#3262#0" />
+            <element signature="e#4902#4952#0" />
+            <element signature="e#5051#5102#0" />
+            <element signature="e#5200#5251#0" />
+            <element signature="e#5348#5400#0" />
+            <element signature="e#5540#5771#0" />
+            <element signature="e#5777#5960#0" />
+            <element signature="e#5966#6154#0" />
+            <element signature="e#6160#6307#0" />
+            <element signature="e#6313#6466#0" />
+            <element signature="e#6542#6543#0" expanded="true" />
+            <element signature="e#6590#6591#0" expanded="true" />
+            <element signature="e#6597#6992#0" />
+            <element signature="e#6744#6969#0" />
+            <element signature="e#6998#7968#0" />
+            <element signature="e#7106#7925#0" />
+            <element signature="e#7974#11208#0" />
+            <element signature="e#8101#9019#0" />
+            <element signature="e#9128#11185#0" />
+            <element signature="e#9339#9369#0" />
+            <element signature="e#9869#9900#0" />
+            <element signature="e#11214#12475#0" />
+            <element signature="e#12481#14758#0" />
+            <element signature="class#12548:13080" />
+            <element signature="method#mouseMoved#0;class#12548:13080" />
+            <element signature="method#mouseDragged#0;class#12548:13080" />
+            <element signature="class#13113:14632" />
+            <element signature="method#mouseReleased#0;class#13113:14632" />
+            <element signature="method#mousePressed#0;class#13113:14632" />
+            <element signature="method#mouseExited#0;class#13113:14632" />
+            <element signature="method#mouseEntered#0;class#13113:14632" />
+            <element signature="method#mouseClicked#0;class#13113:14632" />
+            <element signature="e#14764#16985#0" />
+            <element signature="class#14820:15818" />
+            <element signature="method#mouseReleased#0;class#14820:15818" />
+            <element signature="method#mousePressed#0;class#14820:15818" />
+            <element signature="method#mouseExited#0;class#14820:15818" />
+            <element signature="method#mouseEntered#0;class#14820:15818" />
+            <element signature="method#mouseClicked#0;class#14820:15818" />
+            <element signature="class#15857:16451" />
+            <element signature="method#mouseMoved#0;class#15857:16451" />
+            <element signature="method#mouseDragged#0;class#15857:16451" />
+            <element signature="e#16528#16962#0" />
+            <element signature="e#16991#19694#0" />
+            <element signature="class#17090:17816" />
+            <element signature="method#mouseReleased#0;class#17090:17816" />
+            <element signature="method#mousePressed#0;class#17090:17816" />
+            <element signature="method#mouseExited#0;class#17090:17816" />
+            <element signature="method#mouseClicked#0;class#17090:17816" />
+            <element signature="class#17855:19686" />
+            <element signature="method#mouseMoved#0;class#17855:19686" />
+            <element signature="method#mouseDragged#0;class#17855:19686" />
+            <element signature="e#19700#20368#0" />
+            <element signature="e#19800#20360#0" />
+            <element signature="e#20374#20613#0" />
+            <element signature="e#20619#20825#0" />
+            <element signature="e#20831#21037#0" />
+            <element signature="e#21043#21288#0" />
+            <element signature="e#21294#21539#0" />
+            <element signature="e#21545#22312#0" />
+            <element signature="e#22318#22726#0" />
+            <element signature="e#22732#23347#0" />
+            <element signature="e#23353#24325#0" />
+            <element signature="e#24010#24153#0" />
+            <element signature="e#24331#25317#0" />
+            <element signature="e#25323#26901#0" />
+            <element signature="e#25475#25505#0" />
+            <element signature="e#25925#25956#0" />
+            <element signature="e#26907#27229#0" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -532,6 +673,81 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="33" selection-start-line="33" selection-end-line="33" />
+          <folding>
+            <element signature="e#598#738#0" />
+            <element signature="e#873#932#0" />
+            <element signature="e#1121#1263#0" />
+            <element signature="e#2479#3065#0" />
+            <element signature="e#3161#3262#0" />
+            <element signature="e#4902#4952#0" />
+            <element signature="e#5051#5102#0" />
+            <element signature="e#5200#5251#0" />
+            <element signature="e#5348#5400#0" />
+            <element signature="e#5540#5771#0" />
+            <element signature="e#5777#5960#0" />
+            <element signature="e#5966#6154#0" />
+            <element signature="e#6160#6307#0" />
+            <element signature="e#6313#6466#0" />
+            <element signature="e#6542#6543#0" expanded="true" />
+            <element signature="e#6590#6591#0" expanded="true" />
+            <element signature="e#6597#6992#0" />
+            <element signature="e#6744#6969#0" />
+            <element signature="e#6998#7968#0" />
+            <element signature="e#7106#7925#0" />
+            <element signature="e#7974#11208#0" />
+            <element signature="e#8101#9019#0" />
+            <element signature="e#9128#11185#0" />
+            <element signature="e#9339#9369#0" />
+            <element signature="e#9869#9900#0" />
+            <element signature="e#11214#12475#0" />
+            <element signature="e#12481#14758#0" />
+            <element signature="class#12548:13080" />
+            <element signature="method#mouseMoved#0;class#12548:13080" />
+            <element signature="method#mouseDragged#0;class#12548:13080" />
+            <element signature="class#13113:14632" />
+            <element signature="method#mouseReleased#0;class#13113:14632" />
+            <element signature="method#mousePressed#0;class#13113:14632" />
+            <element signature="method#mouseExited#0;class#13113:14632" />
+            <element signature="method#mouseEntered#0;class#13113:14632" />
+            <element signature="method#mouseClicked#0;class#13113:14632" />
+            <element signature="e#14764#16985#0" />
+            <element signature="class#14820:15818" />
+            <element signature="method#mouseReleased#0;class#14820:15818" />
+            <element signature="method#mousePressed#0;class#14820:15818" />
+            <element signature="method#mouseExited#0;class#14820:15818" />
+            <element signature="method#mouseEntered#0;class#14820:15818" />
+            <element signature="method#mouseClicked#0;class#14820:15818" />
+            <element signature="class#15857:16451" />
+            <element signature="method#mouseMoved#0;class#15857:16451" />
+            <element signature="method#mouseDragged#0;class#15857:16451" />
+            <element signature="e#16528#16962#0" />
+            <element signature="e#16991#19694#0" />
+            <element signature="class#17090:17816" />
+            <element signature="method#mouseReleased#0;class#17090:17816" />
+            <element signature="method#mousePressed#0;class#17090:17816" />
+            <element signature="method#mouseExited#0;class#17090:17816" />
+            <element signature="method#mouseClicked#0;class#17090:17816" />
+            <element signature="class#17855:19686" />
+            <element signature="method#mouseMoved#0;class#17855:19686" />
+            <element signature="method#mouseDragged#0;class#17855:19686" />
+            <element signature="e#19700#20368#0" />
+            <element signature="e#19800#20360#0" />
+            <element signature="e#20374#20613#0" />
+            <element signature="e#20619#20825#0" />
+            <element signature="e#20831#21037#0" />
+            <element signature="e#21043#21288#0" />
+            <element signature="e#21294#21539#0" />
+            <element signature="e#21545#22312#0" />
+            <element signature="e#22318#22726#0" />
+            <element signature="e#22732#23347#0" />
+            <element signature="e#23353#24325#0" />
+            <element signature="e#24010#24153#0" />
+            <element signature="e#24331#25317#0" />
+            <element signature="e#25323#26901#0" />
+            <element signature="e#25475#25505#0" />
+            <element signature="e#25925#25956#0" />
+            <element signature="e#26907#27229#0" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -732,13 +948,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="12" column="7" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -841,13 +1050,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="58" column="54" lean-forward="true" selection-start-line="58" selection-start-column="54" selection-end-line="58" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetCreationDialog.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="358">
@@ -862,6 +1064,102 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="15" column="56" selection-start-line="15" selection-start-column="56" selection-end-line="15" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.xml/com/sun/org/apache/xpath/internal/functions/FuncId.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="36" column="86" selection-start-line="36" selection-start-column="86" selection-end-line="36" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="688">
+          <caret line="153" column="29" lean-forward="true" selection-start-line="153" selection-start-column="29" selection-end-line="153" selection-end-column="29" />
+          <folding>
+            <element signature="e#598#738#0" />
+            <element signature="e#873#932#0" />
+            <element signature="e#1121#1263#0" />
+            <element signature="e#2479#3065#0" />
+            <element signature="e#3161#3262#0" />
+            <element signature="e#4902#4952#0" />
+            <element signature="e#5051#5102#0" />
+            <element signature="e#5200#5251#0" />
+            <element signature="e#5348#5400#0" />
+            <element signature="e#5540#5771#0" />
+            <element signature="e#5777#5960#0" />
+            <element signature="e#5966#6154#0" />
+            <element signature="e#6160#6307#0" />
+            <element signature="e#6313#6466#0" />
+            <element signature="e#6542#6543#0" expanded="true" />
+            <element signature="e#6590#6591#0" expanded="true" />
+            <element signature="e#6597#6992#0" />
+            <element signature="e#6744#6969#0" />
+            <element signature="e#6998#7968#0" />
+            <element signature="e#7106#7925#0" />
+            <element signature="e#7974#11208#0" />
+            <element signature="e#8101#9019#0" />
+            <element signature="e#9128#11185#0" />
+            <element signature="e#9339#9369#0" />
+            <element signature="e#9869#9900#0" />
+            <element signature="e#11214#12475#0" />
+            <element signature="e#12481#14758#0" />
+            <element signature="class#12548:13080" />
+            <element signature="method#mouseMoved#0;class#12548:13080" />
+            <element signature="method#mouseDragged#0;class#12548:13080" />
+            <element signature="class#13113:14632" />
+            <element signature="method#mouseReleased#0;class#13113:14632" />
+            <element signature="method#mousePressed#0;class#13113:14632" />
+            <element signature="method#mouseExited#0;class#13113:14632" />
+            <element signature="method#mouseEntered#0;class#13113:14632" />
+            <element signature="method#mouseClicked#0;class#13113:14632" />
+            <element signature="e#14764#16985#0" />
+            <element signature="class#14820:15818" />
+            <element signature="method#mouseReleased#0;class#14820:15818" />
+            <element signature="method#mousePressed#0;class#14820:15818" />
+            <element signature="method#mouseExited#0;class#14820:15818" />
+            <element signature="method#mouseEntered#0;class#14820:15818" />
+            <element signature="method#mouseClicked#0;class#14820:15818" />
+            <element signature="class#15857:16451" />
+            <element signature="method#mouseMoved#0;class#15857:16451" />
+            <element signature="method#mouseDragged#0;class#15857:16451" />
+            <element signature="e#16528#16962#0" />
+            <element signature="e#16991#19694#0" />
+            <element signature="class#17090:17816" />
+            <element signature="method#mouseReleased#0;class#17090:17816" />
+            <element signature="method#mousePressed#0;class#17090:17816" />
+            <element signature="method#mouseExited#0;class#17090:17816" />
+            <element signature="method#mouseClicked#0;class#17090:17816" />
+            <element signature="class#17855:19686" />
+            <element signature="method#mouseMoved#0;class#17855:19686" />
+            <element signature="method#mouseDragged#0;class#17855:19686" />
+            <element signature="e#19700#20368#0" />
+            <element signature="e#19800#20360#0" />
+            <element signature="e#20374#20613#0" />
+            <element signature="e#20619#20825#0" />
+            <element signature="e#20831#21037#0" />
+            <element signature="e#21043#21288#0" />
+            <element signature="e#21294#21539#0" />
+            <element signature="e#21545#22312#0" />
+            <element signature="e#22318#22726#0" />
+            <element signature="e#22732#23347#0" />
+            <element signature="e#23353#24325#0" />
+            <element signature="e#24010#24153#0" />
+            <element signature="e#24331#25317#0" />
+            <element signature="e#25323#26901#0" />
+            <element signature="e#25475#25505#0" />
+            <element signature="e#25925#25956#0" />
+            <element signature="e#26907#27229#0" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -34,6 +34,7 @@ public class GameDisplay extends JPanel {
     }
 
     private static LinkedList<Component> displays = new LinkedList<>();
+
     public static void repaintAll() {
         for (Component gd : displays) {
             SwingUtilities.invokeLater(gd::repaint);
@@ -140,19 +141,21 @@ public class GameDisplay extends JPanel {
         requestFocus();
 
         // functionality
-        fMatrix.execute(Functionality.DRAW, this::setupDraw);
+        fMatrix.execute(Functionality.DRAW, () -> {
+            setupDraw();
+            setupDeleteAction();
+        });
         fMatrix.execute(Functionality.DRAG, this::setupDrag);
         fMatrix.execute(Functionality.ZOOM, this::setupZoom);
         fMatrix.execute(Functionality.SELECTION, this::setupSelection);
-        fMatrix.execute(Functionality.DELETE_ACTION, this::setupDeleteAction);
         fMatrix.execute(Functionality.COPY_PASTE_ACTION, this::setupCopyPasteAction);
-        fMatrix.execute(Functionality.ARROW_ACTIONS, this::setupArrowActions);
-        setupSnippetCreation();//TODO integrato into fmatrix
-
-        // add global key listeners
-        GlobalKeyListener.attach(listenerSpace, KeyListenerType.PRESSED, e -> {
+        fMatrix.execute(Functionality.SNIPPET_CREATION, this::setupSnippetCreation);
+        fMatrix.execute(Functionality.PAUSE_ACTION, () -> GlobalKeyListener.attach(listenerSpace, KeyListenerType.PRESSED, e -> {
             LogicManager.setPaused(!LogicManager.isPaused());
-        }, KeyEvent.VK_SPACE);
+        }, KeyEvent.VK_SPACE));
+
+        // add general key listeners
+        setupArrowActions(fMatrix);
 
         GlobalKeyListener.attach(listenerSpace, KeyListenerType.PRESSED, e -> {
             ctrlIsPressed = true;
@@ -209,17 +212,11 @@ public class GameDisplay extends JPanel {
      */
     private void setupSnippetCreation() {
         GlobalKeyListener.attach(listenerSpace, KeyListenerType.PRESSED, e -> {
-            System.out.println("VK_S");
             if (ctrlIsPressed) {
-                System.out.println("pressed");
-                System.out.println(
-                        "LogicManager.isPaused(): " + (LogicManager.isPaused()) +
-                                "selectionStart.x != -1: " + (selectionStart.x != -1) +
-                                "selectionEnd.x != -1: " + (selectionEnd.x != -1) +
-                                "!selectionCreation: " + (!selectionCreation)
-                );
                 if (LogicManager.isPaused() && selectionStart.x != -1 && selectionEnd.x != -1 && !selectionCreation) {
-                    new SnippetCreationDialog(copyBuffer, copyBufferStart, s -> {});
+                    new SnippetCreationDialog(copyBuffer, copyBufferStart, s -> {
+                    });
+                    // TODO continue here with snippet creation
                 }
             }
         }, KeyEvent.VK_S);
@@ -323,7 +320,10 @@ public class GameDisplay extends JPanel {
         }, KeyEvent.VK_V);
     }
 
-    private void setupArrowActions() {
+    private void setupArrowActions(FunctionalityMatrix fMatrix) {
+        boolean dragIsEnabled = fMatrix.isEnabled(Functionality.DRAG);
+        boolean selectionIsEnabled = fMatrix.isEnabled(Functionality.SELECTION);
+
         GlobalKeyListener.attach(listenerSpace, KeyListenerType.PRESSED, e -> {
             Point direction = new Point(0, 0);
             switch (e.getKeyCode()) {
@@ -344,10 +344,10 @@ public class GameDisplay extends JPanel {
                     break;
             }
 
-            if (ctrlIsPressed) {
+            if (ctrlIsPressed && dragIsEnabled) {
                 viewport.x += direction.x;
                 viewport.y += direction.y;
-            } else if (shiftIsPressed) {
+            } else if (shiftIsPressed && selectionIsEnabled) {
                 ensureSelection();
                 selectionEnd.x += direction.x;
                 selectionEnd.y += direction.y;
@@ -773,7 +773,7 @@ public class GameDisplay extends JPanel {
             }
 
             // overwrite selected area
-            graphics.setColor(new Color(0,225, 130, 200));
+            graphics.setColor(new Color(0, 225, 130, 200));
 
             for (int x = min.x; x < max.x; x++) {
                 for (int y = min.y; y < max.y; y++) {
