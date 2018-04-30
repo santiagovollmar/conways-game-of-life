@@ -118,6 +118,11 @@ public class GameDisplay extends JPanel {
         this.scaling = scaling;
     }
 
+    public void setClipboard(Collection<Point> data) {
+        copyBuffer = new HashSet<>(data);
+        copyBufferStart = new Point(0, 0);
+    }
+
     /*
      * Constructors
      */

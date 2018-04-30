@@ -7,6 +7,7 @@ import ch.santiagovollmar.gol.util.PropertyManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -16,6 +17,8 @@ public class SnippetPreview extends JButton {
 
     private final Point min;
     private final Point max;
+
+    private volatile short uiResponseAlpha;
 
     private int snippetHeight;
     private int snippetWidth;
@@ -57,6 +60,11 @@ public class SnippetPreview extends JButton {
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                if (uiResponseAlpha < 1) {
+                    // TODO add ui response
+                    uiResponseAlpha = 255;
+                    Window.getCurrentInstance().getGameDisplay().setClipboard(snippet.getScene());
+                }
             }
 
             @Override
@@ -148,6 +156,18 @@ public class SnippetPreview extends JButton {
         if (showDescription) {
             paintDescription(graphics, yOffset, graphics.getFont().deriveFont(10f), background, foreground);
         }
+
+        // paint ui response
+        if (uiResponseAlpha > 0) {
+            paintUiResponse(graphics, Color.GREEN);
+            uiResponseAlpha--;
+            SwingUtilities.invokeLater(this::repaint);
+        }
+    }
+
+    private void paintUiResponse(Graphics graphics, Color color) {
+        graphics.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), uiResponseAlpha));
+        graphics.fillRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
     }
 
     private int paintName(Graphics graphics, Font font, Color background, Color foreground) {
