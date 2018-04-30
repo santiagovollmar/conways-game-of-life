@@ -23,7 +23,7 @@ public class SnippetPreview extends JButton {
 
     private boolean showDescription;
 
-    public SnippetPreview(Snippet snippet) {
+    public SnippetPreview(Snippet snippet) { //TODO center snippet and don't allow scaling smaller than 1 or 2
         this.snippet = snippet;
 
         // determine snippet height and width

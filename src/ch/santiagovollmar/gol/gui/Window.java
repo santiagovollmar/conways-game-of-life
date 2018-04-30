@@ -23,16 +23,18 @@ public class Window {
 
     private JFrame frame;
 
-    public JFrame getFrame() {
-        return frame;
-    }
-
     private GameDisplay gd;
 
     private SnippetPreviewBar spb;
 
     public GameDisplay getGameDisplay() {
         return gd;
+    }
+    public JFrame getFrame() {
+        return frame;
+    }
+    public SnippetPreviewBar getSnippetPreviewBar() {
+        return spb;
     }
 
     /**
@@ -96,7 +98,8 @@ public class Window {
         frame.add(new MenuBar(), BorderLayout.NORTH);
         frame.add(gd, BorderLayout.CENTER);
         frame.add(new ToolBar(), BorderLayout.SOUTH);
-        frame.add(spb = new SnippetPreviewBar(), BorderLayout.EAST);
+        spb = new SnippetPreviewBar();
+        frame.add(spb, BorderLayout.EAST);
 
         HashSet<Point> scene = new HashSet<>();
         for (int i = 0; i < 10; i++) {

@@ -10,6 +10,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.Window;
 import java.util.AbstractCollection;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.function.Consumer;
 
@@ -18,6 +19,7 @@ public class SnippetCreationDialog extends JDialog {
     private Consumer<Snippet> callback;
     private String listenerSpace = "SnippetCreationDialog:" + Math.random();
     private Rectangle bounds;
+    private GameDisplay gd;
 
     public SnippetCreationDialog(AbstractCollection<Point> buffer, Point offset, Consumer<Snippet> callback) {
         super(ch.santiagovollmar.gol.gui.Window.getCurrentInstance().getFrame());
@@ -63,12 +65,21 @@ public class SnippetCreationDialog extends JDialog {
         add(title);
 
         // preview
-        GameDisplay gd = new GameDisplay(listenerSpace, new FunctionalityMatrix(
+        gd = new GameDisplay(listenerSpace, new FunctionalityMatrix(
                 FunctionalityMatrix.Functionality.DRAG,
-                FunctionalityMatrix.Functionality.ZOOM
+                FunctionalityMatrix.Functionality.ZOOM,
+                FunctionalityMatrix.Functionality.DYNAMIC_CONTENT
         ), 100, 100, 5, GameDisplay.getFillColor());
+        gd.setFetchoperation(new GameDisplay.FetchOperation() {
+            @Override
+            public Collection<Point> fetch(int x1, int y1, int x2, int y2) {
+                return snippet.getScene();
+            }
+        });
+        gd.setViewport(new Point(0, 0));
         add(gd);
-        // TODO maybe enable drawing
+        //TODO maybe enable drawing
+        //TODO center preview
 
         // name input
         JLabel lblName = new JLabel("Name:");
@@ -136,6 +147,32 @@ public class SnippetCreationDialog extends JDialog {
     }
 
     private void finalize(boolean cancelled, String name, String description) {
+        if (cancelled) { // user has cancelled the event
+            callback.accept(null); // return null as an indicator
+            destroy();
+            return;
+        }
 
+        // check inputs
+        name = name.trim();
+        description = description.trim().replaceAll("\\s+", " ");
+
+        if (name.isEmpty()) { // abort if no name was given
+            SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(this, "Please provide a name", "Error", JOptionPane.ERROR_MESSAGE));
+            return;
+        }
+
+        // update snippet and return it
+        snippet.setName(name);
+        snippet.setDescription(description);
+        callback.accept(snippet);
+        destroy();
+    }
+
+    private void destroy() {
+        setVisible(false);
+        GlobalKeyListener.freeListenerSpace(listenerSpace);
+        gd.killThread();
+        dispose();
     }
 }

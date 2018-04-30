@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class SnippetManager {
-    private static ArrayList<Snippet> snippets;
+    private static ArrayList<Snippet> snippets = new ArrayList<>();
 
     public static void load() throws IOException {
         ObjectInputStream in = null;

@@ -49,6 +49,7 @@ public class GameDisplay extends JPanel {
      * fields
      */
     private FetchOperation fetchOperation;
+    private Thread updateThread;
 
     public void setFetchoperation(FetchOperation fetchOperation) {
         this.fetchOperation = fetchOperation;
@@ -120,7 +121,7 @@ public class GameDisplay extends JPanel {
     /*
      * Constructors
      */
-    public GameDisplay(String listenerSpace, FunctionalityMatrix fMatrix, int hsize, int vsize, int scaling, Color fillColor) {
+    public GameDisplay(String listenerSpace, FunctionalityMatrix fMatrix, int hsize, int vsize, int scaling, Color fillColor) { // TODO enable overriding of draw location
         super();
         displays.add(this);
 
@@ -174,7 +175,7 @@ public class GameDisplay extends JPanel {
         }, KeyEvent.VK_SHIFT);
 
         // update cycle
-        fMatrix.execute(Functionality.DYNAMIC_CONTENT, () -> new Thread(this::run_gui_update, "GameDisplay::refresh@" + this).start());
+        fMatrix.execute(Functionality.DYNAMIC_CONTENT, () -> (this.updateThread = new Thread(this::run_gui_update, "GameDisplay::refresh@" + this)).start());
     }
 
     private void run_gui_update() {
@@ -184,6 +185,11 @@ public class GameDisplay extends JPanel {
                 Thread.sleep(15);
             } catch (Exception e) {
             }
+        }
+    }
+    public void killThread() {
+        if (updateThread != null) {
+            updateThread.interrupt();
         }
     }
 
@@ -212,11 +218,17 @@ public class GameDisplay extends JPanel {
      */
     private void setupSnippetCreation() {
         GlobalKeyListener.attach(listenerSpace, KeyListenerType.PRESSED, e -> {
-            if (ctrlIsPressed) {
-                if (LogicManager.isPaused() && selectionStart.x != -1 && selectionEnd.x != -1 && !selectionCreation) {
-                    new SnippetCreationDialog(copyBuffer, copyBufferStart, s -> {
-                    });
-                    // TODO continue here with snippet creation
+            if (ctrlIsPressed) { // ctrl is pressed
+                if (LogicManager.isPaused() && selectionStart.x != -1 && selectionEnd.x != -1 && !selectionCreation) { // selection is active
+                    if (copyBuffer != null) { // clipboard is not empty
+                        // show snippet dialog to user
+                        new SnippetCreationDialog(copyBuffer, copyBufferStart, snippet -> {
+                            if (snippet != null) {
+                                SnippetManager.add(snippet);
+                                Window.getCurrentInstance().getSnippetPreviewBar().setContent(SnippetManager.get(), 1d);
+                            }
+                        });
+                    }
                 }
             }
         }, KeyEvent.VK_S);
