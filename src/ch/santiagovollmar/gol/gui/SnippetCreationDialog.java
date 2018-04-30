@@ -36,13 +36,15 @@ public class SnippetCreationDialog extends JDialog {
 
         // create new Listenerspace
         GlobalKeyListener.createListenerSpace(listenerSpace);
-        GlobalKeyListener.apply(listenerSpace, this);
 
         // setup gui
         bounds = new Rectangle(100, 100, 1000, 800);
         setBounds(bounds);
         initializeGui();
         setVisible(true);
+
+        // apply key listener
+        GlobalKeyListener.apply(listenerSpace, this.getContentPane());
     }
 
     private void initializeGui() {
