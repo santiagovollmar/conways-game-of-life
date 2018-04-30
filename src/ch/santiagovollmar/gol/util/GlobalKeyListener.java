@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.function.Consumer;
@@ -23,7 +24,9 @@ public class GlobalKeyListener implements KeyListener {
         }
 
         // apply KeyListener from KeyListenerSpace to component
-        SwingUtilities.invokeLater(() -> parent.addKeyListener(KEY_LISTENERS.get(listenerSpace)));
+        GlobalKeyListener listener = KEY_LISTENERS.get(listenerSpace);
+        listener.children.add(parent);
+        SwingUtilities.invokeLater(() -> parent.addKeyListener(listener));
     }
 
     public static void attach(String listenerSpace, KeyListenerType type, Consumer<KeyEvent> action, int... codes) {
@@ -35,11 +38,28 @@ public class GlobalKeyListener implements KeyListener {
         KEY_LISTENERS.put(listenerSpace, new GlobalKeyListener());
     }
 
+    public static void freeListenerSpace(String listenerSpace) {
+        // get listener
+        GlobalKeyListener listener = KEY_LISTENERS.get(listenerSpace);
+        if (listener == null) {
+            return;
+        }
+
+        // remove listener from children
+        for (Component child : listener.children) {
+            SwingUtilities.invokeLater(() -> child.removeKeyListener(listener));
+        }
+
+        // remove listener from listenerspaces
+        KEY_LISTENERS.remove(listenerSpace);
+    }
+
     public enum KeyListenerType {
         PRESSED, RELEASED, TYPED;
     }
 
     private HashMap<KeyListenerType, LinkedList<ListenerPair>> eventHandlers;
+    private ArrayList<Component> children = new ArrayList<>();
 
     public GlobalKeyListener() {
         this.eventHandlers = new HashMap<>();

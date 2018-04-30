@@ -67,7 +67,7 @@ public class SnippetPreviewBar extends JPanel {
                         (int) (snippetPreviewWrapper.getPreferredSize().width * ratio), SpringLayout.NORTH, preview);
 
                 prev = preview;
-                totalHeight += ((int) (snippetPreviewWrapper.getPreferredSize().width * ratio)) + 5;
+                totalHeight += ((int) (snippetPreviewWrapper.getPreferredSize().width * ratio)) + 5; //TODO ask each snippet for it's own preferred height
             }
 
             snippetPreviewWrapper.setPreferredSize(

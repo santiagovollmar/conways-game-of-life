@@ -15,6 +15,10 @@ public class Snippet {
         this.description = description.trim();
     }
 
+    public Snippet(Set<Point> scene) {
+        this.scene = scene;
+    }
+
     public Snippet(String name, String description) {
         this(null, name, description);
     }

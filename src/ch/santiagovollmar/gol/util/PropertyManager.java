@@ -17,12 +17,15 @@ public class PropertyManager {
         try {
             defaultProperties.load(PropertyManager.class.getResourceAsStream("../configuration/default.properties"));
 
+            String home;
             if (System.getProperty("os.name")
                     .toLowerCase()
                     .contains("windows")) {
                 file = new File(System.getenv("APPDATA") + "\\jcgol\\config.properties");
+                home = System.getenv("APPDATA") + "\\jcgol\\";
             } else {
                 file = new File("/etc/jcgol/config.properties");
+                home = "/etc/jcgol/";
             }
 
             if (file.exists()) {
@@ -34,6 +37,8 @@ public class PropertyManager {
                         .replace("config.properties", "")).mkdirs();
                 file.createNewFile();
             }
+
+            defaultProperties.setProperty("jcgol.home", home);
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(-1);

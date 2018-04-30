@@ -1,9 +1,7 @@
 package ch.santiagovollmar.gol.gui;
 
-import ch.santiagovollmar.gol.logic.FunctionalityMatrix;
+import ch.santiagovollmar.gol.logic.*;
 import ch.santiagovollmar.gol.logic.FunctionalityMatrix.Functionality;
-import ch.santiagovollmar.gol.logic.GridManager;
-import ch.santiagovollmar.gol.logic.LogicManager;
 import ch.santiagovollmar.gol.logic.Point;
 import ch.santiagovollmar.gol.util.GlobalKeyListener;
 import ch.santiagovollmar.gol.util.GlobalKeyListener.KeyListenerType;
@@ -149,6 +147,7 @@ public class GameDisplay extends JPanel {
         fMatrix.execute(Functionality.DELETE_ACTION, this::setupDeleteAction);
         fMatrix.execute(Functionality.COPY_PASTE_ACTION, this::setupCopyPasteAction);
         fMatrix.execute(Functionality.ARROW_ACTIONS, this::setupArrowActions);
+        setupSnippetCreation();//TODO integrato into fmatrix
 
         // add global key listeners
         GlobalKeyListener.attach(listenerSpace, KeyListenerType.PRESSED, e -> {
@@ -190,7 +189,7 @@ public class GameDisplay extends JPanel {
     }
 
     public GameDisplay(String listenerSpace, FunctionalityMatrix fMatrix, int hsize, int vsize, int scaling) {
-        this(listenerSpace, fMatrix, hsize, vsize, scaling, Color.MAGENTA);
+        this(listenerSpace, fMatrix, hsize, vsize, scaling, getFillColor());
     }
 
     public GameDisplay(String listenerSpace, FunctionalityMatrix fMatrix, int scaling) {
@@ -208,6 +207,24 @@ public class GameDisplay extends JPanel {
     /*
      * Functionality
      */
+    private void setupSnippetCreation() {
+        GlobalKeyListener.attach(listenerSpace, KeyListenerType.PRESSED, e -> {
+            System.out.println("VK_S");
+            if (ctrlIsPressed) {
+                System.out.println("pressed");
+                System.out.println(
+                        "LogicManager.isPaused(): " + (LogicManager.isPaused()) +
+                                "selectionStart.x != -1: " + (selectionStart.x != -1) +
+                                "selectionEnd.x != -1: " + (selectionEnd.x != -1) +
+                                "!selectionCreation: " + (!selectionCreation)
+                );
+                if (LogicManager.isPaused() && selectionStart.x != -1 && selectionEnd.x != -1 && !selectionCreation) {
+                    new SnippetCreationDialog(copyBuffer, copyBufferStart, s -> {});
+                }
+            }
+        }, KeyEvent.VK_S);
+    }
+
     private void setupDeleteAction() {
         GlobalKeyListener.attach(listenerSpace, KeyListenerType.PRESSED, e -> {
             if (LogicManager.isPaused() && !ctrlIsPressed) { // check if game is paused
