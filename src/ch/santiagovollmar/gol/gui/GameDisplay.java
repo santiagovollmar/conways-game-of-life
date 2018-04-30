@@ -38,7 +38,6 @@ public class GameDisplay extends JPanel {
 
     private static LinkedList<Component> displays = new LinkedList<>();
     public static void repaintAll() {
-        System.out.println(displays.size());
         for (Component gd : displays) {
             SwingUtilities.invokeLater(gd::repaint);
         }
@@ -271,9 +270,6 @@ public class GameDisplay extends JPanel {
                     Point offset = new Point(-1, -1);
                     offset.x = copyBufferStart.x - min.x;
                     offset.y = copyBufferStart.y - min.y;
-
-                    System.out.println(max);
-                    System.out.println(min);
 
                     if ((max.x - min.x) <= 1 && (max.y - min.y) <= 1) { // only a "one field selection"
                         // get maximum point
@@ -733,6 +729,48 @@ public class GameDisplay extends JPanel {
                 selectionHeight * scaling);
     }
 
+    protected final void drawClipboardPreview(Graphics graphics) {
+        if (copyBufferStart != null && selectionStart.x != -1 && selectionEnd.x != -1) { // check if clipboard contains
+            // data and there is a
+            // selection
+            // get selection
+            Point min = getSelectionMin();
+            Point max = getSelectionMax();
+
+            // calculate offset
+            Point offset = new Point(-1, -1);
+            offset.x = copyBufferStart.x - min.x;
+            offset.y = copyBufferStart.y - min.y;
+
+            if ((max.x - min.x) <= 1 && (max.y - min.y) <= 1) { // only a "one field selection"
+                // get maximum point
+                Point bufferMax = new Point(-1, -1);
+                for (Point p : copyBuffer) {
+                    bufferMax.x = p.x > bufferMax.x ? p.x : bufferMax.x;
+                    bufferMax.y = p.y > bufferMax.y ? p.y : bufferMax.y;
+                }
+
+                max = bufferMax;
+
+                max.x -= offset.x - 1;
+                max.y -= offset.y - 1;
+            }
+
+            // overwrite selected area
+            graphics.setColor(new Color(0,225, 130, 200));
+
+            for (int x = min.x; x < max.x; x++) {
+                for (int y = min.y; y < max.y; y++) {
+                    Point point = new Point(x + offset.x, y + offset.y);
+
+                    if (copyBuffer.contains(point)) {
+                        graphics.fillRect((x - viewport.x) * scaling, (y - viewport.y) * scaling, scaling, scaling);
+                    }
+                }
+            }
+        }
+    }
+
     @Override
     protected void paintComponent(Graphics graphics) {
         graphics.setColor(paneColor);
@@ -740,5 +778,6 @@ public class GameDisplay extends JPanel {
         drawSquares(graphics);
         drawLines(graphics, lineColor, 1);
         drawSelection(graphics);
+        drawClipboardPreview(graphics);
     }
 }
