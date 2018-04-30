@@ -174,7 +174,7 @@ public class GameDisplay extends JPanel {
         }, KeyEvent.VK_SHIFT);
 
         // update cycle
-        new Thread(this::run_gui_update, "GameDisplay::refresh@" + this).start();
+        fMatrix.execute(Functionality.DYNAMIC_CONTENT, () -> new Thread(this::run_gui_update, "GameDisplay::refresh@" + this).start());
     }
 
     private void run_gui_update() {
@@ -351,7 +351,7 @@ public class GameDisplay extends JPanel {
                 ensureSelection();
                 selectionEnd.x += direction.x;
                 selectionEnd.y += direction.y;
-            } else {
+            } else if (selectionIsEnabled) {
                 ensureSelection();
                 selectionStart.x += direction.x;
                 selectionStart.y += direction.y;

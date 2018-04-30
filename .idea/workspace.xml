@@ -25,17 +25,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameDisplay.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GameDisplay.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="688">
-              <caret line="153" column="29" lean-forward="true" selection-start-line="153" selection-start-column="29" selection-end-line="153" selection-end-column="29" />
+            <state relative-caret-position="511">
+              <caret line="176" column="53" selection-start-line="176" selection-start-column="53" selection-end-line="176" selection-end-column="53" />
               <folding>
                 <element signature="e#598#738#0" />
                 <element signature="e#873#932#0" />
                 <element signature="e#1121#1263#0" />
                 <element signature="e#2479#3065#0" />
                 <element signature="e#3161#3262#0" />
+                <element signature="e#4160#4201#0" />
+                <element signature="e#4725#4803#0" />
                 <element signature="e#4902#4952#0" />
                 <element signature="e#5051#5102#0" />
                 <element signature="e#5200#5251#0" />
@@ -45,10 +47,9 @@
                 <element signature="e#5966#6154#0" />
                 <element signature="e#6160#6307#0" />
                 <element signature="e#6313#6466#0" />
-                <element signature="e#6542#6543#0" expanded="true" />
-                <element signature="e#6590#6591#0" expanded="true" />
                 <element signature="e#6597#6992#0" />
                 <element signature="e#6744#6969#0" />
+                <element signature="e#7110#7138#0" />
                 <element signature="e#6998#7968#0" />
                 <element signature="e#7106#7925#0" />
                 <element signature="e#7974#11208#0" />
@@ -57,6 +58,7 @@
                 <element signature="e#9339#9369#0" />
                 <element signature="e#9869#9900#0" />
                 <element signature="e#11214#12475#0" />
+                <element signature="e#11322#12396#0" />
                 <element signature="e#12481#14758#0" />
                 <element signature="class#12548:13080" />
                 <element signature="method#mouseMoved#0;class#12548:13080" />
@@ -109,11 +111,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FunctionalityMatrix.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FunctionalityMatrix.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="36" column="86" selection-start-line="36" selection-start-column="86" selection-end-line="36" selection-end-column="86" />
+            <state relative-caret-position="239">
+              <caret line="36" column="99" selection-start-line="36" selection-start-column="99" selection-end-line="36" selection-end-column="99" />
             </state>
           </provider>
         </entry>
@@ -225,8 +227,8 @@
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/Snippet.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetCreationDialog.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/GlobalKeyListener.java" />
-        <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java" />
+        <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java" />
       </list>
     </option>
   </component>
@@ -436,7 +438,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16437000" />
+    <option name="totallyTimeSpent" value="17223000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
@@ -452,7 +454,7 @@
       <window_info anchor="right" id="Maven Projects" order="0" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="2" />
-      <window_info anchor="bottom" id="Run" order="6" weight="0.33141762" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.33141762" />
       <window_info anchor="bottom" id="Terminal" order="3" />
       <window_info id="Capture Tool" order="0" />
       <window_info id="Designer" order="1" />
@@ -587,6 +589,8 @@
             <element signature="e#1121#1263#0" />
             <element signature="e#2479#3065#0" />
             <element signature="e#3161#3262#0" />
+            <element signature="e#4160#4201#0" />
+            <element signature="e#4725#4803#0" />
             <element signature="e#4902#4952#0" />
             <element signature="e#5051#5102#0" />
             <element signature="e#5200#5251#0" />
@@ -596,10 +600,9 @@
             <element signature="e#5966#6154#0" />
             <element signature="e#6160#6307#0" />
             <element signature="e#6313#6466#0" />
-            <element signature="e#6542#6543#0" expanded="true" />
-            <element signature="e#6590#6591#0" expanded="true" />
             <element signature="e#6597#6992#0" />
             <element signature="e#6744#6969#0" />
+            <element signature="e#7110#7138#0" />
             <element signature="e#6998#7968#0" />
             <element signature="e#7106#7925#0" />
             <element signature="e#7974#11208#0" />
@@ -608,6 +611,7 @@
             <element signature="e#9339#9369#0" />
             <element signature="e#9869#9900#0" />
             <element signature="e#11214#12475#0" />
+            <element signature="e#11322#12396#0" />
             <element signature="e#12481#14758#0" />
             <element signature="class#12548:13080" />
             <element signature="method#mouseMoved#0;class#12548:13080" />
@@ -679,6 +683,8 @@
             <element signature="e#1121#1263#0" />
             <element signature="e#2479#3065#0" />
             <element signature="e#3161#3262#0" />
+            <element signature="e#4160#4201#0" />
+            <element signature="e#4725#4803#0" />
             <element signature="e#4902#4952#0" />
             <element signature="e#5051#5102#0" />
             <element signature="e#5200#5251#0" />
@@ -688,10 +694,9 @@
             <element signature="e#5966#6154#0" />
             <element signature="e#6160#6307#0" />
             <element signature="e#6313#6466#0" />
-            <element signature="e#6542#6543#0" expanded="true" />
-            <element signature="e#6590#6591#0" expanded="true" />
             <element signature="e#6597#6992#0" />
             <element signature="e#6744#6969#0" />
+            <element signature="e#7110#7138#0" />
             <element signature="e#6998#7968#0" />
             <element signature="e#7106#7925#0" />
             <element signature="e#7974#11208#0" />
@@ -700,6 +705,7 @@
             <element signature="e#9339#9369#0" />
             <element signature="e#9869#9900#0" />
             <element signature="e#11214#12475#0" />
+            <element signature="e#11322#12396#0" />
             <element signature="e#12481#14758#0" />
             <element signature="class#12548:13080" />
             <element signature="method#mouseMoved#0;class#12548:13080" />
@@ -1074,23 +1080,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="36" column="86" selection-start-line="36" selection-start-column="86" selection-end-line="36" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="688">
-          <caret line="153" column="29" lean-forward="true" selection-start-line="153" selection-start-column="29" selection-end-line="153" selection-end-column="29" />
+        <state relative-caret-position="511">
+          <caret line="176" column="53" selection-start-line="176" selection-start-column="53" selection-end-line="176" selection-end-column="53" />
           <folding>
             <element signature="e#598#738#0" />
             <element signature="e#873#932#0" />
             <element signature="e#1121#1263#0" />
             <element signature="e#2479#3065#0" />
             <element signature="e#3161#3262#0" />
+            <element signature="e#4160#4201#0" />
+            <element signature="e#4725#4803#0" />
             <element signature="e#4902#4952#0" />
             <element signature="e#5051#5102#0" />
             <element signature="e#5200#5251#0" />
@@ -1100,10 +1101,9 @@
             <element signature="e#5966#6154#0" />
             <element signature="e#6160#6307#0" />
             <element signature="e#6313#6466#0" />
-            <element signature="e#6542#6543#0" expanded="true" />
-            <element signature="e#6590#6591#0" expanded="true" />
             <element signature="e#6597#6992#0" />
             <element signature="e#6744#6969#0" />
+            <element signature="e#7110#7138#0" />
             <element signature="e#6998#7968#0" />
             <element signature="e#7106#7925#0" />
             <element signature="e#7974#11208#0" />
@@ -1112,6 +1112,7 @@
             <element signature="e#9339#9369#0" />
             <element signature="e#9869#9900#0" />
             <element signature="e#11214#12475#0" />
+            <element signature="e#11322#12396#0" />
             <element signature="e#12481#14758#0" />
             <element signature="class#12548:13080" />
             <element signature="method#mouseMoved#0;class#12548:13080" />
@@ -1160,6 +1161,13 @@
             <element signature="e#25925#25956#0" />
             <element signature="e#26907#27229#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="36" column="99" selection-start-line="36" selection-start-column="99" selection-end-line="36" selection-end-column="99" />
         </state>
       </provider>
     </entry>
