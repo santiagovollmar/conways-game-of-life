@@ -100,20 +100,6 @@ public class Window {
         frame.add(new ToolBar(), BorderLayout.SOUTH);
         spb = new SnippetPreviewBar();
         frame.add(spb, BorderLayout.EAST);
-
-        HashSet<Point> scene = new HashSet<>();
-        for (int i = 0; i < 10; i++) {
-            for (int j = i % 2; j < 10; j += 2) {
-                scene.add(new Point(j, i));
-            }
-        }
-
-        ArrayList<Snippet> content = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            content.add(new Snippet((HashSet<Point>) scene.clone(), "Chess Field",
-                    "This is some random description containing no meaning at all. Just some fill text. No meaning here!! Why are you still reading this? U boosted?"));
-        }
-        spb.setContent(content, 1.);
         frame.pack();
 
         for (int x = 0; x < 100; x++) {

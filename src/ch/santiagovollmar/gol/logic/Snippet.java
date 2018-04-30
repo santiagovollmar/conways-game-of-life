@@ -1,9 +1,10 @@
 package ch.santiagovollmar.gol.logic;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Snippet {
+public class Snippet implements Serializable {
     private Set<Point> scene;
     private String name;
     private String description;

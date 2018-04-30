@@ -16,6 +16,8 @@ public class SnippetManager {
                 snippets = (ArrayList<Snippet>) in.readObject();
             } catch (ClassNotFoundException e) {
                 throw new IOException("File contained corrupt data");
+            } catch (Exception e) {
+                throw new IOException(e.getMessage(), e);
             }
         } finally {
             if (in != null) {

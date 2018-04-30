@@ -2,6 +2,8 @@ package ch.santiagovollmar.gol;
 
 import ch.santiagovollmar.gol.gui.Window;
 import ch.santiagovollmar.gol.logic.LogicManager;
+import ch.santiagovollmar.gol.logic.Snippet;
+import ch.santiagovollmar.gol.logic.SnippetManager;
 import ch.santiagovollmar.gol.util.GlobalKeyListener;
 import ch.santiagovollmar.gol.util.PropertyManager;
 import com.sun.net.httpserver.HttpContext;
@@ -11,6 +13,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.time.LocalDateTime;
@@ -30,6 +34,24 @@ public class Main {
         GlobalKeyListener.apply("main", Window.getCurrentInstance()
                 .getFrame()
                 .getContentPane());
+
+        try {
+            SnippetManager.load();
+            Window.getCurrentInstance().getSnippetPreviewBar().setContent(SnippetManager.get(), 1d);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            Window.getCurrentInstance().getFrame().addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    try {
+                        SnippetManager.store();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            });
+        }
 
         SwingUtilities.invokeLater(Window.getCurrentInstance()
                 .getGameDisplay()::grabFocus);
