@@ -1,5 +1,6 @@
 package ch.santiagovollmar.gol.gui;
 
+import ch.santiagovollmar.gol.logic.DrawAcceptor;
 import ch.santiagovollmar.gol.logic.FunctionalityMatrix;
 import ch.santiagovollmar.gol.logic.Point;
 import ch.santiagovollmar.gol.logic.Snippet;
@@ -27,7 +28,7 @@ public class SnippetCreationDialog extends JDialog {
         // fill scene
         HashSet<Point> scene = new HashSet<>(buffer.size(), 2f);
         for (Point p : buffer) {
-            scene.add(new Point(p.x - offset.x, p.y - offset.y));
+            scene.add(new Point(p.x - offset.x + 45000, p.y - offset.y + 45000));
         }
 
         // set callback
@@ -68,6 +69,8 @@ public class SnippetCreationDialog extends JDialog {
         gd = new GameDisplay(listenerSpace, new FunctionalityMatrix(
                 FunctionalityMatrix.Functionality.DRAG,
                 FunctionalityMatrix.Functionality.ZOOM,
+                FunctionalityMatrix.Functionality.DRAW,
+                FunctionalityMatrix.Functionality.SELECTION,
                 FunctionalityMatrix.Functionality.DYNAMIC_CONTENT
         ), 100, 100, 5, GameDisplay.getFillColor());
         gd.setFetchoperation(new GameDisplay.FetchOperation() {
@@ -76,7 +79,28 @@ public class SnippetCreationDialog extends JDialog {
                 return snippet.getScene();
             }
         });
-        gd.setViewport(new Point(0, 0));
+        gd.overrideDrawLocation(new DrawAcceptor() {
+            @Override
+            public void fill(Point p) {
+                snippet.getScene().add(p);
+            }
+
+            @Override
+            public void clear(Point p) {
+                snippet.getScene().remove(p);
+            }
+
+            @Override
+            public void fill(Collection<Point> p) {
+                snippet.getScene().addAll(p);
+            }
+
+            @Override
+            public void clear(Collection<Point> p) {
+                snippet.getScene().removeAll(p);
+            }
+        });
+        //gd.setViewport(new Point(0, 0));
         add(gd);
         //TODO maybe enable drawing
         //TODO center preview
@@ -108,7 +132,6 @@ public class SnippetCreationDialog extends JDialog {
         /*
          * set constraints
          */
-
         // title
         l.putConstraint(SpringLayout.NORTH, title, 10, SpringLayout.NORTH, this.getContentPane());
         l.putConstraint(SpringLayout.WEST, title, 10, SpringLayout.WEST, this.getContentPane());

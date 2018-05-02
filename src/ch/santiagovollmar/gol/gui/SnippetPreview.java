@@ -10,6 +10,10 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SnippetPreview extends JButton {
     private final Snippet snippet;
@@ -50,7 +54,7 @@ public class SnippetPreview extends JButton {
                 snippetWidth,
                 snippetHeight,
                 Integer.valueOf(PropertyManager.get("display.scaling")),
-                new Color(Integer.valueOf(rgbValues[0]), Integer.valueOf(rgbValues[1]), Integer.valueOf(rgbValues[2])));
+                GameDisplay.getFillColor());
         gd.setFetchoperation((int x1, int y1, int x2, int y2) -> {
             return snippet.getScene();
         });
@@ -63,7 +67,7 @@ public class SnippetPreview extends JButton {
                 if (uiResponseAlpha < 1) {
                     // TODO add ui response
                     uiResponseAlpha = 255;
-                    Window.getCurrentInstance().getGameDisplay().setClipboard(snippet.getScene());
+                    Window.getCurrentInstance().getGameDisplay().setClipboard(snippet.getScene(), new Point(45000, 45000));
                 }
             }
 

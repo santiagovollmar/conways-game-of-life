@@ -81,6 +81,8 @@ public class GameDisplay extends JPanel {
     private Point copyBufferStart;
     private HashSet<Point> copyBuffer;
 
+    private DrawAcceptor location;
+
     /*
      * getters and setters
      */
@@ -118,9 +120,13 @@ public class GameDisplay extends JPanel {
         this.scaling = scaling;
     }
 
-    public void setClipboard(Collection<Point> data) {
+    public void setClipboard(Collection<Point> data, Point offset) {
         copyBuffer = new HashSet<>(data);
-        copyBufferStart = new Point(0, 0);
+        copyBufferStart = offset;
+    }
+
+    public void overrideDrawLocation(DrawAcceptor location) {
+        this.location = location;
     }
 
     /*
@@ -255,7 +261,11 @@ public class GameDisplay extends JPanel {
                     }
 
                     // clear all points
-                    GridManager.clear(points, false);
+                    if (location == null) {
+                        GridManager.clear(points, false);
+                    } else {
+                        location.clear(points);
+                    }
                 }
             }
         }, KeyEvent.VK_DELETE, KeyEvent.VK_C);
@@ -502,7 +512,6 @@ public class GameDisplay extends JPanel {
                 }
             }
         });
-
         GlobalKeyListener.attach(listenerSpace, KeyListenerType.PRESSED, e -> {
             if (!LogicManager.isPaused() || selectionStart.x == -1 || selectionEnd.x == -1) {
                 return;
@@ -513,7 +522,11 @@ public class GameDisplay extends JPanel {
 
             for (int x = min.x; x < max.x; x++) {
                 for (int y = min.y; y < max.y; y++) {
-                    GridManager.fill(new Point(x, y), false);
+                    if (location == null) {
+                        GridManager.fill(new Point(x, y), false);
+                    } else {
+                        location.fill(new Point(x, y));
+                    }
                 }
             }
         }, KeyEvent.VK_F);
@@ -625,13 +638,21 @@ public class GameDisplay extends JPanel {
      */
     public void fillCell(MouseEvent e) {
         synchronized (viewport) {
-            GridManager.fill(new Point((e.getX() / scaling) + viewport.x, (e.getY() / scaling) + viewport.y), false);
+            if (location == null) {
+                GridManager.fill(new Point((e.getX() / scaling) + viewport.x, (e.getY() / scaling) + viewport.y), false);
+            } else {
+                location.fill(new Point((e.getX() / scaling) + viewport.x, (e.getY() / scaling) + viewport.y));
+            }
         }
     }
 
     public void clearCell(MouseEvent e) {
         synchronized (viewport) {
-            GridManager.clear(new Point((e.getX() / scaling) + viewport.x, (e.getY() / scaling) + viewport.y), false);
+            if (location == null) {
+                GridManager.clear(new Point((e.getX() / scaling) + viewport.x, (e.getY() / scaling) + viewport.y), false);
+            } else {
+                location.clear(new Point((e.getX() / scaling) + viewport.x, (e.getY() / scaling) + viewport.y));
+            }
         }
     }
 
