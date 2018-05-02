@@ -239,6 +239,7 @@ public class GameDisplay extends JPanel {
                                 Window.getCurrentInstance().getSnippetPreviewBar().setContent(SnippetManager.get(), 1d);
                             }
                         });
+                        ctrlIsPressed = false;
                     }
                 }
             }

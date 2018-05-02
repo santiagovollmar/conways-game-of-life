@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d679f6da-71e2-42c3-94b9-0367c02c7cf3" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/DrawAcceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetCreationDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetCreationDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetPreview.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetPreview.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,11 +26,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameDisplay.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GameDisplay.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="124" column="32" selection-start-line="124" selection-start-column="32" selection-end-line="124" selection-end-column="32" />
+            <state relative-caret-position="132">
+              <caret line="241" column="46" selection-start-line="241" selection-start-column="46" selection-end-line="241" selection-end-column="46" />
               <folding>
                 <element signature="e#598#738#0" />
                 <element signature="e#873#932#0" />
@@ -52,8 +48,6 @@
                 <element signature="e#6601#6790#0" />
                 <element signature="e#6796#6943#0" />
                 <element signature="e#6949#7102#0" />
-                <element signature="e#7233#8177#0" />
-                <element signature="e#7380#8154#0" />
                 <element signature="e#7627#7652#0" />
                 <element signature="e#7787#8088#0" />
                 <element signature="e#9159#12393#0" />
@@ -166,11 +160,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SnippetPreview.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SnippetPreview.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetPreview.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
-              <caret line="69" column="120" selection-start-line="69" selection-start-column="120" selection-end-line="69" selection-end-column="120" />
+            <state relative-caret-position="336">
+              <caret line="69" column="123" lean-forward="true" selection-start-line="69" selection-start-column="123" selection-end-line="69" selection-end-column="123" />
             </state>
           </provider>
         </entry>
@@ -248,8 +242,8 @@
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/DrawAcceptor.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/Point.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetCreationDialog.java" />
-        <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetPreview.java" />
+        <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java" />
       </list>
     </option>
   </component>
@@ -433,12 +427,12 @@
       <workItem from="1522824041649" duration="6178000" />
       <workItem from="1523341465193" duration="1647000" />
       <workItem from="1525099338538" duration="1243000" />
-      <workItem from="1525240239199" duration="4032000" />
+      <workItem from="1525240239199" duration="4141000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28927000" />
+    <option name="totallyTimeSpent" value="29036000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
@@ -580,8 +574,6 @@
             <element signature="e#6601#6790#0" />
             <element signature="e#6796#6943#0" />
             <element signature="e#6949#7102#0" />
-            <element signature="e#7233#8177#0" />
-            <element signature="e#7380#8154#0" />
             <element signature="e#7627#7652#0" />
             <element signature="e#7787#8088#0" />
             <element signature="e#9159#12393#0" />
@@ -673,8 +665,6 @@
             <element signature="e#6601#6790#0" />
             <element signature="e#6796#6943#0" />
             <element signature="e#6949#7102#0" />
-            <element signature="e#7233#8177#0" />
-            <element signature="e#7380#8154#0" />
             <element signature="e#7627#7652#0" />
             <element signature="e#7787#8088#0" />
             <element signature="e#9159#12393#0" />
@@ -1067,10 +1057,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetPreview.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="69" column="123" lean-forward="true" selection-start-line="69" selection-start-column="123" selection-end-line="69" selection-end-column="123" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="124" column="32" selection-start-line="124" selection-start-column="32" selection-end-line="124" selection-end-column="32" />
+        <state relative-caret-position="132">
+          <caret line="241" column="46" selection-start-line="241" selection-start-column="46" selection-end-line="241" selection-end-column="46" />
           <folding>
             <element signature="e#598#738#0" />
             <element signature="e#873#932#0" />
@@ -1088,8 +1085,6 @@
             <element signature="e#6601#6790#0" />
             <element signature="e#6796#6943#0" />
             <element signature="e#6949#7102#0" />
-            <element signature="e#7233#8177#0" />
-            <element signature="e#7380#8154#0" />
             <element signature="e#7627#7652#0" />
             <element signature="e#7787#8088#0" />
             <element signature="e#9159#12393#0" />
@@ -1147,13 +1142,6 @@
             <element signature="e#27728#27759#0" />
             <element signature="e#28711#29033#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetPreview.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="69" column="120" selection-start-line="69" selection-start-column="120" selection-end-line="69" selection-end-column="120" />
         </state>
       </provider>
     </entry>
