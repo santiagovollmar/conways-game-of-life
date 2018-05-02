@@ -2,11 +2,13 @@ package ch.santiagovollmar.gol.gui;
 
 import ch.santiagovollmar.gol.logic.LogicManager;
 import ch.santiagovollmar.gol.util.FileManager;
+import ch.santiagovollmar.gol.util.GlobalKeyListener;
 import ch.santiagovollmar.gol.util.PropertyManager;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -81,6 +83,19 @@ public class MenuBar extends JMenuBar {
             }
         });
         menu.add(load);
+
+        // add keyboard shortcuts
+        GlobalKeyListener.attach("main", GlobalKeyListener.KeyListenerType.PRESSED, keyEvent -> {
+            if (keyEvent.isControlDown() && keyEvent.isShiftDown()) {
+                save.doClick();
+            }
+        }, KeyEvent.VK_S);
+
+        GlobalKeyListener.attach("main", GlobalKeyListener.KeyListenerType.PRESSED, keyEvent -> {
+            if (keyEvent.isControlDown()) {
+                load.doClick();
+            }
+        }, KeyEvent.VK_O);
     }
 
     private File getFile(boolean ensureExtension) {
