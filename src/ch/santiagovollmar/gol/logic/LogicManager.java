@@ -60,7 +60,7 @@ public class LogicManager {
     /**
      * Changes the ruleset of the game.
      * @see <a href='https://de.wikipedia.org/wiki/Conways_Spiel_des_Lebens#Abweichende_Regeln'>Wikipedia</a>
-     * @param surviveGrid
+     * @param surviveGrid a list of
      * @param birthGrid
      * @throws IllegalArgumentException
      */

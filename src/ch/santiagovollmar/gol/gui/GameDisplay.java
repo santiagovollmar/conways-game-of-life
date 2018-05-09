@@ -619,7 +619,7 @@ public class GameDisplay extends JPanel {
         addMouseWheelListener(e -> {
             if (ctrlIsPressed) {
                 if (e.getWheelRotation() > 0) {
-                    if (parentDisplay.scaling > 4) {
+                    if (parentDisplay.scaling > 1) {
                         parentDisplay.scaling--;
                     }
                 } else if (e.getWheelRotation() < 0) {
@@ -713,6 +713,10 @@ public class GameDisplay extends JPanel {
     }
 
     protected final void drawLines(Graphics graphics, Color color, int stroke) {
+        if (scaling < 3) {
+            return;
+        }
+
         // set color and save current color for later
         Color prevColor = graphics.getColor();
         graphics.setColor(color);

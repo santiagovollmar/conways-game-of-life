@@ -5,6 +5,10 @@ import ch.santiagovollmar.gol.logic.LogicManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("serial")
 public class ToolBar extends JToolBar {
@@ -28,6 +32,7 @@ public class ToolBar extends JToolBar {
 
     private JButton pauseButton;
     private JDialog colorChooserDialog;
+    private JDialog ruleChangerDialog;
     private JColorChooser colorChooser;
     private boolean previousPauseState;
 
@@ -40,6 +45,7 @@ public class ToolBar extends JToolBar {
         addPauseButton();
         addColorChooser();
         addResetButton();
+        addRuleChanger();
         addSpeedSlider();
     }
 
@@ -71,7 +77,144 @@ public class ToolBar extends JToolBar {
         add(resetButton);
     }
 
-    private void addColorChooser() {
+    private void addRuleChanger() {
+        // grid class
+        class GridInput extends JPanel {
+            private JCheckBox[] checkBoxes;
+
+            public GridInput(String caption, int min, int max) {
+                // set layout
+                setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+                // add title
+                JPanel titleWrapper = new JPanel(new FlowLayout(FlowLayout.LEFT));
+                titleWrapper.add(new JLabel(caption));
+                add(titleWrapper);
+
+                // add boxes
+                JPanel wrapper = new JPanel();
+                wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.X_AXIS));
+                checkBoxes = new JCheckBox[max - min + 1];
+                for (int i = min; i <= max; i++) {
+                    checkBoxes[i] = new JCheckBox(Integer.toString(i), false);
+                    wrapper.add(checkBoxes[i]);
+                }
+                add(wrapper);
+            }
+
+            public ArrayList<Integer> getValues() {
+                ArrayList<Integer> values = new ArrayList<>();
+
+                for (int i = 0; i < checkBoxes.length; i++) {
+                    if (checkBoxes[i].isSelected()) {
+                        values.add(i);
+                    }
+                }
+
+                return values;
+            }
+        }
+
+        // create dialog
+        this.ruleChangerDialog = new JDialog(Window.getCurrentInstance().getFrame(), "Change the rules of the simulation", true);
+        this.ruleChangerDialog.setBounds(300, 300, 700, 400);
+        this.ruleChangerDialog.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
+        SpringLayout layout = new SpringLayout();
+        this.ruleChangerDialog.setLayout(layout);
+
+        /*
+         * Add components
+         */
+
+        // add title
+        JLabel title = new JLabel("Change the rules");
+        title.setFont(title.getFont().deriveFont(18f));
+        ruleChangerDialog.add(title);
+
+        // grid wrapper
+        JPanel gridWrapper = new JPanel();
+        gridWrapper.setLayout(new BoxLayout(gridWrapper, BoxLayout.Y_AXIS));
+        ruleChangerDialog.add(gridWrapper);
+
+        // survive grid input
+        GridInput surviveGridInput = new GridInput("Survival:", 0, 8);
+        gridWrapper.add(surviveGridInput);
+
+        // birth grid input
+        GridInput birthGridInput = new GridInput("Birth:", 0, 8);
+        gridWrapper.add(birthGridInput);
+
+        // 'apply' button
+        JButton applyButton = new JButton("apply");
+        ruleChangerDialog.add(applyButton);
+
+        // 'exit' button
+        JButton exitButton = new JButton("exit");
+        ruleChangerDialog.add(exitButton);
+
+        // 'open' button
+        JButton ruleChangerOpener = new JButton(new ImageIcon(getClass().getResource("pictures/settings.png")));
+        ruleChangerOpener.setBackground(Color.WHITE);
+        ruleChangerOpener.setToolTipText("Change the rules of the simulation");
+        add(ruleChangerOpener);
+
+        /*
+         * add functionality
+         */
+        // 'open' button
+        ruleChangerOpener.addActionListener(e -> {
+            previousPauseState = LogicManager.isPaused();
+            LogicManager.setPaused(true);
+            ruleChangerDialog.setVisible(true);
+        });
+
+        // 'apply' button
+        applyButton.addActionListener(e -> {
+            ArrayList<Integer> surviveGrid = surviveGridInput.getValues();
+            ArrayList<Integer> birthGrid = birthGridInput.getValues();
+
+            String surviveRule = surviveGrid.stream().map(i -> Integer.toString(i)).collect(Collectors.joining());
+            String birthRule = birthGrid.stream().map(i -> Integer.toString(i)).collect(Collectors.joining());
+
+            LogicManager.setRule(surviveGrid, birthGrid);
+            JOptionPane.showMessageDialog(ruleChangerDialog, String.format("The new rules, %sS/%sB, have been applied!",
+                    surviveRule, birthRule), "Rules changed", JOptionPane.INFORMATION_MESSAGE);
+        });
+
+        // 'exit' button
+        exitButton.addActionListener(e -> LogicManager.setPaused(previousPauseState));
+
+        ruleChangerDialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                exitButton.doClick();
+            }
+        });
+
+        /*
+         * add layout constraints
+         */
+        Component panel = ruleChangerDialog.getContentPane();
+
+        // title
+        layout.putConstraint(SpringLayout.NORTH, title, 10, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.WEST, title, 10, SpringLayout.WEST, panel);
+
+        // gridwrapper
+        layout.putConstraint(SpringLayout.NORTH, gridWrapper, 5, SpringLayout.SOUTH, title);
+        layout.putConstraint(SpringLayout.WEST, gridWrapper, 10, SpringLayout.WEST, panel);
+        //layout.putConstraint(SpringLayout.EAST, gridWrapper, -10, SpringLayout.EAST, panel);
+
+        // 'exit' button
+        layout.putConstraint(SpringLayout.EAST, exitButton, -10, SpringLayout.EAST, panel);
+        layout.putConstraint(SpringLayout.SOUTH, exitButton, -10, SpringLayout.SOUTH, panel);
+
+        // 'apply' button
+        layout.putConstraint(SpringLayout.EAST, applyButton, -5, SpringLayout.WEST, exitButton);
+        layout.putConstraint(SpringLayout.SOUTH, applyButton, 0, SpringLayout.SOUTH, exitButton);
+    }
+
+    private void addColorChooser() { // TODO add ability to close window with 'X' in edge
         this.colorChooserDialog = new JDialog(Window.getCurrentInstance()
                 .getFrame(), "Choose new color", true);
         colorChooserDialog.setBounds(300, 300, 700, 400);
@@ -88,7 +231,6 @@ public class ToolBar extends JToolBar {
         layout.putConstraint(SpringLayout.WEST, colorChooser, 0, SpringLayout.WEST,
                 colorChooserDialog.getContentPane());
         this.colorChooserDialog.add(this.colorChooser);
-
         JButton okButton = new JButton("apply");
         okButton.addActionListener(e -> {
             GameDisplay.setFillColor(colorChooser.getColor());
@@ -112,7 +254,7 @@ public class ToolBar extends JToolBar {
 
         JButton colorChooserOpener = new JButton(new ImageIcon(getClass().getResource("pictures/palette.PNG")));
         colorChooserOpener.setBackground(Color.WHITE);
-        colorChooserOpener.setToolTipText("Change the color of the living cells");
+        colorChooserOpener.setToolTipText("Change the coloring of the game");
         colorChooserOpener.addActionListener(e -> {
             previousPauseState = LogicManager.isPaused();
             LogicManager.setPaused(true);
