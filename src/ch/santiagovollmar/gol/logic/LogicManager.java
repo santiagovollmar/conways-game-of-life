@@ -2,9 +2,7 @@ package ch.santiagovollmar.gol.logic;
 
 import ch.santiagovollmar.gol.gui.ToolBar;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Handles the game logic
@@ -59,7 +57,41 @@ public class LogicManager {
         }
     }
 
-    private static Set<Point> checkedNeighbors = Collections.synchronizedSet(new HashSet<Point>());
+    /**
+     * Changes the ruleset of the game.
+     * @see <a href='https://de.wikipedia.org/wiki/Conways_Spiel_des_Lebens#Abweichende_Regeln'>Wikipedia</a>
+     * @param surviveGrid
+     * @param birthGrid
+     * @throws IllegalArgumentException
+     */
+    public static void setRule(Iterable<Integer> surviveGrid, Iterable<Integer> birthGrid) throws IllegalArgumentException {
+        Arrays.fill(LogicManager.surviveGrid, false);
+        Arrays.fill(LogicManager.birthGrid, false);
+
+        for (int i : surviveGrid) {
+            try {
+                LogicManager.surviveGrid[i] = true;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new IllegalArgumentException("Values must be in {[1; 8]}");
+            }
+        }
+
+        for (int i : birthGrid) {
+            try {
+                LogicManager.birthGrid[i] = true;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new IllegalArgumentException("Values must be in {[1; 8]}");
+            }
+        }
+    }
+
+    private static boolean[] surviveGrid = new boolean[8];
+    private static boolean[] birthGrid = new boolean[8];
+
+    static {
+        setRule(Arrays.asList(2, 3), Arrays.asList(3));
+        //setRule(Arrays.asList(1, 3, 5, 7), Arrays.asList( 1, 3, 5, 7));
+    }
 
     /**
      * Clears the cache of already checked neighbors. This method should be invoked after having executed the computation for each {@link Point}
@@ -67,6 +99,8 @@ public class LogicManager {
     public static void clearCheckedCache() {
         checkedNeighbors.clear();
     }
+
+    private static Set<Point> checkedNeighbors = Collections.synchronizedSet(new HashSet<>());
 
     /**
      * Computes the state of a point in the next generation and checks if any neighbors of the given point will be born in the next generation.
@@ -82,7 +116,7 @@ public class LogicManager {
         }
 
         // check if cell survives
-        if (neighborAmount < 2 || neighborAmount > 3) { // cell dies
+        if (!surviveGrid[neighborAmount]) { // cell dies
             GridManager.clear(point, true);
         }
 
@@ -100,7 +134,7 @@ public class LogicManager {
                 subNeighborAmount += GridManager.isAlive(subNeighbor) ? 1 : 0;
             }
 
-            if (subNeighborAmount == 3) { // cell gets born
+            if (birthGrid[subNeighborAmount]) { // cell gets born
                 GridManager.fill(neighbor, true);
             }
         }

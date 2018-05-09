@@ -105,7 +105,7 @@ public class Window {
         for (int x = 0; x < 100; x++) {
             for (int y = 0; y < 100; y++) {
                 if (Math.random() > 0.5) {
-                    GridManager.fill(new Point(x + 45020, y + 45020), false);
+                    //GridManager.fill(new Point(x + 45020, y + 45020), false);
                 }
             }
         }
