@@ -44,6 +44,21 @@ public class LogicManager {
         }
     }
 
+    private static long genPerSec = 0;
+
+    public static void startGPSCounter() {
+        Timer t = new Timer(true);
+        t.schedule(new TimerTask() {
+            private long prev = generation;
+
+            @Override
+            public void run() {
+                genPerSec = generation - prev;
+                prev = generation;
+            }
+        }, 0, 1000);
+    }
+
     /**
      * Invokes {@link GridManager#consume()} and {@link GridManager#update()} to move the game to the next generation.
      * If the game state is paused, the above mentioned will be skipped
@@ -53,40 +68,70 @@ public class LogicManager {
             updating = true;
             GridManager.consume();
             GridManager.update();
+            generation++;
             updating = false;
         }
     }
 
+    private static volatile long generation = 0;
+
+    public static void resetGeneration() {
+        generation = 0;
+    }
+
+    public static void resetGeneration(int generation) {
+        LogicManager.generation = generation;
+    }
+
+    public static long getGeneration() {
+        return generation;
+    }
+
     /**
      * Changes the ruleset of the game.
-     * @see <a href='https://de.wikipedia.org/wiki/Conways_Spiel_des_Lebens#Abweichende_Regeln'>Wikipedia</a>
+     *
      * @param surviveGrid a list of
      * @param birthGrid
      * @throws IllegalArgumentException
+     * @see <a href='https://de.wikipedia.org/wiki/Conways_Spiel_des_Lebens#Abweichende_Regeln'>Wikipedia</a>
      */
     public static void setRule(Iterable<Integer> surviveGrid, Iterable<Integer> birthGrid) throws IllegalArgumentException {
         Arrays.fill(LogicManager.surviveGrid, false);
         Arrays.fill(LogicManager.birthGrid, false);
 
+        StringBuilder builder = new StringBuilder();
+
         for (int i : surviveGrid) {
             try {
                 LogicManager.surviveGrid[i] = true;
+                builder.append(i);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new IllegalArgumentException("Values must be in {[1; 8]}");
             }
         }
+
+        builder.append("S/");
 
         for (int i : birthGrid) {
             try {
                 LogicManager.birthGrid[i] = true;
+                builder.append(i);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new IllegalArgumentException("Values must be in {[1; 8]}");
             }
         }
+
+        builder.append('B');
+        rules = builder.toString();
     }
 
     private static boolean[] surviveGrid = new boolean[8];
     private static boolean[] birthGrid = new boolean[8];
+    private static String rules;
+
+    public static String getRules() {
+        return rules;
+    }
 
     static {
         setRule(Arrays.asList(2, 3), Arrays.asList(3));
@@ -105,6 +150,7 @@ public class LogicManager {
     /**
      * Computes the state of a point in the next generation and checks if any neighbors of the given point will be born in the next generation.
      * Changes will be forwarded to the {@link GridManager}.
+     *
      * @param point The point for which to compute the above mentioned things
      */
     public static void compute(Point point) {
@@ -144,6 +190,7 @@ public class LogicManager {
      * Pauses or unpauses the game based on the given argument.
      * This method directly affects {@link LogicManager#renderNext()}
      * and changes the appearance of the GUI by invoking {@link ToolBar#setPaused(boolean)} on the current {@link ToolBar} instance.
+     *
      * @param paused The desired state of the game
      */
     public static synchronized void setPaused(boolean paused) {
@@ -154,9 +201,14 @@ public class LogicManager {
 
     /**
      * Returns the current game state
+     *
      * @return A boolean stating whether or not the game is paused
      */
     public static synchronized boolean isPaused() {
         return isPaused;
+    }
+
+    public static long getGenPerSec() {
+        return genPerSec;
     }
 }

@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d679f6da-71e2-42c3-94b9-0367c02c7cf3" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/ToolBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/ToolBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/GridManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/GridManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/LogicManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/LogicManager.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -16,16 +19,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ToolBar.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/ToolBar.java">
+      <file leaf-file-name="GameDisplay.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="160" column="10" lean-forward="true" selection-start-line="160" selection-start-column="10" selection-end-line="160" selection-end-column="10" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#5276#5440#0" />
-                <element signature="e#5584#5642#0" />
-              </folding>
+            <state relative-caret-position="305">
+              <caret line="890" lean-forward="true" selection-start-line="890" selection-end-line="890" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FunctionalityMatrix.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="465">
+              <caret line="36" column="105" selection-start-line="36" selection-start-column="105" selection-end-line="36" selection-end-column="105" />
             </state>
           </provider>
         </entry>
@@ -55,9 +62,7 @@
       <list>
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/PropertyManager.java" />
-        <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/SnippetManager.java" />
-        <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/Main.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/SnippetPreviewBar.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/Snippet.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/MenuBar.java" />
@@ -68,9 +73,12 @@
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/GlobalKeyListener.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/check.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/Window.java" />
-        <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/LogicManager.java" />
-        <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java" />
         <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/ToolBar.java" />
+        <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/GridManager.java" />
+        <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/Main.java" />
+        <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/LogicManager.java" />
+        <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java" />
+        <option value="$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java" />
       </list>
     </option>
   </component>
@@ -83,11 +91,9 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1176" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="width" value="1920" />
+    <option name="height" value="1200" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -155,7 +161,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="Main&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/Main.java&#10;LogicManager&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/logic/LogicManager.java&#10;chec&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/util/check.java&#10;check&#9;ACTION&#9;CheckinProject&#10;Prope&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/util/PropertyManager.java&#10;GlobalKeyListener&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/util/GlobalKeyListener.java&#10;Poin&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/logic/Point.java&#10;DrawA&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/logic/DrawAcceptor.java&#10;MenuBar&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/MenuBar.java&#10;SnippetPre&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/SnippetPreview.java&#10;Snippet&#9;PSI&#9;JAVA://ch.santiagovollmar.gol.logic.Snippet&#10;Window&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/Window.java&#10;GameD&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/GameDisplay.java&#10;Gam&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/GameDisplay.java&#10;Fun&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java&#10;Function&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java&#10;Funci&#9;PSI&#9;JAVA://com.sun.org.apache.xpath.internal.functions.FuncId&#10;Global&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/util/GlobalKeyListener.java" />
+    <property name="SearchEverywhereHistoryKey" value="Fu&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java&#10;Game&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/GameDisplay.java&#10;M&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/Main.java&#10;Main&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/Main.java&#10;Log&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/logic/LogicManager.java&#10;Gam&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/GameDisplay.java&#10;Ga&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/GameDisplay.java&#10;L&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/logic/LogicManager.java&#10;GameD&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/GameDisplay.java&#10;Lo&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/logic/LogicManager.java&#10;T&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/ToolBar.java&#10;LogicManager&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/logic/LogicManager.java&#10;chec&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/util/check.java&#10;check&#9;ACTION&#9;CheckinProject&#10;Prope&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/util/PropertyManager.java&#10;GlobalKeyListener&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/util/GlobalKeyListener.java&#10;Poin&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/logic/Point.java&#10;DrawA&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/logic/DrawAcceptor.java&#10;MenuBar&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/MenuBar.java&#10;SnippetPre&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/SnippetPreview.java&#10;Snippet&#9;PSI&#9;JAVA://ch.santiagovollmar.gol.logic.Snippet&#10;Window&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/gui/Window.java&#10;Fun&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java&#10;Function&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java&#10;Funci&#9;PSI&#9;JAVA://com.sun.org.apache.xpath.internal.functions.FuncId&#10;Global&#9;FILE&#9;file://C:/Users/vollmar/github/conways-game-of-life/src/ch/santiagovollmar/gol/util/GlobalKeyListener.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="full.screen.before.presentation.mode" value="false" />
@@ -266,15 +272,16 @@
       <workItem from="1525413217833" duration="8628000" />
       <workItem from="1525437252165" duration="562000" />
       <workItem from="1525439939225" duration="2268000" />
-      <workItem from="1525845317165" duration="17064000" />
+      <workItem from="1525845317165" duration="17448000" />
+      <workItem from="1526450043031" duration="8427000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57634000" />
+    <option name="totallyTimeSpent" value="66445000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1200" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="5" />
@@ -287,7 +294,7 @@
       <window_info anchor="right" id="Maven Projects" order="0" />
       <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="2" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.3275" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.33333334" />
       <window_info anchor="bottom" id="Terminal" order="3" />
       <window_info id="Capture Tool" order="0" />
       <window_info id="Designer" order="1" />
@@ -312,10 +319,10 @@
       <window_info anchor="bottom" id="Find" order="5" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="8" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.3275862" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.32666665" />
       <window_info anchor="right" id="Ant Build" order="7" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="4" />
-      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.25746268" />
+      <window_info content_ui="combo" id="Project" order="5" weight="0.25746268" />
       <window_info id="Learn" order="3" />
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info anchor="bottom" id="TODO" order="10" />
@@ -351,6 +358,16 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/ToolBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2720">
+          <caret line="160" column="10" lean-forward="true" selection-start-line="160" selection-start-column="10" selection-end-line="160" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/util/FileManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -448,7 +465,9 @@
         <state relative-caret-position="170">
           <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
           <folding>
-            <marker date="1522826005583" expanded="true" signature="6813:6816" ph="{...}" />
+            <element signature="e#6856#6857#0" expanded="true" />
+            <element signature="e#6888#6889#0" expanded="true" />
+            <marker date="1526456998248" expanded="true" signature="6813:6816" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -599,7 +618,9 @@
         <state relative-caret-position="85">
           <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
           <folding>
-            <marker date="1522826005583" expanded="true" signature="6813:6816" ph="{...}" />
+            <element signature="e#6856#6857#0" expanded="true" />
+            <element signature="e#6888#6889#0" expanded="true" />
+            <marker date="1526456998248" expanded="true" signature="6813:6816" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -730,13 +751,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="36" column="99" selection-start-line="36" selection-start-column="99" selection-end-line="36" selection-end-column="99" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/MenuBar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2210">
@@ -773,20 +787,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="29" selection-start-line="29" selection-end-line="29" />
-          <folding>
-            <element signature="e#493#494#0" expanded="true" />
-            <element signature="e#527#528#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/GridManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2176">
-          <caret line="133" column="13" selection-start-line="133" selection-start-column="13" selection-end-line="133" selection-end-column="13" />
-          <folding>
-            <marker date="1522826005583" expanded="true" signature="6813:6816" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -829,16 +829,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="29" column="17" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/Window.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="875">
@@ -846,122 +836,60 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/ToolBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="178" column="57" lean-forward="true" selection-start-line="178" selection-start-column="57" selection-end-line="178" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/GridManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="751">
+          <caret line="223" column="26" selection-start-line="223" selection-start-column="26" selection-end-line="223" selection-end-column="26" />
+          <folding>
+            <element signature="e#6856#6857#0" expanded="true" />
+            <element signature="e#6888#6889#0" expanded="true" />
+            <marker date="1526456998248" expanded="true" signature="6813:6816" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="61" column="39" selection-start-line="61" selection-start-column="39" selection-end-line="61" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/LogicManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="617">
-          <caret line="157" column="7" selection-start-line="157" selection-start-column="7" selection-end-line="157" selection-end-column="7" />
+        <state relative-caret-position="649">
+          <caret line="211" column="15" lean-forward="true" selection-start-line="211" selection-start-column="15" selection-end-line="211" selection-end-column="15" />
           <folding>
-            <element signature="e#2543#2544#0" expanded="true" />
-            <element signature="e#2583#2584#0" expanded="true" />
-            <element signature="e#4807#4808#0" expanded="true" />
-            <element signature="e#4838#4839#0" expanded="true" />
+            <element signature="e#6531#6532#0" expanded="true" />
+            <element signature="e#6563#6564#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/logic/FunctionalityMatrix.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="36" column="105" selection-start-line="36" selection-start-column="105" selection-end-line="36" selection-end-column="105" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/GameDisplay.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="717" column="9" selection-start-line="717" selection-start-column="9" selection-end-line="717" selection-end-column="9" />
-          <folding>
-            <element signature="e#598#738#0" />
-            <element signature="e#873#932#0" />
-            <element signature="e#1122#1264#0" />
-            <element signature="e#2549#3135#0" />
-            <element signature="e#3231#3332#0" />
-            <element signature="e#3480#3626#0" />
-            <element signature="e#3735#6053#0" />
-            <element signature="e#4528#4603#0" />
-            <element signature="e#5096#5174#0" />
-            <element signature="e#5345#5395#0" />
-            <element signature="e#5494#5545#0" />
-            <element signature="e#5643#5694#0" />
-            <element signature="e#5791#5843#0" />
-            <element signature="e#6059#6290#0" />
-            <element signature="e#6295#6411#0" />
-            <element signature="e#6417#6600#0" />
-            <element signature="e#6606#6795#0" />
-            <element signature="e#6801#6948#0" />
-            <element signature="e#6954#7107#0" />
-            <element signature="e#7238#8229#0" />
-            <element signature="e#7385#8206#0" />
-            <element signature="e#7632#7657#0" />
-            <element signature="e#7792#8093#0" />
-            <element signature="e#8235#9352#0" />
-            <element signature="e#8343#9309#0" />
-            <element signature="e#9358#12592#0" />
-            <element signature="e#9485#10403#0" />
-            <element signature="e#10512#12569#0" />
-            <element signature="e#10723#10753#0" />
-            <element signature="e#11253#11284#0" />
-            <element signature="e#12598#14102#0" />
-            <element signature="e#12886#14023#0" />
-            <element signature="e#14108#16385#0" />
-            <element signature="class#14175:14707" />
-            <element signature="method#mouseMoved#0;class#14175:14707" />
-            <element signature="method#mouseDragged#0;class#14175:14707" />
-            <element signature="class#14740:16259" />
-            <element signature="method#mouseReleased#0;class#14740:16259" />
-            <element signature="method#mousePressed#0;class#14740:16259" />
-            <element signature="method#mouseExited#0;class#14740:16259" />
-            <element signature="method#mouseEntered#0;class#14740:16259" />
-            <element signature="method#mouseClicked#0;class#14740:16259" />
-            <element signature="e#16391#18766#0" />
-            <element signature="class#16447:17445" />
-            <element signature="method#mouseReleased#0;class#16447:17445" />
-            <element signature="method#mousePressed#0;class#16447:17445" />
-            <element signature="method#mouseExited#0;class#16447:17445" />
-            <element signature="method#mouseEntered#0;class#16447:17445" />
-            <element signature="method#mouseClicked#0;class#16447:17445" />
-            <element signature="class#17484:18078" />
-            <element signature="method#mouseMoved#0;class#17484:18078" />
-            <element signature="method#mouseDragged#0;class#17484:18078" />
-            <element signature="e#18154#18743#0" />
-            <element signature="e#18772#21475#0" />
-            <element signature="class#18871:19597" />
-            <element signature="method#mouseReleased#0;class#18871:19597" />
-            <element signature="method#mousePressed#0;class#18871:19597" />
-            <element signature="method#mouseExited#0;class#18871:19597" />
-            <element signature="method#mouseClicked#0;class#18871:19597" />
-            <element signature="class#19636:21467" />
-            <element signature="method#mouseMoved#0;class#19636:21467" />
-            <element signature="method#mouseDragged#0;class#19636:21467" />
-            <element signature="e#22155#22581#0" />
-            <element signature="e#22587#22981#0" />
-            <element signature="e#22987#23193#0" />
-            <element signature="e#23199#23444#0" />
-            <element signature="e#23450#23695#0" />
-            <element signature="e#23701#24468#0" />
-            <element signature="e#24474#24882#0" />
-            <element signature="e#25509#26481#0" />
-            <element signature="e#26166#26309#0" />
-            <element signature="e#26487#27473#0" />
-            <element signature="e#27479#29058#0" />
-            <element signature="e#27631#27661#0" />
-            <element signature="e#28081#28112#0" />
-            <element signature="e#29064#29386#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/pictures/palette.PNG">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/pictures/pause.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/pictures/settings.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ch/santiagovollmar/gol/gui/ToolBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="160" column="10" lean-forward="true" selection-start-line="160" selection-start-column="10" selection-end-line="160" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5276#5440#0" />
-            <element signature="e#5584#5642#0" />
-          </folding>
+        <state relative-caret-position="305">
+          <caret line="890" lean-forward="true" selection-start-line="890" selection-end-line="890" />
         </state>
       </provider>
     </entry>

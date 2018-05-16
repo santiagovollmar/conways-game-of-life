@@ -59,6 +59,8 @@ public class Main {
 
     @SuppressWarnings("unused")
     private static void run_normal() {
+        LogicManager.startGPSCounter();
+
         for (; ; ) {
             try {
                 long start = System.nanoTime();

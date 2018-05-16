@@ -34,7 +34,7 @@ public class FunctionalityMatrix {
      * Possible functionalities for a GameDisplay
      */
     public enum Functionality {
-        DRAW, DRAG, ZOOM, SELECTION, COPY_PASTE_ACTION, SNIPPET_CREATION, PAUSE_ACTION, DYNAMIC_CONTENT
+        DRAW, DRAG, ZOOM, SELECTION, COPY_PASTE_ACTION, SNIPPET_CREATION, PAUSE_ACTION, INFORMATION_BOARD, DYNAMIC_CONTENT
     }
 
     /**

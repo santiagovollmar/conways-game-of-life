@@ -219,4 +219,8 @@ public class GridManager {
                 p.x - 1, p.y + 1), new Point(p.x - 1, p.y - 1), new Point(p.x - 1, p.y), new Point(p.x,
                 p.y + 1), new Point(p.x, p.y - 1)};
     }
+
+    public static int getAliveCount() {
+        return map.size();
+    }
 }

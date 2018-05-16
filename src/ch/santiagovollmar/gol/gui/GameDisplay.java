@@ -5,6 +5,7 @@ import ch.santiagovollmar.gol.logic.FunctionalityMatrix.Functionality;
 import ch.santiagovollmar.gol.logic.Point;
 import ch.santiagovollmar.gol.util.GlobalKeyListener;
 import ch.santiagovollmar.gol.util.GlobalKeyListener.KeyListenerType;
+import com.oracle.tools.packager.Log;
 
 import javax.swing.*;
 import java.awt.*;
@@ -83,6 +84,8 @@ public class GameDisplay extends JPanel {
 
     private DrawAcceptor location;
 
+    private final boolean drawInfoBoard;
+
     /*
      * getters and setters
      */
@@ -142,6 +145,7 @@ public class GameDisplay extends JPanel {
         this.listenerSpace = listenerSpace;
         setFillColor(fillColor);
         this.viewport = new Point(45000, 45000);
+        this.drawInfoBoard = fMatrix.isEnabled(Functionality.INFORMATION_BOARD);
 
         // set sizes
         setPreferredSize(new Dimension(hsize * scaling, vsize * scaling));
@@ -830,6 +834,74 @@ public class GameDisplay extends JPanel {
         }
     }
 
+    protected final void drawInformationCorner(Graphics graphics, int xOffset, int yOffset, int padding) {
+        if (!drawInfoBoard) {
+            return;
+        }
+
+        int lineHeigt = graphics.getFontMetrics().getHeight();
+        int xPos = xOffset;
+        int yPos = yOffset + lineHeigt;
+
+        graphics.setColor(Color.BLACK);
+
+        // generate strings
+        String generationLbl =  "generation: ";
+        String livingLbl =      "alive cells: ";
+        String rulesLbl =       "rules: ";
+        String gpsLbl =         "gen/sec: ";
+        String viewportStrLbl = "view: ";
+
+        String generationVal = Long.toString(LogicManager.getGeneration());
+        String livingVal = Integer.toString(GridManager.getAliveCount());
+        String rulesVal = LogicManager.getRules();
+        String gpsVal = Long.toString(LogicManager.getGenPerSec());
+        String viewportStrVal = String.format("[x: %d, y: %d] / %d", viewport.x, viewport.y, scaling);
+
+        // draw bg
+        int[] lengths = new int[] {
+                graphics.getFontMetrics().stringWidth(generationLbl) + graphics.getFontMetrics().stringWidth(generationVal),
+                graphics.getFontMetrics().stringWidth(gpsLbl) + graphics.getFontMetrics().stringWidth(gpsVal),
+                graphics.getFontMetrics().stringWidth(livingLbl) + graphics.getFontMetrics().stringWidth(livingVal),
+                graphics.getFontMetrics().stringWidth(rulesLbl) + graphics.getFontMetrics().stringWidth(rulesVal),
+                graphics.getFontMetrics().stringWidth(viewportStrLbl) + graphics.getFontMetrics().stringWidth(viewportStrVal),
+        };
+
+        int max = Integer.MIN_VALUE;
+        for (int l : lengths) {
+            if (l > max) {
+                max = l;
+            }
+        }
+
+        graphics.setColor(new Color(0, 0, 0, 150));
+        graphics.fillRect(xOffset - padding, yOffset - padding, max + 2*padding, lengths.length  * lineHeigt + 2*padding);
+        graphics.setColor(Color.LIGHT_GRAY);
+
+        int rightEdge = xPos + max;
+
+        // draw strings
+        graphics.drawString(generationLbl, xPos, yPos);
+        graphics.drawString(generationVal, rightEdge - graphics.getFontMetrics().stringWidth(generationVal), yPos);
+        yPos += lineHeigt;
+
+        graphics.drawString(gpsLbl, xPos, yPos);
+        graphics.drawString(gpsVal, rightEdge - graphics.getFontMetrics().stringWidth(gpsVal), yPos);
+        yPos += lineHeigt;
+
+        graphics.drawString(livingLbl, xPos, yPos);
+        graphics.drawString(livingVal, rightEdge - graphics.getFontMetrics().stringWidth(livingVal), yPos);
+        yPos += lineHeigt;
+
+        graphics.drawString(rulesLbl, xPos, yPos);
+        graphics.drawString(rulesVal, rightEdge - graphics.getFontMetrics().stringWidth(rulesVal), yPos);
+        yPos += lineHeigt;
+
+        graphics.drawString(viewportStrLbl, xPos, yPos);
+        graphics.drawString(viewportStrVal, rightEdge - graphics.getFontMetrics().stringWidth(viewportStrVal), yPos);
+        yPos += lineHeigt;
+    }
+
     @Override
     protected void paintComponent(Graphics graphics) {
         graphics.setColor(paneColor);
@@ -838,5 +910,6 @@ public class GameDisplay extends JPanel {
         drawLines(graphics, lineColor, 1);
         drawSelection(graphics);
         drawClipboardPreview(graphics);
+        drawInformationCorner(graphics, 10, 10, 5);
     }
 }
