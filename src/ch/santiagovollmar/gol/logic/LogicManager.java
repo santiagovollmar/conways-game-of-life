@@ -125,8 +125,8 @@ public class LogicManager {
         rules = builder.toString();
     }
 
-    private static boolean[] surviveGrid = new boolean[8];
-    private static boolean[] birthGrid = new boolean[8];
+    private static boolean[] surviveGrid = new boolean[9];
+    private static boolean[] birthGrid = new boolean[9];
     private static String rules;
 
     public static String getRules() {
